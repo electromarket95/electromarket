@@ -22,5 +22,5 @@ window.PRODUCTS = [
   {id:"climate-002",name:"Кондиционер 12 000 BTU",brand:"Climate",category:"Кондиционеры",price:33990,oldPrice:0,badge:"",emoji:"🌬️",image:"",description:"Подбор мощности зависит от площади и условий помещения."},
   {id:"network-001",name:"Wi-Fi роутер",brand:"Network",category:"Смарт-гаджеты и сеть",price:2490,oldPrice:0,badge:"",emoji:"📡",image:"",description:"Для подключения совместимых устройств к интернету."},
   {id:"network-002",name:"TV Box 4K",brand:"Smart TV",category:"Смарт-гаджеты и сеть",price:3990,oldPrice:0,badge:"",emoji:"📺",image:"",description:"Медиаприставка для совместимого телевизора."},
-  {id:"makita-001",name:"Шуруповёрт Makita 13 мм",brand:"Makita",category:"Электроинструменты",price:2300,oldPrice:0,badge:"АКЦИЯ",emoji:"🔧",image:"",description:"Металлический патрон 13 мм, 3 режима работы, 2 аккумулятора по 5 А·ч, зарядное устройство и кейс."}
+  {id:"makita-001",name:"Шуруповёрт Makita 13 мм",brand:"Makita",category:"Электроинструменты",price:2300,oldPrice:0,badge:"АКЦИЯ",emoji:"🔧",image:"шуруповерт макита.png",description:"Металлический патрон 13 мм, 3 режима работы, 2 аккумулятора по 5 А·ч, зарядное устройство и кейс."}
 ];
