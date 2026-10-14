@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="ЭлектроМаркет — электроника, аксессуары, электроинструменты и бытовая техника. Заказ через WhatsApp.">
+  <title>ЭлектроМаркет — всё, что нужно, в одном месте</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="ЭлектроМаркет — главная">
+      <span class="brand-mark">Э<span>M</span></span>
+      <span class="brand-copy"><strong>ЭЛЕКТРОМАРКЕТ</strong><small>Всё, что нужно — в одном месте</small></span>
+    </a>
+    <a class="header-wa" href="https://wa.me/79298881157" target="_blank" rel="noopener">WhatsApp <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">ТЕХНИКА • ИНСТРУМЕНТЫ • ДОМ</p>
+        <h1>Технологии для<br><span>каждого дня.</span></h1>
+        <p class="hero-text">Выбирайте товары в каталоге и оформляйте заказ напрямую в WhatsApp.</p>
+        <a class="primary-btn" href="#catalog">Перейти в каталог <span>↓</span></a>
+        <div class="hero-note"><span class="pulse"></span> Поможем подобрать подходящий товар</div>
+      </div>
+      <div class="hero-art" aria-label="Иллюстрация электроники" role="img">
+        <div class="art-glow"></div>
+        <div class="device device-phone"><div class="phone-screen"><span>EM</span><i>●</i></div></div>
+        <div class="device device-headphones"><div class="ear ear-left"></div><div class="ear ear-right"></div><div class="headband"></div></div>
+        <div class="art-tag tag-one">SMART</div><div class="art-tag tag-two">TOOLS</div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Преимущества">
+      <div><span class="trust-icon">✓</span><span><b>Удобный выбор</b><small>Каталог в телефоне</small></span></div>
+      <div><span class="trust-icon">↗</span><span><b>Заказ в WhatsApp</b><small>Без сложной регистрации</small></span></div>
+      <div><span class="trust-icon">◇</span><span><b>Разные категории</b><small>Для дома и работы</small></span></div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <div><p class="eyebrow">НАШ АССОРТИМЕНТ</p><h2>Каталог товаров</h2><p class="muted">Найдите нужное и добавьте в корзину.</p></div>
+        <button id="cart-open" class="cart-button" type="button">Корзина <span id="cart-count">0</span></button>
+      </div>
+      <div class="catalog-tools">
+        <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Поиск по названию, бренду…" aria-label="Поиск товаров"></label>
+        <select id="sort" aria-label="Сортировка">
+          <option value="featured">Сначала рекомендуемые</option>
+          <option value="price-asc">Сначала дешевле</option>
+          <option value="price-desc">Сначала дороже</option>
+          <option value="name">По названию</option>
+        </select>
+      </div>
+      <nav id="categories" class="category-list" aria-label="Категории товаров"></nav>
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+      <p id="empty-state" class="empty-state" hidden>Ничего не найдено. Попробуйте изменить запрос или категорию.</p>
+      <p class="catalog-disclaimer">Цены и наличие уточняйте перед заказом. Фотографии в демонстрационных карточках можно заменить своими.</p>
+    </section>
+
+    <section class="order-banner">
+      <div><p class="eyebrow">НУЖНА ПОМОЩЬ С ВЫБОРОМ?</p><h2>Подберём технику под ваши задачи.</h2><p>Напишите нам — поможем уточнить характеристики и наличие.</p></div>
+      <a href="https://wa.me/79298881157?text=Здравствуйте!%20Помогите%20подобрать%20товар." target="_blank" rel="noopener" class="wa-large">Написать в WhatsApp <span>↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="#"><span class="brand-mark">Э<span>M</span></span><span class="brand-copy"><strong>ЭЛЕКТРОМАРКЕТ</strong><small>Всё, что нужно — в одном месте</small></span></a>
+    <div class="footer-contact"><span>Заказы и вопросы</span><a href="https://wa.me/79298881157" target="_blank" rel="noopener">+7 929 888-11-57</a></div>
+    <small class="copyright">© <span id="year"></span> ЭлектроМаркет</small>
+  </footer>
+
+  <div id="cart-drawer" class="drawer-backdrop" hidden>
+    <section class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="drawer-head"><div><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="cart-title">Корзина</h2></div><button id="cart-close" class="icon-button" aria-label="Закрыть корзину">×</button></div>
+      <div id="cart-items" class="cart-items"></div>
+      <div id="cart-empty" class="cart-empty">Корзина пока пуста. Добавьте товары из каталога.</div>
+      <div class="cart-bottom">
+        <div class="total-line"><span>Итого</span><strong id="cart-total">0 ₽</strong></div>
+        <label class="customer-field">Ваше имя <input id="customer-name" type="text" placeholder="Как к вам обращаться?"></label>
+        <label class="customer-field">Комментарий к заказу <textarea id="customer-note" rows="2" placeholder="Например, удобное время для связи"></textarea></label>
+        <button id="checkout" class="checkout-button" type="button">Оформить через WhatsApp <span>↗</span></button>
+        <small class="privacy-note">Нажимая кнопку, вы откроете WhatsApp с подготовленным сообщением. Заказ ещё нужно отправить вручную.</small>
+      </div>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
