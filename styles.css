@@ -4,3 +4,138 @@
 @media(max-width:1000px){.header-inner{padding:12px 18px;gap:14px}.header-actions{gap:12px}.favorites-link{display:none}.page-shell{padding:18px}.hero{grid-template-columns:1fr .8fr;min-height:340px}.hero-copy{padding-left:27px}.hero h1{font-size:clamp(32px,5vw,46px)}.hero-art{min-height:320px}.laptop{width:205px;right:2%;top:72px}.laptop-screen{height:145px}.laptop-base{width:230px}.phone{left:14%;top:91px;width:90px;height:175px}.buds{left:2%;bottom:40px;transform:scale(.85)}.category-shortcuts{gap:8px}.shortcut{min-height:110px}.benefit{padding:4px 10px;gap:9px}.benefit-icon{width:33px;height:33px;flex-basis:33px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-visual{height:175px}}
 @media(max-width:700px){html{scroll-padding-top:82px}.site-header{position:relative}.header-inner{min-height:72px;padding:10px 14px;align-items:center;gap:10px}.brand{gap:9px;flex:1}.brand-mark{width:42px;height:40px;flex-basis:42px;border-radius:10px;font-size:23px}.brand-copy strong{font-size:13px;letter-spacing:0}.brand-copy small{font-size:7px;letter-spacing:.02em;margin-top:3px}.header-actions{gap:9px}.header-action{min-width:30px}.header-action .action-icon{font-size:23px}.header-action small{display:none}.cart-top{display:flex}.header-wa{padding:9px 10px;border-radius:10px;gap:0}.header-wa .wa-symbol{display:none}.header-wa strong{font-size:11px}.header-wa small{font-size:8px}.page-shell{padding:13px 13px 30px}.search-row{margin-bottom:13px}.search-box{min-height:49px;padding-left:12px;gap:8px}.search-box input{font-size:12px}.search-submit{padding:10px 13px;font-size:11px}.search-icon{font-size:23px}.hero{display:block;min-height:0;border-radius:17px}.hero-copy{padding:22px 19px 17px}.hero .eyebrow{gap:6px;font-size:9px;margin-bottom:12px}.hero h1{font-size:clamp(30px,8vw,40px);line-height:1.08;max-width:100%}.hero-text{font-size:12px;line-height:1.6;margin:13px 0 16px;max-width:100%}.primary-btn{padding:12px 15px;gap:20px;font-size:12px}.primary-btn b{font-size:19px}.hero-note{font-size:10px;margin-top:14px}.hero-art{min-height:180px;height:180px;margin:0 8px 5px}.orbit-one{width:250px;height:150px;top:12px;left:15%}.orbit-two{width:190px;height:125px;top:27px;left:27%}.laptop{width:160px;right:4%;top:27px}.laptop-screen{height:105px;border-width:5px;border-bottom-width:7px;border-radius:9px}.laptop-base{width:178px;height:7px;margin-left:-9px}.laptop-screen span{font-size:22px}.phone{width:65px;height:132px;left:21%;top:37px;border-width:4px;border-radius:16px}.phone-camera{top:5px;width:18px;height:4px}.phone-mark{font-size:16px}.buds{left:7%;bottom:19px;transform:scale(.62);transform-origin:bottom left}.hero-floating-tag{font-size:7px;padding:6px 8px}.tag-smart{left:7%;top:14px}.tag-tools{right:5%;bottom:16px}.category-shortcuts{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:13px 0}.shortcut{min-height:100px;padding:8px 4px;border-radius:12px;gap:4px}.shortcut-art{height:48px;font-size:30px}.art-phone{font-size:37px}.art-laptop{font-size:39px}.art-home{font-size:35px}.art-cool{font-size:32px}.art-watch,.art-all{font-size:34px}.shortcut b{font-size:9px}.benefit-strip{grid-template-columns:repeat(2,minmax(0,1fr));padding:9px;margin-bottom:30px}.benefit{padding:10px 7px;border-right:0;gap:8px}.benefit:nth-child(odd){border-right:1px solid #1c3045}.benefit:nth-child(-n+2){border-bottom:1px solid #1c3045}.benefit-icon{flex-basis:31px;width:31px;height:31px;font-size:19px;border-radius:9px}.benefit b{font-size:10px}.benefit small{font-size:9px}.section-heading{align-items:center;gap:8px;margin-bottom:13px}.section-heading h2{font-size:23px}.section-heading .eyebrow{font-size:9px}.muted{font-size:11px;line-height:1.45;max-width:280px}.cart-button{padding:8px 9px;font-size:10px}.cart-count-small{min-width:18px;height:18px;margin-left:2px;font-size:10px}.catalog-tools{margin:10px 0;gap:8px}.catalog-tools-label{font-size:10px}.catalog-tools select{padding:8px;font-size:10px;max-width:65%}.category-list{gap:6px;padding-bottom:10px}.category-chip{font-size:10px;padding:8px 11px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product-card{border-radius:13px}.product-visual{height:145px}.product-visual img{padding:8px}.product-placeholder{font-size:47px}.product-badge{top:7px;left:7px;font-size:8px;padding:4px 6px}.product-info{padding:9px}.product-category{font-size:8px}.product-info h3{font-size:11px;margin:6px 0 4px}.product-desc{font-size:9px;min-height:28px;margin-bottom:9px}.product-price{font-size:15px}.add-button{width:32px;height:32px;flex-basis:32px;border-radius:9px;font-size:23px}.catalog-disclaimer{font-size:10px;line-height:1.5;margin:12px 0 24px}.service-banners{grid-template-columns:1fr;gap:8px;margin-bottom:18px}.service-card{padding:13px;border-radius:13px;gap:12px}.service-symbol{width:38px;height:38px;flex-basis:38px;font-size:23px}.service-card b{font-size:12px}.service-card p{font-size:10px}.order-banner{display:block;padding:20px 17px;border-radius:15px;margin-bottom:20px}.order-banner h2{font-size:23px}.order-banner p:not(.eyebrow){font-size:11px;line-height:1.55}.wa-large{margin-top:16px;width:100%;padding:13px 12px;font-size:11px}.footer-main{align-items:flex-start}.footer-brand .brand-mark{width:37px;height:35px;flex-basis:37px;font-size:20px}.footer-brand .brand-copy strong{font-size:11px}.footer-brand .brand-copy small{font-size:6px;white-space:normal}.footer-contact span{font-size:9px}.footer-contact a{font-size:11px}.site-footer{padding:19px 14px 14px}.footer-bottom{margin-top:14px;padding-top:10px}.footer-bottom small{font-size:9px}.cart-drawer{padding:17px}.toast{width:calc(100% - 30px);text-align:center;bottom:15px}}
 @media(max-width:380px){.brand-copy strong{font-size:11px}.brand-copy small{font-size:6px}.header-actions{gap:6px}.header-wa{padding:8px}.header-wa strong{font-size:10px}.hero-copy{padding-left:15px;padding-right:15px}.hero h1{font-size:29px}.hero .eyebrow{font-size:8px}.product-visual{height:125px}.product-price{font-size:14px}}
+
+/* ELECTROMARKET — FIX CATALOG CARDS */
+#product-grid,
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 14px;
+}
+
+.product-card {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+}
+
+.product-visual {
+  height: 180px;
+  flex: 0 0 180px;
+  overflow: hidden;
+}
+
+.product-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 13px;
+}
+
+.product-category {
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.product-info h3 {
+  font-size: 15px;
+  line-height: 1.35;
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
+
+.product-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  min-height: 0;
+  max-height: 4.5em;
+  margin: 0 0 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.product-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+}
+
+.product-price {
+  font-size: 19px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.add-button {
+  flex-shrink: 0;
+}
+
+/* Телефоны: карточки на всю ширину */
+@media (max-width: 560px) {
+  #product-grid,
+  .product-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .product-card {
+    border-radius: 17px;
+  }
+
+  .product-visual {
+    height: 210px;
+    flex-basis: 210px;
+  }
+
+  .product-info {
+    padding: 14px;
+  }
+
+  .product-info h3 {
+    font-size: 17px;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+    max-height: 4.5em;
+  }
+
+  .product-price {
+    font-size: 21px;
+  }
+
+  .add-button {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: 13px;
+  }
+
+  .category-list,
+  #categories {
+    max-width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+  }
+}
