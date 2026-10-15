@@ -228,10 +228,10 @@ window.PRODUCTS = [
   {
     "id": "item-тест-товар",
     "name": "Тест товар",
-    "brand": "Нету",
-    "category": "Аксессуары",
-    "price": 100,
-    "description": "Все что надо",
-    "image": "images/product-1792050010869.jpg"
+    "brand": "Немецкое",
+    "category": "Бытовая техника",
+    "price": 555,
+    "description": "Не описуемо",
+    "image": "images/product-1792050076122.jpg"
   }
 ];
