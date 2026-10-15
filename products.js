@@ -108,42 +108,6 @@ window.PRODUCTS = [
     "description": "Для резки и шлифования с подходящей оснасткой."
   },
   {
-    "id": "tools-003",
-    "name": "Набор инструментов",
-    "brand": "Tools",
-    "category": "Электроинструменты",
-    "price": 2790,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "🧰",
-    "image": "",
-    "description": "Набор для домашних задач и мелкого ремонта."
-  },
-  {
-    "id": "home-001",
-    "name": "Электрический чайник",
-    "brand": "Home",
-    "category": "Бытовая техника",
-    "price": 1490,
-    "oldPrice": 1790,
-    "badge": "",
-    "emoji": "🫖",
-    "image": "",
-    "description": "Для быстрого кипячения воды дома или в офисе."
-  },
-  {
-    "id": "home-002",
-    "name": "Микроволновая печь",
-    "brand": "Home",
-    "category": "Бытовая техника",
-    "price": 6990,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "▤",
-    "image": "",
-    "description": "Разогрев и приготовление простых блюд."
-  },
-  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
