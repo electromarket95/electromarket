@@ -576,7 +576,6 @@ function checkoutWhatsApp() {
 
   window.open(url, "_blank");
 }
-
 function bindEvents() {
   document.addEventListener("click", event => {
     const target = event.target.closest("button, [data-gallery]");
