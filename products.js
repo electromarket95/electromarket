@@ -1,17 +1,5 @@
 window.PRODUCTS = [
   {
-    "id": "phone-001",
-    "name": "Смартфон Android 8/256 ГБ",
-    "brand": "Android",
-    "category": "Смартфоны",
-    "price": 14990,
-    "oldPrice": 16990,
-    "badge": "Популярное",
-    "emoji": "📱",
-    "image": "",
-    "description": "Большой экран, ёмкая память, поддержка двух SIM."
-  },
-  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
