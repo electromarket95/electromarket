@@ -3,7 +3,7 @@ window.PRODUCTS = [
     "id": "item-1792095502489",
     "name": "Машинка для стрижки",
     "brand": "Cronier",
-    "category": "Прочее",
+    "category": "Машинки для стрижки",
     "price": 1500,
     "oldPrice": 0,
     "badge": "",
