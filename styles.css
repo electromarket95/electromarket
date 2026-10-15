@@ -143,6 +143,23 @@
 @media (max-width: 600px) {
 .product-visual {
 height: 190px !important;
-min-height: 0 !important;
+min-height: 0 !important; /* Исправление фотографий товаров на мобильных устройствах */
+@media (max-width: 600px) {
+.product-visual {
+height: 190px !important;
+min-height: 190px !important;
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.product-visual img {
+width: 100%;
+height: 100%;
+object-fit: contain !important;
+object-position: center;
+}
+}
 }
 }
