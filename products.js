@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792095502489",
+    "name": "Машинка для стрижки",
+    "brand": "Cronier",
+    "category": "Прочее",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792095502489.webp",
+    "description": ""
+  },
+  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
