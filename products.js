@@ -12,42 +12,6 @@ window.PRODUCTS = [
     "description": "Большой экран, ёмкая память, поддержка двух SIM."
   },
   {
-    "id": "phone-002",
-    "name": "Смартфон 12/256 ГБ",
-    "brand": "Android",
-    "category": "Смартфоны",
-    "price": 21990,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "📲",
-    "image": "",
-    "description": "Для общения, фото, видео и повседневных задач."
-  },
-  {
-    "id": "accessory-001",
-    "name": "Беспроводные наушники",
-    "brand": "Audio",
-    "category": "Аксессуары",
-    "price": 1490,
-    "oldPrice": 1990,
-    "badge": "Акция",
-    "emoji": "🎧",
-    "image": "",
-    "description": "Bluetooth, компактный кейс для зарядки."
-  },
-  {
-    "id": "accessory-002",
-    "name": "Зарядное устройство USB-C",
-    "brand": "Power",
-    "category": "Аксессуары",
-    "price": 790,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "🔌",
-    "image": "",
-    "description": "Компактный адаптер для совместимых устройств."
-  },
-  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
