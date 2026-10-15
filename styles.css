@@ -17,3 +17,50 @@ footer{margin-top:48px;padding:28px 0 36px;border-top:1px solid var(--line);colo
 0 36px;border-top:1px solid var(--line);color:var(--muted)}footer a{color:#79caff}footer p{font-size:.92rem}
 @media(max-width:900px){#product-grid,.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.benefits,.features,.advantages,.em-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.product-visual{height:170px}}
 @media(max-width:600px){main,foot
+/* Дополнительные правки к тёмной теме ElectroMarket. Добавить в самый конец styles.css. */
+:root{--bg:#080b10;--panel:#111720;--panel2:#171f2b;--ink:#f4f7fb;--muted:#a5afbd;--line:#263241;--blue:#48a9ff;--blue2:#176fd1;--radius:16px;--shadow:0 12px 30px rgba(0,0,0,.22)}
+body{background:#080b10;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;min-height:76px}
+header>*{min-width:0}
+header a{overflow-wrap:anywhere}
+header a:first-child{font-weight:800}
+header p,header .tagline,header .subtitle{color:var(--muted);font-size:.9rem}
+main{width:min(1120px,calc(100% - 32px))}
+.hero,.hero-section,.em-hero{margin:18px auto 22px;padding:clamp(22px,4vw,44px);border-radius:22px;background:radial-gradient(ellipse at 82% 26%,rgba(39,132,218,.16),transparent 38%),linear-gradient(145deg,#121a25,#0b1018 72%);box-shadow:0 12px 32px rgba(0,0,0,.18)}
+.hero h1,.hero-section h1,.em-hero h1{font-size:clamp(2.15rem,7vw,4.3rem);line-height:1.04;letter-spacing:-.045em;margin:14px 0 18px;max-width:720px}
+.hero p,.hero-section p,.em-hero p{font-size:1.02rem;line-height:1.6;max-width:580px}
+.hero a,.hero-section a,.em-hero a{margin-top:12px;padding:12px 18px;border-radius:11px}
+section{margin-block:24px}
+#categories{gap:7px}
+.category-chip{padding:8px 12px;background:#121a25}
+#product-grid,.product-grid{gap:12px}
+.product-card{border-radius:15px;background:#111720;box-shadow:0 8px 20px rgba(0,0,0,.14)}
+.product-visual{background:#0c121a;height:170px}
+.product-info{padding:13px}
+.product-info h3{line-height:1.3}
+.product-price{color:#f5f8fc}
+.add-button,#checkout,#cart-open,.button,.btn{box-shadow:none}
+/* Compact the decorative words beneath the hero copy, when present. */
+.hero .hero-art,.hero-section .hero-art,.em-hero .hero-art{max-width:100%;}
+@media(max-width:600px){
+  header{padding:10px 12px;gap:8px;min-height:68px}
+  header p,header .tagline,header .subtitle{font-size:.78rem;line-height:1.35}
+  main{width:calc(100% - 24px)}
+  .hero,.hero-section,.em-hero{margin:12px auto 18px;padding:22px 18px;border-radius:18px}
+  .hero h1,.hero-section h1,.em-hero h1{font-size:clamp(2.05rem,9.5vw,3.05rem);line-height:1.06;margin:12px 0 16px}
+  .hero p,.hero-section p,.em-hero p{font-size:.98rem;margin:12px 0}
+  .hero a,.hero-section a,.em-hero a{width:100%;justify-content:center;text-align:center}
+  #product-grid,.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  .product-visual{height:125px;padding:8px}
+  .product-info{padding:10px}
+  .product-info h3{font-size:.9rem}
+  .product-desc{font-size:.76rem;line-height:1.4;min-height:0}
+  .product-price{font-size:1rem}
+  .category-chip{font-size:.78rem;padding:7px 10px}
+  .benefits,.features,.advantages,.em-benefits{grid-template-columns:1fr}
+}
+tion .hero-art,.em-hero .hero-art{max-width:100%;}
+@media(max-width:600px){
+  header{padding:10px 12px;gap:8px;min-height:68px}
+  header p,header .tagline,header .subtitle{font-size:.78rem;line-height:1.35}
+  main{width:calc(100% - 24px)
