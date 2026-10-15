@@ -3,91 +3,108 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111827">
-  <meta name="description" content="ЭлектроМаркет — электроника, аксессуары, электроинструменты и бытовая техника. Заказ через WhatsApp.">
-  <title>ЭлектроМаркет — всё, что нужно, в одном месте</title>
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="ЭлектроМаркет — смартфоны, электроника, инструменты и техника для дома. Заказ через WhatsApp.">
+  <title>ЭлектроМаркет — техника, электроника и инструменты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#" aria-label="ЭлектроМаркет — главная">
-      <span class="brand-mark">Э<span>M</span></span>
-      <span class="brand-copy"><strong>ЭЛЕКТРОМАРКЕТ</strong><small>Всё, что нужно — в одном месте</small></span>
-    </a>
-    <a class="header-wa" href="https://wa.me/79298881157" target="_blank" rel="noopener">WhatsApp <span>↗</span></a>
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="ЭлектроМаркет — главная">
+        <span class="brand-mark"><span>Э</span><i>M</i></span>
+        <span class="brand-copy"><strong>ЭЛЕКТРО<span>МАРКЕТ</span></strong><small>ВСЁ, ЧТО НУЖНО — В ОДНОМ МЕСТЕ</small></span>
+      </a>
+      <nav class="header-actions" aria-label="Быстрые ссылки">
+        <a class="header-action" href="#catalog"><span class="action-icon">⌕</span><small>Поиск</small></a>
+        <a class="header-action favorites-link" href="#catalog"><span class="action-icon">♡</span><small>Избранное</small></a>
+        <button id="cart-open" class="header-action cart-top" type="button"><span class="action-icon">▢<b id="cart-count">0</b></span><small>Корзина</small></button>
+        <a class="header-wa" href="https://wa.me/79298881157" target="_blank" rel="noopener"><span class="wa-symbol">◉</span><span><strong>WhatsApp</strong><small>+7 929 888-11-57</small></span></a>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main id="top" class="page-shell">
+    <section class="search-row" aria-label="Поиск товаров">
+      <label class="search-box"><span class="search-icon">⌕</span><input id="search" type="search" placeholder="Поиск товаров: смартфон, Xiaomi, шуруповёрт…" aria-label="Поиск товаров"><button type="button" class="search-submit" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Найти</button></label>
+    </section>
+
     <section class="hero">
       <div class="hero-copy">
-        <p class="eyebrow">ТЕХНИКА • ИНСТРУМЕНТЫ • ДОМ</p>
-        <h1>Технологии для<br><span>каждого дня.</span></h1>
-        <p class="hero-text">Выбирайте товары в каталоге и оформляйте заказ напрямую в WhatsApp.</p>
-        <a class="primary-btn" href="#catalog">Перейти в каталог <span>↓</span></a>
+        <p class="eyebrow"><span>ТЕХНИКА</span><i>•</i><span>ИНСТРУМЕНТЫ</span><i>•</i><span>ДОМ</span></p>
+        <h1>Современные технологии <span>для каждого дня.</span></h1>
+        <p class="hero-text">Смартфоны, аксессуары, электроинструменты и техника для дома. Выбирайте и оформляйте заказ напрямую в WhatsApp.</p>
+        <a class="primary-btn" href="#catalog"><span>Перейти в каталог</span><b>→</b></a>
         <div class="hero-note"><span class="pulse"></span> Поможем подобрать подходящий товар</div>
       </div>
       <div class="hero-art" aria-label="Иллюстрация электроники" role="img">
-        <div class="art-glow"></div>
-        <div class="device device-phone"><div class="phone-screen"><span>EM</span><i>●</i></div></div>
-        <div class="device device-headphones"><div class="ear ear-left"></div><div class="ear ear-right"></div><div class="headband"></div></div>
-        <div class="art-tag tag-one">SMART</div><div class="art-tag tag-two">TOOLS</div>
+        <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+        <div class="hero-device laptop"><div class="laptop-screen"><div class="screen-glow"></div><span>EM</span></div><div class="laptop-base"></div></div>
+        <div class="hero-device phone"><div class="phone-camera"></div><div class="phone-mark">ЭM</div></div>
+        <div class="hero-device buds"><div class="bud-case"></div><span class="bud bud-left"></span><span class="bud bud-right"></span></div>
+        <div class="hero-floating-tag tag-smart">SMART<br><b>TECH</b></div><div class="hero-floating-tag tag-tools">TOOLS <b>↗</b></div>
       </div>
     </section>
 
-    <section class="trust-strip" aria-label="Преимущества">
-      <div><span class="trust-icon">✓</span><span><b>Удобный выбор</b><small>Каталог в телефоне</small></span></div>
-      <div><span class="trust-icon">↗</span><span><b>Заказ в WhatsApp</b><small>Без сложной регистрации</small></span></div>
-      <div><span class="trust-icon">◇</span><span><b>Разные категории</b><small>Для дома и работы</small></span></div>
+    <section class="category-shortcuts" aria-label="Популярные категории">
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-phone">▯</span><b>Смартфоны</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-buds">◖◗</span><b>Аксессуары</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-laptop">▱</span><b>Планшеты и<br> компьютеры</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-tools">⚒</span><b>Электро-<br>инструменты</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-home">▤</span><b>Бытовая<br>техника</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-cool">❄</span><b>Кондиционеры</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-watch">◉</span><b>Смарт-гаджеты<br>и сеть</b></a>
+      <a href="#catalog" class="shortcut"><span class="shortcut-art art-all">▦</span><b>Все товары</b></a>
+    </section>
+
+    <section class="benefit-strip" aria-label="Преимущества магазина">
+      <div class="benefit"><span class="benefit-icon">↗</span><span><b>Быстрая связь</b><small>Заказ через WhatsApp</small></span></div>
+      <div class="benefit"><span class="benefit-icon">◇</span><span><b>Помощь с выбором</b><small>Подскажем характеристики</small></span></div>
+      <div class="benefit"><span class="benefit-icon">％</span><span><b>Выгодные предложения</b><small>Акции и специальные цены</small></span></div>
+      <div class="benefit"><span class="benefit-icon">▣</span><span><b>Удобный заказ</b><small>Без сложной регистрации</small></span></div>
     </section>
 
     <section class="catalog-section" id="catalog">
       <div class="section-heading">
-        <div><p class="eyebrow">НАШ АССОРТИМЕНТ</p><h2>Каталог товаров</h2><p class="muted">Найдите нужное и добавьте в корзину.</p></div>
-        <button id="cart-open" class="cart-button" type="button">Корзина <span id="cart-count">0</span></button>
+        <div><p class="eyebrow">НАШ АССОРТИМЕНТ</p><h2><span class="heading-flame">✦</span> Каталог товаров</h2><p class="muted">Выберите нужное — мы поможем уточнить наличие и условия.</p></div>
+        <button class="cart-button" type="button" onclick="document.getElementById('cart-open').click()">Корзина <span class="cart-count-small" id="cart-count-display">0</span></button>
       </div>
       <div class="catalog-tools">
-        <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Поиск по названию, бренду…" aria-label="Поиск товаров"></label>
+        <div class="catalog-tools-label">Подберите товар</div>
         <select id="sort" aria-label="Сортировка">
-          <option value="featured">Сначала рекомендуемые</option>
-          <option value="price-asc">Сначала дешевле</option>
-          <option value="price-desc">Сначала дороже</option>
-          <option value="name">По названию</option>
+          <option value="featured">Сначала рекомендуемые</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name">По названию</option>
         </select>
       </div>
       <nav id="categories" class="category-list" aria-label="Категории товаров"></nav>
       <div id="product-grid" class="product-grid" aria-live="polite"></div>
       <p id="empty-state" class="empty-state" hidden>Ничего не найдено. Попробуйте изменить запрос или категорию.</p>
-      <p class="catalog-disclaimer">Цены и наличие уточняйте перед заказом. Фотографии в демонстрационных карточках можно заменить своими.</p>
+      <p class="catalog-disclaimer">Цены и наличие уточняйте перед заказом. Условия рассрочки уточняйте в WhatsApp.</p>
+    </section>
+
+    <section class="service-banners">
+      <article class="service-card service-deals"><span class="service-symbol">％</span><div><b>Акции и скидки</b><p>Следите за выгодными предложениями</p></div></article>
+      <article class="service-card service-installment"><span class="service-symbol">↗</span><div><b>Рассрочка</b><p>Уточните доступные условия в WhatsApp</p><a href="https://wa.me/79298881157?text=Здравствуйте!%20Подскажите%20условия%20рассрочки." target="_blank" rel="noopener">Уточнить условия →</a></div></article>
+      <article class="service-card service-delivery"><span class="service-symbol">▰</span><div><b>Доставка</b><p>По Чечне и в другие регионы России. Условия согласуем при заказе.</p></div></article>
     </section>
 
     <section class="order-banner">
-      <div><p class="eyebrow">НУЖНА ПОМОЩЬ С ВЫБОРОМ?</p><h2>Подберём технику под ваши задачи.</h2><p>Напишите нам — поможем уточнить характеристики и наличие.</p></div>
-      <a href="https://wa.me/79298881157?text=Здравствуйте!%20Помогите%20подобрать%20товар." target="_blank" rel="noopener" class="wa-large">Написать в WhatsApp <span>↗</span></a>
+      <div><p class="eyebrow">НУЖНА ПОМОЩЬ С ВЫБОРОМ?</p><h2>Подберём технику под ваши задачи.</h2><p>Напишите нам — поможем уточнить характеристики, наличие и условия получения.</p></div>
+      <a href="https://wa.me/79298881157?text=Здравствуйте!%20Помогите%20подобрать%20товар." target="_blank" rel="noopener" class="wa-large"><span>◉</span> Написать в WhatsApp <b>↗</b></a>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <a class="brand footer-brand" href="#"><span class="brand-mark">Э<span>M</span></span><span class="brand-copy"><strong>ЭЛЕКТРОМАРКЕТ</strong><small>Всё, что нужно — в одном месте</small></span></a>
-    <div class="footer-contact"><span>Заказы и вопросы</span><a href="https://wa.me/79298881157" target="_blank" rel="noopener">+7 929 888-11-57</a></div>
-    <small class="copyright">© <span id="year"></span> ЭлектроМаркет</small>
-  </footer>
+  <footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="#top"><span class="brand-mark"><span>Э</span><i>M</i></span><span class="brand-copy"><strong>ЭЛЕКТРО<span>МАРКЕТ</span></strong><small>ВСЁ, ЧТО НУЖНО — В ОДНОМ МЕСТЕ</small></span></a><div class="footer-contact"><span>Заказы и вопросы</span><a href="https://wa.me/79298881157" target="_blank" rel="noopener">+7 929 888-11-57</a></div></div><div class="footer-bottom"><small>© <span id="year"></span> ЭлектроМаркет</small><small>Техника • Инструменты • Дом</small></div></footer>
 
-  <div id="cart-drawer" class="drawer-backdrop" hidden>
-    <section class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-      <div class="drawer-head"><div><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="cart-title">Корзина</h2></div><button id="cart-close" class="icon-button" aria-label="Закрыть корзину">×</button></div>
-      <div id="cart-items" class="cart-items"></div>
-      <div id="cart-empty" class="cart-empty">Корзина пока пуста. Добавьте товары из каталога.</div>
-      <div class="cart-bottom">
-        <div class="total-line"><span>Итого</span><strong id="cart-total">0 ₽</strong></div>
-        <label class="customer-field">Ваше имя <input id="customer-name" type="text" placeholder="Как к вам обращаться?"></label>
-        <label class="customer-field">Комментарий к заказу <textarea id="customer-note" rows="2" placeholder="Например, удобное время для связи"></textarea></label>
-        <button id="checkout" class="checkout-button" type="button">Оформить через WhatsApp <span>↗</span></button>
-        <small class="privacy-note">Нажимая кнопку, вы откроете WhatsApp с подготовленным сообщением. Заказ ещё нужно отправить вручную.</small>
-      </div>
-    </section>
-  </div>
+  <div id="cart-drawer" class="drawer-backdrop" hidden><section class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title"><div class="drawer-head"><div><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="cart-title">Корзина</h2></div><button id="cart-close" class="icon-button" aria-label="Закрыть корзину">×</button></div><div id="cart-items" class="cart-items"></div><div id="cart-empty" class="cart-empty">Корзина пока пуста. Добавьте товары из каталога.</div><div class="cart-bottom"><div class="total-line"><span>Итого</span><strong id="cart-total">0 ₽</strong></div><label class="customer-field">Ваше имя <input id="customer-name" type="text" placeholder="Как к вам обращаться?"></label><label class="customer-field">Комментарий к заказу <textarea id="customer-note" rows="2" placeholder="Например, удобное время для связи"></textarea></label><button id="checkout" class="checkout-button" type="button">Оформить через WhatsApp <span>↗</span></button><small class="privacy-note">WhatsApp откроется с подготовленным сообщением. Заказ нужно отправить вручную.</small></div></section></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="products.js"></script>
-  <script src="app.js"></script>
+  <script src="products.js"></script><script src="app.js"></script>
+  <script>
+    // Синхронизируем число товаров в шапке и заголовке каталога с существующей корзиной.
+    const countObserver = new MutationObserver(() => { const a=document.getElementById('cart-count'); const b=document.getElementById('cart-count-display'); if(a&&b)b.textContent=a.textContent; });
+    const cartCount=document.getElementById('cart-count'); if(cartCount)countObserver.observe(cartCount,{childList:true,characterData:true,subtree:true});
+  </script>
 </body>
 </html>
