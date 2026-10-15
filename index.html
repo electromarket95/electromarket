@@ -101,7 +101,7 @@
   <div id="cart-drawer" class="drawer-backdrop" hidden><section class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title"><div class="drawer-head"><div><p class="eyebrow">ВАШ ВЫБОР</p><h2 id="cart-title">Корзина</h2></div><button id="cart-close" class="icon-button" aria-label="Закрыть корзину">×</button></div><div id="cart-items" class="cart-items"></div><div id="cart-empty" class="cart-empty">Корзина пока пуста. Добавьте товары из каталога.</div><div class="cart-bottom"><div class="total-line"><span>Итого</span><strong id="cart-total">0 ₽</strong></div><label class="customer-field">Ваше имя <input id="customer-name" type="text" placeholder="Как к вам обращаться?"></label><label class="customer-field">Комментарий к заказу <textarea id="customer-note" rows="2" placeholder="Например, удобное время для связи"></textarea></label><button id="checkout" class="checkout-button" type="button">Оформить через WhatsApp <span>↗</span></button><small class="privacy-note">WhatsApp откроется с подготовленным сообщением. Заказ нужно отправить вручную.</small></div></section></div>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="products.js"></script><script src="app.js"></script>
-  <script>
+  script>
     // Синхронизируем число товаров в шапке и заголовке каталога с существующей корзиной.
     const countObserver = new MutationObserver(() => { const a=document.getElementById('cart-count'); const b=document.getElementById('cart-count-display'); if(a&&b)b.textContent=a.textContent; });
     const cartCount=document.getElementById('cart-count'); if(cartCount)countObserver.observe(cartCount,{childList:true,characterData:true,subtree:true});
