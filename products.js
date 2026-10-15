@@ -84,30 +84,6 @@ window.PRODUCTS = [
     "description": "Для документов, браузера и повседневных задач."
   },
   {
-    "id": "tools-001",
-    "name": "Аккумуляторный шуруповёрт",
-    "brand": "Tools",
-    "category": "Электроинструменты",
-    "price": 4500,
-    "oldPrice": 5500,
-    "badge": "Акция",
-    "emoji": "🛠️",
-    "image": "",
-    "description": "Для сборки мебели и бытового ремонта."
-  },
-  {
-    "id": "tools-002",
-    "name": "Угловая шлифмашина",
-    "brand": "Tools",
-    "category": "Электроинструменты",
-    "price": 3290,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "⚙️",
-    "image": "",
-    "description": "Для резки и шлифования с подходящей оснасткой."
-  },
-  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
