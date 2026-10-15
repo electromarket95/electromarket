@@ -228,10 +228,10 @@ window.PRODUCTS = [
   {
     "id": "item-тест-товар",
     "name": "Тест товар",
-    "brand": "Немецкое",
-    "category": "Бытовая техника",
-    "price": 555,
-    "description": "Не описуемо",
-    "image": "images/product-1792050076122.jpg"
+    "brand": "Оран",
+    "category": "Электроинструменты",
+    "price": 5550,
+    "description": "Пила бннзиновая",
+    "image": "images/product-1792050373793.jpg"
   }
 ];
