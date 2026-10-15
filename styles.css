@@ -139,3 +139,10 @@
     scrollbar-width: thin;
   }
 }
+/* Компактные фотографии товаров на телефонах */
+@media (max-width: 600px) {
+.product-visual {
+height: 190px !important;
+min-height: 0 !important;
+}
+}
