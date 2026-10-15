@@ -48,42 +48,6 @@ window.PRODUCTS = [
     "description": "Компактный адаптер для совместимых устройств."
   },
   {
-    "id": "accessory-003",
-    "name": "Умные часы",
-    "brand": "Smart",
-    "category": "Аксессуары",
-    "price": 2490,
-    "oldPrice": 2990,
-    "badge": "",
-    "emoji": "⌚",
-    "image": "",
-    "description": "Уведомления, шагомер и спортивные режимы."
-  },
-  {
-    "id": "computer-001",
-    "name": "Планшет 10 дюймов",
-    "brand": "Tablet",
-    "category": "Планшеты и компьютеры",
-    "price": 11990,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "▣",
-    "image": "",
-    "description": "Для учёбы, чтения, видео и интернета."
-  },
-  {
-    "id": "computer-002",
-    "name": "Ноутбук для работы",
-    "brand": "Laptop",
-    "category": "Планшеты и компьютеры",
-    "price": 39990,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "💻",
-    "image": "",
-    "description": "Для документов, браузера и повседневных задач."
-  },
-  {
     "id": "makita-001",
     "name": "Шуруповёрт Makita 13 мм",
     "brand": "Makita",
