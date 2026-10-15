@@ -1,136 +1,19 @@
-const WHATSAPP_NUMBER = "79298881157";
-const CATEGORIES = ["Все товары","Смартфоны","Аксессуары","Планшеты и компьютеры","Электроинструменты","Бытовая техника","Кондиционеры","Смарт-гаджеты и сеть"];
-let activeCategory = "Все товары";
-let searchTerm = "";
-let sortMode = "featured";
-let cart = {};
-let toastTimer;
-
-const $ = (id) => document.getElementById(id);
-const money = (n) => new Intl.NumberFormat("ru-RU", {maximumFractionDigits:0}).format(n) + " ₽";
-const safe = (value) => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-const productById = (id) => window.PRODUCTS.find(p => p.id === id);
-
-function renderCategories(){
-  $("categories").innerHTML = CATEGORIES.map(category =>
-    `<button class="category-chip ${category === activeCategory ? "active" : ""}" data-category="${safe(category)}" type="button">${safe(category)}</button>`
-  ).join("");
-}
-function filteredProducts(){
-  let products = window.PRODUCTS.filter(p => {
-    const categoryMatch = activeCategory === "Все товары" || p.category === activeCategory;
-    const haystack = `${p.name} ${p.brand} ${p.category} ${p.description}`.toLocaleLowerCase("ru");
-    return categoryMatch && haystack.includes(searchTerm.toLocaleLowerCase("ru"));
-  });
-  if(sortMode === "price-asc") products.sort((a,b) => a.price-b.price);
-  if(sortMode === "price-desc") products.sort((a,b) => b.price-a.price);
-  if(sortMode === "name") products.sort((a,b) => a.name.localeCompare(b.name,"ru"));
-  return products;
-}
-function renderProducts(){
-  const products = filteredProducts();
-  $("product-grid").innerHTML = products.map(p => {
-    const visual = p.image
-      ? `<img src="${safe(p.image)}" alt="${safe(p.name)}" loading="lazy" onerror="this.remove()">`
-      : `<span class="product-placeholder" aria-hidden="true">${safe(p.emoji || "📦")}</span>`;
-    return `<article class="product-card">
-      <div class="product-visual">${p.badge ? `<span class="product-badge">${safe(p.badge)}</span>` : ""}${visual}</div>
-      <div class="product-info"><span class="product-category">${safe(p.category)} · ${safe(p.brand)}</span>
-        <h3>${safe(p.name)}</h3><p class="product-desc">${safe(p.description || "")}</p>
-        <div class="product-bottom"><div><div class="product-price">${money(p.price)}</div>${p.oldPrice > p.price ? `<small style="color:#8a929e;text-decoration:line-through;font-size:10px">${money(p.oldPrice)}</small>` : ""}</div>
-        <button class="add-button" data-add="${safe(p.id)}" aria-label="Добавить ${safe(p.name)} в корзину" title="Добавить в корзину">+</button></div>
-      </div></article>`;
-  }).join("");
-  $("empty-state").hidden = products.length > 0;
-}
-function cartItems(){
-  return Object.entries(cart).map(([id,qty]) => ({product:productById(id),qty})).filter(item => item.product && item.qty > 0);
-}
-function renderCart(){
-  const items = cartItems();
-  const count = items.reduce((sum,item) => sum + item.qty,0);
-  const total = items.reduce((sum,item) => sum + item.product.price*item.qty,0);
-  $("cart-count").textContent = count;
-  $("cart-total").textContent = money(total);
-  $("cart-empty").hidden = items.length > 0;
-  $("cart-items").innerHTML = items.map(({product:p,qty}) => `<div class="cart-row">
-    <div><h3>${safe(p.name)}</h3><small>${money(p.price)} за шт.</small>
-      <div class="quantity"><button data-qty="${safe(p.id)}" data-delta="-1" aria-label="Уменьшить количество">−</button><span>${qty}</span><button data-qty="${safe(p.id)}" data-delta="1" aria-label="Увеличить количество">+</button></div></div>
-    <div class="cart-row-price">${money(p.price*qty)}<br><button class="remove-item" data-remove="${safe(p.id)}">Удалить</button></div>
-  </div>`).join("");
-  $("checkout").disabled = items.length === 0;
-  $("checkout").style.opacity = items.length === 0 ? ".5" : "1";
-}
-function showToast(message){
-  const toast = $("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
-}
-function openCart(){
-  $("cart-drawer").hidden = false;
-  document.body.style.overflow = "hidden";
-  $("cart-close").focus();
-}
-function closeCart(){
-  $("cart-drawer").hidden = true;
-  document.body.style.overflow = "";
-  $("cart-open").focus();
-}
-function addToCart(id){
-  if(!productById(id)) return;
-  cart[id] = (cart[id] || 0) + 1;
-  renderCart();
-  showToast("Добавлено в корзину");
-}
-function checkout(){
-  const items = cartItems();
-  if(!items.length){showToast("Сначала добавьте товары в корзину");return;}
-  const name = $("customer-name").value.trim();
-  const note = $("customer-note").value.trim();
-  const total = items.reduce((sum,item) => sum + item.product.price*item.qty,0);
-  const lines = items.map(({product:p,qty},i) => `${i+1}. ${p.name} — ${qty} шт. × ${money(p.price)} = ${money(p.price*qty)}`);
-  const message = [
-    "Здравствуйте! Хочу оформить заказ в ЭлектроМаркет.",
-    "",
-    ...lines,
-    "",
-    `Итого: ${money(total)}`,
-    name ? `Имя: ${name}` : "",
-    note ? `Комментарий: ${note}` : "",
-    "",
-    "Пожалуйста, уточните наличие и условия получения."
-  ].filter(Boolean).join("\n");
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
-}
-$("categories").addEventListener("click", e => {
-  const button = e.target.closest("[data-category]");
-  if(!button) return;
-  activeCategory = button.dataset.category;
-  renderCategories(); renderProducts();
-});
-$("product-grid").addEventListener("click", e => {
-  const button = e.target.closest("[data-add]");
-  if(button) addToCart(button.dataset.add);
-});
-$("search").addEventListener("input", e => {searchTerm=e.target.value.trim();renderProducts();});
-$("sort").addEventListener("change", e => {sortMode=e.target.value;renderProducts();});
-$("cart-open").addEventListener("click", openCart);
-$("cart-close").addEventListener("click", closeCart);
-$("cart-drawer").addEventListener("click", e => {if(e.target === $("cart-drawer")) closeCart();});
-$("cart-items").addEventListener("click", e => {
-  const qtyButton = e.target.closest("[data-qty]");
-  const removeButton = e.target.closest("[data-remove]");
-  if(qtyButton){
-    const id=qtyButton.dataset.qty; cart[id]=(cart[id]||0)+Number(qtyButton.dataset.delta);
-    if(cart[id]<=0) delete cart[id];
-    renderCart();
-  }
-  if(removeButton){delete cart[removeButton.dataset.remove];renderCart();}
-});
-$("checkout").addEventListener("click", checkout);
-document.addEventListener("keydown", e => {if(e.key==="Escape" && !$("cart-drawer").hidden) closeCart();});
-$("year").textContent = new Date().getFullYear();
-renderCategories(); renderProducts(); renderCart();
+/* ElectroMarket — восстановленное тёмное оформление. Вставлять в styles.css вместо ошибочного JavaScript. */
+:root{color-scheme:dark;--bg:#090d14;--panel:#111827;--panel2:#172235;--ink:#f3f6fb;--muted:#9aa8ba;--line:#263449;--blue:#36a9ff;--blue2:#1675d1;--green:#25d366;--radius:18px;--shadow:0 16px 44px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:radial-gradient(ellipse at 85% 5%,rgba(26,117,209,.13),transparent 35%),var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}body,button,input,select,textarea{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--blue)}button{cursor:pointer}button,input,select,textarea{font-size:inherit}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue);outline-offset:3px}img{max-width:100%}header{position:sticky;top:0;z-index:20;background:rgba(9,13,20,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}header a{text-decoration:none}header>*,header .container{max-width:1200px;margin-left:auto;margin-right:auto}main,footer{width:min(1200px,calc(100% - 32px));margin-inline:auto}header{padding:14px 16px}header h1,header h2,header p{margin-top:0;margin-bottom:0}header button,.button,.btn,#cart-open,#checkout,.add-button{border:0;border-radius:13px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-weight:750;padding:12px 18px;box-shadow:0 8px 22px rgba(22,117,209,.18)}
+/* Hero and sections */
+.hero,.hero-section,.em-hero{margin:28px auto 22px;padding:clamp(24px,5vw,58px);border:1px solid #24364c;border-radius:28px;background:radial-gradient(circle at 80% 30%,rgba(54,169,255,.23),transparent 34%),linear-gradient(135deg,#121d2c,#0c121d 70%);box-shadow:var(--shadow);overflow:hidden}.hero h1,.hero-section h1,.em-hero h1{font-size:clamp(2.4rem,8vw,5rem);line-height:1.02;letter-spacing:-.055em;max-width:850px;margin:12px 0 22px;font-weight:850}.hero h1 span,.hero-section h1 span,.em-hero h1 span{color:var(--blue)}.hero p,.hero-section p,.em-hero p{color:#bac6d5;font-size:clamp(1rem,2vw,1.2rem);max-width:700px}.eyebrow,.hero-kicker,.em-hero .eyebrow{color:#63c7ff;text-transform:uppercase;letter-spacing:.16em;font-weight:800;font-size:.8rem}.hero a,.hero-section a,.em-hero a{display:inline-flex;margin-top:14px;padding:13px 20px;border-radius:12px;background:var(--blue2);color:#fff;text-decoration:none;font-weight:800}
+section{margin-block:28px}h1,h2,h3{color:var(--ink);line-height:1.2}h2{font-size:clamp(1.55rem,4vw,2.3rem);letter-spacing:-.025em}p{color:#bdc8d6}small,.muted,.product-desc{color:var(--muted)}
+/* Feature/benefit cards */
+.benefits,.features,.advantages,.em-benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:24px auto}.benefit,.feature,.advantage,.em-benefit{padding:18px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,var(--panel2),var(--panel));box-shadow:var(--shadow)}.benefit strong,.feature strong,.advantage strong{display:block;margin-bottom:5px;color:var(--ink)}
+/* Catalog */
+#categories,.categories,.category-list{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0} .category-chip{background:#121d2c;color:#cbd8e8;border:1px solid #2a3b51;border-radius:999px;padding:9px 14px;font-weight:650}.category-chip.active,.category-chip:hover{background:var(--blue2);border-color:var(--blue);color:#fff}#search,.search input,input[type=search],#sort,select,textarea,input[type=text],input[type=tel]{width:100%;min-height:44px;background:#0e1622;color:var(--ink);border:1px solid #34465e;border-radius:12px;padding:10px 13px}#search::placeholder,input::placeholder,textarea::placeholder{color:#7e8da2}#sort{max-width:100%;margin-top:8px}#product-grid,.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:20px 0}.product-card{min-width:0;overflow:hidden;border:1px solid #25354a;border-radius:19px;background:linear-gradient(160deg,#151f2d,#0f1621);box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .18s,border-color .18s}.product-card:hover{transform:translateY(-3px);border-color:#397cb6}.product-visual{height:190px;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 45%,rgba(54,169,255,.13),transparent 65%),#0c131d;padding:14px}.product-visual img{width:100%;height:100%;object-fit:contain}.product-placeholder{font-size:3rem}.product-badge{position:absolute;left:10px;top:10px;z-index:1;border-radius:7px;background:#dc3545;color:#fff;font-size:.72rem;font-weight:800;padding:5px 8px}.product-info{padding:15px}.product-category{font-size:.72rem;color:#68c7ff;font-weight:750}.product-info h3{font-size:1rem;margin:8px 0}.product-desc{font-size:.86rem;min-height:2.5em;margin:6px 0 16px}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.product-price{font-size:1.25rem;font-weight:850;color:#f6fbff}.add-button{width:42px;height:42px;padding:0;font-size:1.6rem;flex-shrink:0}.add-button:hover,#checkout:hover,#cart-open:hover{filter:brightness(1.12)}#empty-state{padding:22px;border:1px dashed #34465e;border-radius:14px;color:var(--muted)}
+/* Cart */
+#cart-drawer{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.68);backdrop-filter:blur(5px);padding:16px;overflow:auto}#cart-drawer[hidden],[hidden]{display:none!important}#cart-drawer>div,#cart-drawer .cart-panel,.cart-panel{width:min(560px,100%);margin:4vh auto;padding:22px;border:1px solid #30425a;border-radius:22px;background:#101925;box-shadow:var(--shadow)}#cart-close{float:right;border:1px solid var(--line);border-radius:10px;background:#1b293b;color:#fff;padding:8px 12px}.cart-row{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}.cart-row h3{font-size:1rem;margin:0 0 5px}.cart-row-price{text-align:right;font-weight:800}.quantity{display:flex;align-items:center;gap:12px;margin-top:8px}.quantity button{width:30px;height:30px;border:1px solid #34465e;border-radius:8px;background:#1a2a3d;color:#fff}.remove-item{background:transparent;color:#ff8585;border:0;padding:5px}.cart-total,.total{font-size:1.25rem;font-weight:850}#checkout{width:100%;margin-top:14px}#checkout:disabled{cursor:not-allowed}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:200;background:#eaf6ff;color:#0a1726;padding:12px 18px;border-radius:12px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}#toast.show{opacity:1}
+/* Footer */
+footer{margin-top:48px;padding:28px 0 36px;border-top:1px solid var(--line);color:var(--muted)}footer a{color:#79caff}footer p{font-size:.92rem}
+@media(max-width:900px){#product-grid,.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.benefits,.features,.advantages,.em-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.product-visual{height:170px}}
+@media(max-width:600px){main,footer{width:calc(100% - 24px)}header{padding:12px}.hero,.hero-section,.em-hero{margin-top:16px;padding:25px 20px;border-radius:22px}.hero h1,.hero-section h1,.em-hero h1{font-size:clamp(2.5rem,12vw,3.7rem)}#product-grid,.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-visual{height:135px;padding:10px}.product-info{padding:11px}.product-info h3{font-size:.92rem}.product-desc{font-size:.78rem;min-height:2.4em}.product-price{font-size:1.05rem}.add-button{width:36px;height:36px}.benefits,.features,.advantages,.em-benefits{grid-template-columns:1fr;gap:10px}.category-chip{font-size:.82rem;padding:8px 11px}section{margin-block:22px}}
+0 36px;border-top:1px solid var(--line);color:var(--muted)}footer a{color:#79caff}footer p{font-size:.92rem}
+@media(max-width:900px){#product-grid,.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.benefits,.features,.advantages,.em-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}.product-visual{height:170px}}
+@media(max-width:600px){main,foot
