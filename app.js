@@ -1,136 +1,77 @@
-const WHATSAPP_NUMBER = "79298881157";
-const CATEGORIES = ["Все товары","Смартфоны","Аксессуары","Планшеты и компьютеры","Электроинструменты","Бытовая техника","Кондиционеры","Смарт-гаджеты и сеть"];
-let activeCategory = "Все товары";
-let searchTerm = "";
-let sortMode = "featured";
-let cart = {};
-let toastTimer;
-
-const $ = (id) => document.getElementById(id);
-const money = (n) => new Intl.NumberFormat("ru-RU", {maximumFractionDigits:0}).format(n) + " ₽";
-const safe = (value) => String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
-const productById = (id) => window.PRODUCTS.find(p => p.id === id);
-
-function renderCategories(){
-  $("categories").innerHTML = CATEGORIES.map(category =>
-    `<button class="category-chip ${category === activeCategory ? "active" : ""}" data-category="${safe(category)}" type="button">${safe(category)}</button>`
-  ).join("");
+/* ELECTROMARKET — DARK GRAPHITE / ELECTRIC BLUE THEME
+   Add this entire file to the VERY END of styles.css. Do not replace existing styles. */
+:root {
+  color-scheme: dark;
+  --ink: #f3f6fc;
+  --muted: #a5afc1;
+  --line: #293346;
+  --paper: #0b0f17;
+  --white: #121926;
+  --blue: #28a9f5;
+  --blue-dark: #0879c9;
+  --green: #25d366;
+  --radius: 22px;
+  --shadow: 0 14px 42px rgba(0,0,0,.28);
 }
-function filteredProducts(){
-  let products = window.PRODUCTS.filter(p => {
-    const categoryMatch = activeCategory === "Все товары" || p.category === activeCategory;
-    const haystack = `${p.name} ${p.brand} ${p.category} ${p.description}`.toLocaleLowerCase("ru");
-    return categoryMatch && haystack.includes(searchTerm.toLocaleLowerCase("ru"));
-  });
-  if(sortMode === "price-asc") products.sort((a,b) => a.price-b.price);
-  if(sortMode === "price-desc") products.sort((a,b) => b.price-a.price);
-  if(sortMode === "name") products.sort((a,b) => a.name.localeCompare(b.name,"ru"));
-  return products;
+html { background:#0b0f17 !important; color-scheme:dark; }
+body { background:#0b0f17 !important; color:#f3f6fc !important; }
+body, main, section, header, footer, nav, article, aside,
+.container, .wrap, .page, .content, .hero, .catalog, .products-section {
+  color:inherit;
 }
-function renderProducts(){
-  const products = filteredProducts();
-  $("product-grid").innerHTML = products.map(p => {
-    const visual = p.image
-      ? `<img src="${safe(p.image)}" alt="${safe(p.name)}" loading="lazy" onerror="this.remove()">`
-      : `<span class="product-placeholder" aria-hidden="true">${safe(p.emoji || "📦")}</span>`;
-    return `<article class="product-card">
-      <div class="product-visual">${p.badge ? `<span class="product-badge">${safe(p.badge)}</span>` : ""}${visual}</div>
-      <div class="product-info"><span class="product-category">${safe(p.category)} · ${safe(p.brand)}</span>
-        <h3>${safe(p.name)}</h3><p class="product-desc">${safe(p.description || "")}</p>
-        <div class="product-bottom"><div><div class="product-price">${money(p.price)}</div>${p.oldPrice > p.price ? `<small style="color:#8a929e;text-decoration:line-through;font-size:10px">${money(p.oldPrice)}</small>` : ""}</div>
-        <button class="add-button" data-add="${safe(p.id)}" aria-label="Добавить ${safe(p.name)} в корзину" title="Добавить в корзину">+</button></div>
-      </div></article>`;
-  }).join("");
-  $("empty-state").hidden = products.length > 0;
+header, .header, .site-header, .topbar, .navbar, nav {
+  background:rgba(13,18,29,.96) !important;
+  color:#f3f6fc !important;
+  border-color:#293346 !important;
 }
-function cartItems(){
-  return Object.entries(cart).map(([id,qty]) => ({product:productById(id),qty})).filter(item => item.product && item.qty > 0);
+header *, .header *, .site-header *, .topbar *, .navbar *, nav * { color:inherit; }
+main, section, .section, .catalog, .products-section, .categories-section {
+  background-color:transparent;
 }
-function renderCart(){
-  const items = cartItems();
-  const count = items.reduce((sum,item) => sum + item.qty,0);
-  const total = items.reduce((sum,item) => sum + item.product.price*item.qty,0);
-  $("cart-count").textContent = count;
-  $("cart-total").textContent = money(total);
-  $("cart-empty").hidden = items.length > 0;
-  $("cart-items").innerHTML = items.map(({product:p,qty}) => `<div class="cart-row">
-    <div><h3>${safe(p.name)}</h3><small>${money(p.price)} за шт.</small>
-      <div class="quantity"><button data-qty="${safe(p.id)}" data-delta="-1" aria-label="Уменьшить количество">−</button><span>${qty}</span><button data-qty="${safe(p.id)}" data-delta="1" aria-label="Увеличить количество">+</button></div></div>
-    <div class="cart-row-price">${money(p.price*qty)}<br><button class="remove-item" data-remove="${safe(p.id)}">Удалить</button></div>
-  </div>`).join("");
-  $("checkout").disabled = items.length === 0;
-  $("checkout").style.opacity = items.length === 0 ? ".5" : "1";
+.hero, .hero-section, .hero-content, .banner, .promo, .benefit, .benefits,
+.feature, .feature-card, .info-card, .contact-card, .social-block {
+  color:#f3f6fc !important;
 }
-function showToast(message){
-  const toast = $("toast");
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+.hero, .hero-section, .banner, .promo {
+  background:radial-gradient(ellipse at 85% 15%,rgba(28,153,230,.18),transparent 48%),linear-gradient(135deg,#101827,#0b0f17 70%) !important;
 }
-function openCart(){
-  $("cart-drawer").hidden = false;
-  document.body.style.overflow = "hidden";
-  $("cart-close").focus();
+h1,h2,h3,h4,h5,h6,p,label,small,li,dt,dd { color:inherit; }
+body p, .muted, .subtitle, .description, .product-description { color:#a5afc1; }
+.card, .product-card, .product, .category-card, .benefit-card, .feature-card,
+.info-card, .cart, .cart-panel, .modal, .dialog, .dropdown-menu, .search-box,
+input, textarea, select {
+  background:#121926 !important;
+  color:#f3f6fc !important;
+  border-color:#293346 !important;
 }
-function closeCart(){
-  $("cart-drawer").hidden = true;
-  document.body.style.overflow = "";
-  $("cart-open").focus();
+.product-card, .product, .card, .category-card, .benefit-card, .feature-card {
+  box-shadow:0 10px 28px rgba(0,0,0,.22) !important;
 }
-function addToCart(id){
-  if(!productById(id)) return;
-  cart[id] = (cart[id] || 0) + 1;
-  renderCart();
-  showToast("Добавлено в корзину");
+input::placeholder, textarea::placeholder { color:#8793a8 !important; }
+button, .button, .btn, a.button, a.btn, .primary-button, .checkout-button {
+  background:#087fce !important;
+  color:#fff !important;
+  border-color:#168fdf !important;
 }
-function checkout(){
-  const items = cartItems();
-  if(!items.length){showToast("Сначала добавьте товары в корзину");return;}
-  const name = $("customer-name").value.trim();
-  const note = $("customer-note").value.trim();
-  const total = items.reduce((sum,item) => sum + item.product.price*item.qty,0);
-  const lines = items.map(({product:p,qty},i) => `${i+1}. ${p.name} — ${qty} шт. × ${money(p.price)} = ${money(p.price*qty)}`);
-  const message = [
-    "Здравствуйте! Хочу оформить заказ в ЭлектроМаркет.",
-    "",
-    ...lines,
-    "",
-    `Итого: ${money(total)}`,
-    name ? `Имя: ${name}` : "",
-    note ? `Комментарий: ${note}` : "",
-    "",
-    "Пожалуйста, уточните наличие и условия получения."
-  ].filter(Boolean).join("\n");
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank", "noopener,noreferrer");
+button:hover, .button:hover, .btn:hover, a.button:hover, a.btn:hover {
+  background:#1298ed !important;
 }
-$("categories").addEventListener("click", e => {
-  const button = e.target.closest("[data-category]");
-  if(!button) return;
-  activeCategory = button.dataset.category;
-  renderCategories(); renderProducts();
-});
-$("product-grid").addEventListener("click", e => {
-  const button = e.target.closest("[data-add]");
-  if(button) addToCart(button.dataset.add);
-});
-$("search").addEventListener("input", e => {searchTerm=e.target.value.trim();renderProducts();});
-$("sort").addEventListener("change", e => {sortMode=e.target.value;renderProducts();});
-$("cart-open").addEventListener("click", openCart);
-$("cart-close").addEventListener("click", closeCart);
-$("cart-drawer").addEventListener("click", e => {if(e.target === $("cart-drawer")) closeCart();});
-$("cart-items").addEventListener("click", e => {
-  const qtyButton = e.target.closest("[data-qty]");
-  const removeButton = e.target.closest("[data-remove]");
-  if(qtyButton){
-    const id=qtyButton.dataset.qty; cart[id]=(cart[id]||0)+Number(qtyButton.dataset.delta);
-    if(cart[id]<=0) delete cart[id];
-    renderCart();
-  }
-  if(removeButton){delete cart[removeButton.dataset.remove];renderCart();}
-});
-$("checkout").addEventListener("click", checkout);
-document.addEventListener("keydown", e => {if(e.key==="Escape" && !$("cart-drawer").hidden) closeCart();});
-$("year").textContent = new Date().getFullYear();
-renderCategories(); renderProducts(); renderCart();
+a { color:#55bdff; }
+a:hover { color:#8bd3ff; }
+.price, .product-price, .current-price, .sale-price { color:#62c4ff !important; }
+.badge, .tag, .label, .discount, .sale-badge {
+  border-color:rgba(40,169,245,.35) !important;
+}
+hr, .divider, .separator { border-color:#293346 !important; }
+footer, .footer, .site-footer {
+  background:#080b11 !important;
+  color:#a5afc1 !important;
+  border-color:#293346 !important;
+}
+footer *, .footer *, .site-footer * { color:inherit; }
+img { color:#a5afc1; }
+::selection { background:#087fce; color:#fff; }
+@media (prefers-reduced-motion: no-preference) {
+  .product-card, .product, .card, button, .btn, .button { transition:background-color .18s ease,border-color .18s ease,transform .18s ease; }
+  .product-card:hover, .product:hover { transform:translateY(-2px); }
+}
