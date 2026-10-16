@@ -444,16 +444,16 @@ function installStoreStyles() {
     }
 
     .details-cart {
-      border: 1px solid #c4a363;
+      border: 1px solid #078cff;
       background: transparent;
-      color: #c4a363;
+      color: #078cff;
     }
 
     .details-phone {
-      border: 1px solid #c4a363;
+      border: 1px solid #078cff;
       border-radius: 50%;
       background: transparent;
-      color: #c4a363;
+      color: #078cff;
       font-size: 22px;
     }
 
