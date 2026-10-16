@@ -630,4 +630,78 @@
   }
 }
 
+/* ELECTROMARKET — ЕДИНАЯ СИНЯЯ ЦВЕТОВАЯ СХЕМА */
+
+/* Категории товаров */
+.product-category,
+.details-category {
+  color: #36b4ff !important;
+}
+
+/* Название товара при наведении */
+.product-title-link:hover {
+  color: #36b4ff !important;
+}
+
+/* Кнопка «Заказать» */
+.product-actions .buy-now-button,
+.details-order {
+  background: linear-gradient(135deg, #078cff, #0065df) !important;
+  color: #ffffff !important;
+}
+
+/* Круглая кнопка корзины */
+.product-actions .add-button,
+.details-cart,
+.details-phone {
+  border-color: #168fff !important;
+  color: #36b4ff !important;
+}
+
+/* Фон карточек */
+.product-card {
+  background: #0b1523 !important;
+  border-color: #1c3048 !important;
+}
+
+.product-card:hover {
+  border-color: #168fff !important;
+}
+
+/* Фон области фотографии */
+.product-visual {
+  background: #081321 !important;
+}
+
+/* Окно подробностей товара */
+.product-details-panel {
+  background: #0b1523 !important;
+  border-color: #1c3048 !important;
+}
+
+.details-image-wrap {
+  background: #081321 !important;
+}
+
+.details-category {
+  color: #36b4ff !important;
+}
+
+/* Разделители характеристик */
+.details-spec {
+  border-color: #1c3048 !important;
+}
+
+/* Аккуратное выделение кнопок при нажатии */
+.product-actions .buy-now-button:active,
+.details-order:active {
+  filter: brightness(1.12);
+}
+
+.product-actions .add-button:active,
+.details-cart:active,
+.details-phone:active {
+  background: rgba(7, 140, 255, 0.12) !important;
+}
+
 
