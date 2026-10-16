@@ -1368,6 +1368,14 @@ function bindEvents() {
       return;
     }
 
+    // Нажатие на фото сразу открывает галерею всех фотографий товара.
+    const productImage = event.target.closest("img[data-product-open]");
+    if (productImage) {
+      openGallery(productImage.dataset.productOpen);
+      return;
+    }
+
+    // Название товара по-прежнему открывает подробности.
     const openButton = event.target.closest("[data-product-open]");
     if (openButton) {
       openProductDetails(openButton.dataset.productOpen);
