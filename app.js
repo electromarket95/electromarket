@@ -95,6 +95,28 @@ function productById(id) {
     product => String(product.id) === String(id)
   );
 }
+function getProductShareUrl(product) {
+  const baseUrl = "https://electromarket95.github.io/electromarket/";
+  return baseUrl + "#product=" + encodeURIComponent(String(product.id));
+}
+
+function openProductFromHash() {
+  const match = window.location.hash.match(/^#product=(.+)$/);
+  if (!match) return;
+
+  let id;
+
+  try {
+    id = decodeURIComponent(match[1]);
+  } catch (error) {
+    return;
+  }
+
+  const product = productById(id);
+  if (!product) return;
+
+  openProductDetails(product.id);
+}
 
 function getProductImages(product) {
   if (!product) return [];
@@ -1413,8 +1435,8 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
     0
   );
 
-  const lines = items.map(({ product, qty }, index) =>
-    `${index + 1}. ${product.name} — ${qty} шт. × ${money(product.price)} = ${money(Number(product.price) * qty)}`
+    const lines = items.map(({ product, qty }, index) =>
+    `${index + 1}. ${product.name} — ${qty} шт. × ${money(product.price)} = ${money(Number(product.price) * qty)}\nСсылка на товар: ${getProductShareUrl(product)}`
   );
 
   const message = [
@@ -1597,6 +1619,8 @@ function bindEvents() {
 // ==================================================
 
 function initStore() {
+openProductFromHash();
+window.addEventListener("hashchange", openProductFromHash);
   installStoreStyles();
   bindEvents();
   renderCategories();
