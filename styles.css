@@ -703,5 +703,47 @@
 .details-phone:active {
   background: rgba(7, 140, 255, 0.12) !important;
 }
-7
+
+/* ELECTROMARKET BLUE THEME — FINAL OVERRIDE */
+
+.product-card {
+  background: #0b1523 !important;
+  border-color: #1c3048 !important;
+}
+
+.product-visual {
+  background: #081321 !important;
+}
+
+.product-category,
+.details-category,
+.product-title-link:hover {
+  color: #36b4ff !important;
+}
+
+.product-actions .buy-now-button,
+.details-order {
+  background: linear-gradient(135deg, #078cff, #0065df) !important;
+  color: #fff !important;
+}
+
+.product-actions .add-button,
+.details-cart,
+.details-phone {
+  border-color: #168fff !important;
+  color: #36b4ff !important;
+}
+
+.product-details-panel {
+  background: #0b1523 !important;
+  border-color: #1c3048 !important;
+}
+
+.details-image-wrap {
+  background: #081321 !important;
+}
+
+.details-spec {
+  border-color: #1c3048 !important;
+}
 
