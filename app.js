@@ -29,6 +29,8 @@ let galleryProduct = null;
 let galleryIndex = 0;
 let galleryTouchX = 0;
 let detailProductId = null;
+let detailImageIndex = 0;
+let detailTouchX = 0;
 
 const $ = id => document.getElementById(id);
 
@@ -398,21 +400,65 @@ function installStoreStyles() {
     }
 
     .details-image-wrap {
+      position: relative;
       width: 100%;
-      height: 340px;
+      height: clamp(280px, 52vh, 480px);
       display: grid;
       place-items: center;
       overflow: hidden;
       background: #111;
-      cursor: zoom-in;
+      cursor: grab;
+      touch-action: pan-y;
+      user-select: none;
     }
 
     .details-image {
       display: block;
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
       padding: 8px;
       object-fit: contain;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .details-gallery-dots {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      max-width: calc(100% - 24px);
+      padding: 7px 10px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, .55);
+    }
+
+    .details-gallery-dots[hidden] { display: none !important; }
+
+    .details-gallery-dots button {
+      width: 7px;
+      height: 7px;
+      min-width: 7px;
+      min-height: 7px;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .55);
+      cursor: pointer;
+    }
+
+    .details-gallery-dots button.active {
+      width: 18px;
+      border-radius: 8px;
+      background: #078cff;
     }
 
     .details-image[hidden] {
@@ -642,7 +688,7 @@ function installStoreStyles() {
       }
 
       .details-image-wrap {
-        height: 280px;
+        height: clamp(250px, 42vh, 380px);
       }
 
       .details-content {
@@ -863,6 +909,7 @@ function initProductDetails() {
 
       <div class="details-image-wrap">
         <img class="details-image" alt="">
+        <div class="details-gallery-dots" aria-label="Фотографии товара"></div>
       </div>
 
       <div class="details-content">
@@ -915,15 +962,73 @@ function initProductDetails() {
     }
   );
 
-  modal.querySelector(".details-image").addEventListener(
-    "click", () => {
-      if (detailProductId === null) return;
-
-      const id = detailProductId;
-      closeProductDetails();
-      openGallery(id);
+  const imageWrap = modal.querySelector(".details-image-wrap");
+  imageWrap.addEventListener("touchstart", event => {
+    if (event.changedTouches.length) {
+      detailTouchX = event.changedTouches[0].clientX;
     }
-  );
+  }, { passive: true });
+
+  imageWrap.addEventListener("touchend", event => {
+    if (!event.changedTouches.length || detailProductId === null) return;
+    const delta = event.changedTouches[0].clientX - detailTouchX;
+    if (Math.abs(delta) > 40) {
+      changeDetailImage(delta < 0 ? 1 : -1);
+    }
+  }, { passive: true });
+
+  modal.querySelector(".details-gallery-dots").addEventListener("click", event => {
+    const dot = event.target.closest("[data-detail-image-index]");
+    if (!dot) return;
+    detailImageIndex = Number(dot.dataset.detailImageIndex) || 0;
+    renderDetailImage();
+  });
+}
+
+
+function renderDetailImage() {
+  if (detailProductId === null) return;
+  const product = productById(detailProductId);
+  if (!product) return;
+
+  const images = getProductImages(product);
+  const modal = $("product-details");
+  const image = modal.querySelector(".details-image");
+  const dots = modal.querySelector(".details-gallery-dots");
+
+  if (!images.length) {
+    image.removeAttribute("src");
+    image.hidden = true;
+    dots.innerHTML = "";
+    dots.hidden = true;
+    return;
+  }
+
+  detailImageIndex = (detailImageIndex + images.length) % images.length;
+  image.src = images[detailImageIndex];
+  image.alt = `${product.name || "Товар"} — фото ${detailImageIndex + 1}`;
+  image.hidden = false;
+
+  dots.innerHTML = images.length > 1
+    ? images.map((_, index) => `
+        <button type="button"
+          class="${index === detailImageIndex ? "active" : ""}"
+          data-detail-image-index="${index}"
+          aria-label="Фото ${index + 1} из ${images.length}"
+          aria-current="${index === detailImageIndex ? "true" : "false"}"></button>
+      `).join("")
+    : "";
+  dots.hidden = images.length < 2;
+}
+
+function changeDetailImage(direction) {
+  if (detailProductId === null) return;
+  const product = productById(detailProductId);
+  if (!product) return;
+  const images = getProductImages(product);
+  if (images.length < 2) return;
+  detailImageIndex += direction;
+  renderDetailImage();
 }
 
 function openProductDetails(id) {
@@ -934,17 +1039,8 @@ function openProductDetails(id) {
   detailProductId = product.id;
 
   const modal = $("product-details");
-  const images = getProductImages(product);
-  const image = modal.querySelector(".details-image");
-
-  if (images.length) {
-    image.src = images[0];
-    image.alt = product.name || "Товар";
-    image.hidden = false;
-  } else {
-    image.removeAttribute("src");
-    image.hidden = true;
-  }
+  detailImageIndex = 0;
+  renderDetailImage();
 
   modal.querySelector(".details-category").textContent =
     [product.brand, product.category].filter(Boolean).join(" · ");
