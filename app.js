@@ -204,7 +204,7 @@ function installStoreStyles() {
     }
 
     .product-category {
-      color: #c4a363 !important;
+      color: #078cff !important;
       font-size: 10px !important;
       line-height: 1.4;
       overflow-wrap: anywhere;
@@ -220,7 +220,7 @@ function installStoreStyles() {
     }
 
     .product-title-link:hover {
-      color: #d7b777;
+      color: #56b5ff;
     }
 
     .product-desc {
@@ -266,7 +266,7 @@ function installStoreStyles() {
       padding: 8px 5px !important;
       border: 0 !important;
       border-radius: 28px !important;
-      background: #c4a363 !important;
+      background: #078cff !important;
       color: #17130b !important;
       font-size: 14px !important;
       font-weight: 800 !important;
@@ -284,10 +284,10 @@ function installStoreStyles() {
       min-width: 48px !important;
       min-height: 48px !important;
       padding: 0 !important;
-      border: 2px solid #c4a363 !important;
+      border: 2px solid #078cff !important;
       border-radius: 50% !important;
       background: transparent !important;
-      color: #c4a363 !important;
+      color: #078cff !important;
       font-size: 23px !important;
       line-height: 1;
       box-shadow: none !important;
@@ -369,7 +369,7 @@ function installStoreStyles() {
 
     .details-category {
       margin-bottom: 10px;
-      color: #c4a363;
+      color: #078cff;
       font-size: 14px;
     }
 
