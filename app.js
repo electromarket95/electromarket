@@ -399,27 +399,31 @@ function installStoreStyles() {
       font-size: 30px;
     }
 
-    .details-image-wrap {
-      position: relative;
-      width: 100%;
-      height: clamp(280px, 52vh, 480px);
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background: #111;
+    /* Force complete photo display even if styles.css has older image rules */
+    #product-details .details-image-wrap {
+      position: relative !important;
+      width: 100% !important;
+      height: clamp(220px, 48vh, 420px) !important;
+      min-height: 220px !important;
+      max-height: 48vh !important;
+      display: grid !important;
+      place-items: center !important;
+      overflow: hidden !important;
+      background: #111 !important;
       cursor: grab;
       touch-action: pan-y;
       user-select: none;
     }
 
-    .details-image {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      padding: 8px;
-      object-fit: contain;
+    #product-details .details-image {
+      display: block !important;
+      width: auto !important;
+      height: auto !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      padding: 8px !important;
+      object-fit: contain !important;
+      object-position: center center !important;
       pointer-events: none;
       -webkit-user-drag: none;
     }
@@ -687,8 +691,15 @@ function installStoreStyles() {
         border-radius: 18px;
       }
 
-      .details-image-wrap {
-        height: clamp(250px, 42vh, 380px);
+      #product-details .details-image-wrap {
+        height: clamp(220px, 42vh, 340px) !important;
+        max-height: 42vh !important;
+      }
+
+      #product-details .details-image {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
       }
 
       .details-content {
