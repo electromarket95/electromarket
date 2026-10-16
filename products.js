@@ -1,5 +1,18 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792178487839",
+    "name": "Коса",
+    "brand": "Оала",
+    "category": "Смартфоны и телефоны",
+    "price": 86668,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "status": "coming_soon",
+    "image": "images/item-1792178487839.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792175027112",
     "name": "Набор 6в1",
     "brand": "Фенг бао",
