@@ -191,6 +191,39 @@ function installStoreStyles() {
       cursor: pointer;
     }
 
+    /* Маленькие точки под фото показывают, что в карточке есть галерея */
+    .product-photo-dots {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 5px 8px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, .62);
+      pointer-events: none;
+    }
+
+    .product-photo-dots i,
+    .gallery-dots button {
+      display: block;
+      width: 6px;
+      height: 6px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .55);
+    }
+
+    .product-photo-dots i:first-child,
+    .gallery-dots button.active {
+      background: #078cff;
+    }
+
     .product-badge {
       z-index: 3;
     }
@@ -519,14 +552,14 @@ function installStoreStyles() {
       z-index: 2;
       display: grid;
       place-items: center;
-      min-width: 44px;
-      min-height: 44px;
-      padding: 4px 12px;
+      min-width: 42px;
+      min-height: 42px;
+      padding: 4px 10px;
       color: #fff;
-      background: rgba(25, 25, 25, .94);
+      background: rgba(25, 25, 25, .82);
       border: 1px solid rgba(255, 255, 255, .35);
       border-radius: 50%;
-      font-size: 30px;
+      font-size: 28px;
       cursor: pointer;
     }
 
@@ -535,29 +568,26 @@ function installStoreStyles() {
       right: 8px;
     }
 
-    #gallery-prev {
-      left: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    #gallery-next {
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    #gallery-count {
+    .gallery-dots {
       position: absolute;
-      bottom: 8px;
+      bottom: max(16px, env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
-      padding: 7px 13px;
-      color: white;
-      background: rgba(25, 25, 25, .94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 12px;
       border-radius: 20px;
-      font-size: 14px;
-      white-space: nowrap;
+      background: rgba(0, 0, 0, .62);
+    }
+
+    .gallery-dots button {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      min-height: 8px;
+      cursor: pointer;
     }
 
     @media (max-width: 600px) {
@@ -757,7 +787,7 @@ function renderProducts() {
             : ""}
           ${visual}
           ${images.length > 1
-            ? `<span class="product-photo-count">${images.length} фото</span>`
+            ? `<span class="product-photo-dots" aria-label="${images.length} фотографии">${images.map((_, dotIndex) => `<i${dotIndex === 0 ? ' class="active"' : ''}></i>`).join("")}</span>`
             : ""}
         </div>
 
@@ -1014,35 +1044,21 @@ function initGallery() {
         aria-label="Закрыть"
       >×</button>
 
-      <button
-        id="gallery-prev"
-        class="gallery-control"
-        type="button"
-        aria-label="Предыдущее фото"
-      >‹</button>
-
       <img id="gallery-image" alt="">
 
-      <button
-        id="gallery-next"
-        class="gallery-control"
-        type="button"
-        aria-label="Следующее фото"
-      >›</button>
-
-      <div id="gallery-count"></div>
+      <div id="gallery-dots" class="gallery-dots" aria-label="Выбор фотографии"></div>
     </div>
   `;
 
   document.body.appendChild(modal);
 
   $("gallery-close").addEventListener("click", closeGallery);
-  $("gallery-prev").addEventListener(
-    "click", () => changeGallery(-1)
-  );
-  $("gallery-next").addEventListener(
-    "click", () => changeGallery(1)
-  );
+  $("gallery-dots").addEventListener("click", event => {
+    const dot = event.target.closest("[data-gallery-index]");
+    if (!dot) return;
+    galleryIndex = Number(dot.dataset.galleryIndex) || 0;
+    showGalleryImage();
+  });
 
   modal.addEventListener("click", event => {
     if (event.target === modal) closeGallery();
@@ -1101,12 +1117,19 @@ function showGalleryImage() {
   $("gallery-image").alt =
     `${galleryProduct.name || "Товар"} — фото ${galleryIndex + 1}`;
 
-  $("gallery-count").textContent =
-    `${galleryIndex + 1} / ${images.length}`;
-
-  $("gallery-prev").hidden = images.length < 2;
-  $("gallery-next").hidden = images.length < 2;
-  $("gallery-count").hidden = images.length < 2;
+  const dots = $("gallery-dots");
+  dots.innerHTML = images.length > 1
+    ? images.map((_, index) => `
+        <button
+          type="button"
+          class="${index === galleryIndex ? "active" : ""}"
+          data-gallery-index="${index}"
+          aria-label="Фото ${index + 1} из ${images.length}"
+          aria-current="${index === galleryIndex ? "true" : "false"}"
+        ></button>
+      `).join("")
+    : "";
+  dots.hidden = images.length < 2;
 }
 
 function changeGallery(direction) {
@@ -1368,14 +1391,6 @@ function bindEvents() {
       return;
     }
 
-    // Нажатие на фото сразу открывает галерею всех фотографий товара.
-    const productImage = event.target.closest("img[data-product-open]");
-    if (productImage) {
-      openGallery(productImage.dataset.productOpen);
-      return;
-    }
-
-    // Название товара по-прежнему открывает подробности.
     const openButton = event.target.closest("[data-product-open]");
     if (openButton) {
       openProductDetails(openButton.dataset.productOpen);
