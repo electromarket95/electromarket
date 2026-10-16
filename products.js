@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792165693027",
+    "name": "Фонарь лазерный",
+    "brand": "FaizFull",
+    "category": "Прочее",
+    "price": 2000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792165693027.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792133715459",
     "name": "Смарт телевизор",
     "brand": "FEVITEZ",
