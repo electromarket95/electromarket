@@ -1,803 +1,317 @@
+:root{color-scheme:dark;--bg:#050b13;--panel:#0b1523;--panel2:#101d2d;--ink:#f4f7fc;--muted:#9baec5;--line:#1c3048;--blue:#078cff;--blue2:#36b4ff;--green:#08c96b;--radius:18px;--shadow:0 18px 48px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:radial-gradient(ellipse at 50% -20%,rgba(0,115,255,.13),transparent 42%),var(--bg);color:var(--ink);font-family:Manrope,Inter,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--blue2);outline-offset:3px}.site-header{position:sticky;top:0;z-index:30;background:rgba(5,11,19,.92);backdrop-filter:blur(18px);border-bottom:1px solid rgba(92,137,184,.16)}.header-inner{max-width:1280px;margin:auto;min-height:86px;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:13px;min-width:0}.brand-mark{width:56px;height:48px;flex:0 0 56px;display:flex;align-items:center;justify-content:center;border-radius:13px;background:linear-gradient(145deg,#168fff,#074cbd);box-shadow:0 7px 24px rgba(0,125,255,.24);font-weight:800;font-size:28px;letter-spacing:-4px}.brand-mark span{color:white}.brand-mark i{font-style:normal;color:#70d9ff;margin-left:1px}.brand-copy{display:flex;flex-direction:column;min-width:0}.brand-copy strong{font-size:18px;letter-spacing:.025em;white-space:nowrap;line-height:1.2}.brand-copy strong span{color:var(--blue2)}.brand-copy small{margin-top:5px;font-size:9px;letter-spacing:.08em;color:#a9b8cc;white-space:nowrap}.header-actions{display:flex;align-items:center;gap:20px}.header-action{position:relative;border:0;background:none;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:3px 0;min-width:46px}.action-icon{font-size:28px;line-height:1.1;position:relative}.action-icon b{position:absolute;top:-5px;right:-12px;min-width:19px;height:19px;padding:0 4px;display:grid;place-items:center;border-radius:20px;background:var(--blue);font-size:11px;font-weight:800}.header-action small{font-size:10px;color:#c4d0df}.header-wa{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:13px;background:linear-gradient(135deg,#09c76a,#03994f);color:white;box-shadow:0 8px 24px rgba(0,201,105,.16);white-space:nowrap}.wa-symbol{font-size:27px}.header-wa span:last-child{display:flex;flex-direction:column;line-height:1.2}.header-wa strong{font-size:13px}.header-wa small{font-size:10px;margin-top:4px}.page-shell{max-width:1280px;margin:0 auto;padding:20px 24px 44px}.search-row{margin:0 0 22px}.search-box{display:flex;align-items:center;gap:13px;width:100%;min-height:58px;border:1px solid #244c76;border-radius:15px;background:linear-gradient(110deg,#0d1a2a,#0a1421);padding:6px 7px 6px 18px;box-shadow:inset 0 1px rgba(255,255,255,.025)}.search-icon{font-size:28px;color:#9dc8ff}.search-box input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:var(--ink);font-size:14px}.search-box input::placeholder{color:#839bb7}.search-submit{border:0;border-radius:11px;padding:12px 25px;background:linear-gradient(135deg,#087dff,#0060e9);color:#fff;font-weight:800}.hero{position:relative;isolation:isolate;min-height:360px;overflow:hidden;display:grid;grid-template-columns:1.03fr .97fr;align-items:center;border:1px solid #16416a;border-radius:22px;background:radial-gradient(ellipse at 75% 45%,rgba(0,124,255,.26),transparent 42%),linear-gradient(112deg,#091523 0%,#081322 53%,#06101e 100%);box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,12,21,.12),transparent 65%)}.hero-copy{padding:34px 10px 34px 36px;position:relative;z-index:3}.eyebrow{margin:0 0 14px;color:#9eb5d0;font-size:11px;letter-spacing:.13em;font-weight:800}.hero .eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:9px;color:#d3e7ff;letter-spacing:.06em}.hero .eyebrow i{color:var(--blue2);font-style:normal}.hero h1{font-size:clamp(32px,4vw,54px);line-height:1.07;letter-spacing:-.045em;margin:0;max-width:590px;font-weight:800}.hero h1 span{display:block;color:#22a8ff}.hero-text{max-width:440px;color:#c2d0e2;font-size:15px;line-height:1.65;margin:18px 0 22px}.primary-btn{display:inline-flex;align-items:center;gap:24px;padding:14px 20px;border-radius:12px;background:linear-gradient(100deg,#058cff,#0085e9);color:#fff;font-weight:800;box-shadow:0 8px 22px rgba(0,137,255,.18);transition:transform .2s,filter .2s}.primary-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.primary-btn b{font-size:22px}.hero-note{display:flex;align-items:center;gap:9px;margin-top:19px;font-size:11px;color:#aebed2}.pulse{width:8px;height:8px;border-radius:50%;background:#16d985;box-shadow:0 0 0 5px rgba(22,217,133,.11)}.hero-art{position:relative;min-height:340px;height:100%;overflow:hidden}.hero-orbit{position:absolute;border:1px solid rgba(50,160,255,.22);border-radius:50%;transform:rotate(-24deg)}.orbit-one{width:360px;height:240px;top:50px;left:6%;box-shadow:0 0 55px rgba(0,117,255,.14)}.orbit-two{width:290px;height:190px;top:75px;left:18%;border-color:rgba(93,198,255,.18)}.hero-device{position:absolute;filter:drop-shadow(0 18px 20px rgba(0,0,0,.42))}.laptop{width:240px;right:5%;top:62px;transform:rotate(-5deg)}.laptop-screen{height:166px;border:7px solid #26384d;border-bottom-width:10px;border-radius:13px;background:linear-gradient(145deg,#071326,#0758b9 58%,#0b1830);position:relative;overflow:hidden;display:grid;place-items:center}.laptop-screen:before{content:"";position:absolute;width:170px;height:190px;right:-65px;top:-30px;background:linear-gradient(145deg,transparent 25%,rgba(50,177,255,.65),transparent 70%);transform:rotate(25deg)}.laptop-screen span{font-weight:800;font-size:33px;color:#e8f7ff;letter-spacing:-3px}.laptop-base{height:10px;width:270px;margin-left:-15px;background:linear-gradient(#9caebf,#35485d 40%,#101b29);clip-path:polygon(5% 0,95% 0,100% 100%,0 100%);border-radius:0 0 8px 8px}.phone{width:105px;height:205px;left:23%;top:83px;border:6px solid #26364a;border-radius:23px;background:linear-gradient(145deg,#0b1b34,#0c76c6 70%,#1aa5e8);transform:rotate(10deg);display:grid;place-items:center;box-shadow:inset 0 0 0 2px #06101c}.phone-camera{position:absolute;top:7px;width:25px;height:5px;border-radius:5px;background:#050c16}.phone-mark{font-size:25px;font-weight:800;letter-spacing:-3px;color:#d8f4ff}.buds{left:7%;bottom:42px;width:105px;height:72px}.bud-case{position:absolute;bottom:0;left:0;width:105px;height:43px;border-radius:12px 12px 24px 24px;background:linear-gradient(145deg,#fff,#b7c6d7);box-shadow:inset 0 -4px 0 #7c8b9d}.bud-left,.bud-right{position:absolute;top:0;width:21px;height:40px;background:linear-gradient(90deg,#f8fbff,#a9b7c9);border-radius:13px 13px 10px 10px}.bud-left{left:24px;transform:rotate(-8deg)}.bud-right{right:24px;transform:rotate(8deg)}.hero-floating-tag{position:absolute;z-index:4;padding:8px 12px;border:1px solid rgba(132,190,255,.32);border-radius:9px;background:rgba(7,18,32,.82);box-shadow:0 8px 25px rgba(0,0,0,.2);font-size:9px;letter-spacing:.08em;font-weight:800;color:#cbe8ff}.hero-floating-tag b{color:var(--blue2)}.tag-smart{left:8%;top:45px}.tag-tools{right:8%;bottom:40px}.category-shortcuts{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px;margin:22px 0}.shortcut{min-width:0;min-height:118px;padding:12px 7px 10px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;text-align:center;border:1px solid #182c42;border-radius:14px;background:linear-gradient(145deg,#0b1624,#07111d);transition:border-color .2s,transform .2s}.shortcut:hover{border-color:#167dc9;transform:translateY(-2px)}.shortcut-art{height:60px;width:100%;display:grid;place-items:center;font-size:37px;font-weight:800;background:radial-gradient(ellipse,rgba(0,137,255,.17),transparent 70%);color:#8ed5ff}.art-phone{font-size:45px}.art-buds{letter-spacing:-10px;padding-right:9px}.art-laptop{font-size:48px}.art-tools{color:#d8e4f3}.art-home{font-size:42px}.art-cool{font-size:39px}.art-watch{font-size:42px}.art-all{font-size:42px}.shortcut b{font-size:10px;line-height:1.35;font-weight:700}.benefit-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #1b3047;border-radius:17px;background:linear-gradient(110deg,#0a1523,#091320);margin:0 0 42px;padding:19px 10px}.benefit{display:flex;align-items:center;gap:12px;padding:4px 16px;border-right:1px solid #1c3045;min-width:0}.benefit:last-child{border-right:0}.benefit-icon{flex:0 0 38px;width:38px;height:38px;border-radius:11px;background:rgba(0,139,255,.13);display:grid;place-items:center;color:#28aaff;font-size:24px;font-weight:800}.benefit span:last-child{min-width:0;display:flex;flex-direction:column}.benefit b{font-size:11px;line-height:1.4}.benefit small{font-size:10px;color:#9eb1c8;margin-top:4px;line-height:1.4}.catalog-section{scroll-margin-top:105px}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:20px}.section-heading .eyebrow{margin-bottom:5px}.section-heading h2,.order-banner h2{margin:0;font-size:clamp(24px,3vw,32px);line-height:1.2;letter-spacing:-.03em}.heading-flame{color:#25aaff}.muted{margin:8px 0 0;color:var(--muted);font-size:13px}.cart-button{border:1px solid #22517e;background:#0c1c2e;color:#e8f5ff;border-radius:11px;padding:10px 14px;font-size:12px;font-weight:800;white-space:nowrap}.cart-count-small{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;margin-left:6px;border-radius:20px;background:var(--blue);color:white}.catalog-tools{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:15px 0 13px}.catalog-tools-label{font-size:12px;font-weight:800;color:#d7e5f7}.catalog-tools select{max-width:100%;border:1px solid #243b54;background:#0b1726;color:#dbe8f6;border-radius:10px;padding:10px 12px;font-size:12px}.category-list{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:thin;scrollbar-color:#2b5278 transparent}.category-chip{flex:0 0 auto;border:1px solid #21364d;border-radius:999px;background:#0b1623;color:#b5c6d9;padding:9px 14px;font-size:11px;font-weight:700;transition:background .2s,border-color .2s}.category-chip.active,.category-chip:hover{background:#0879d8;border-color:#159cff;color:white}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.product-card{min-width:0;overflow:hidden;position:relative;border:1px solid #1c3047;border-radius:16px;background:linear-gradient(155deg,#0e1b2b,#08111d);display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}.product-card:hover{transform:translateY(-3px);border-color:#24649a;box-shadow:0 12px 30px rgba(0,0,0,.22)}.product-visual{height:190px;position:relative;display:grid;place-items:center;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,rgba(0,127,255,.14),transparent 70%),linear-gradient(140deg,#0b1929,#0a1421)}.product-visual img{width:100%;height:100%;object-fit:contain;padding:12px;position:relative;z-index:1}.product-placeholder{display:grid;place-items:center;font-size:65px;color:#a5c9ed;width:100%;height:100%;background:radial-gradient(ellipse,rgba(0,137,255,.14),transparent 65%)}.product-badge{position:absolute;z-index:3;top:10px;left:10px;border-radius:7px;padding:5px 8px;background:#087fff;color:white;font-size:9px;font-weight:800}.product-info{padding:12px;display:flex;flex-direction:column;flex:1}.product-category{font-size:9px;color:#7fa8d1;font-weight:800;letter-spacing:.02em}.product-info h3{font-size:13px;line-height:1.35;margin:7px 0 5px;font-weight:800}.product-desc{font-size:10px;color:#9dafc5;line-height:1.5;margin:0 0 12px;min-height:30px}.product-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}.product-price{font-size:18px;font-weight:800;letter-spacing:-.03em;white-space:nowrap}.add-button{flex:0 0 38px;width:38px;height:38px;border:0;border-radius:11px;background:linear-gradient(145deg,#078cff,#0062db);color:white;font-size:27px;line-height:1;box-shadow:0 6px 14px rgba(0,115,255,.17)}.add-button:active{transform:scale(.96)}.empty-state{padding:28px;text-align:center;color:var(--muted);border:1px dashed #29415a;border-radius:14px}.catalog-disclaimer{font-size:11px;color:#71869e;margin:16px 0 34px}.service-banners{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 26px}.service-card{display:flex;align-items:center;gap:14px;min-width:0;padding:18px;border:1px solid #1c334b;border-radius:15px;background:linear-gradient(130deg,#0d1a2a,#091321)}.service-symbol{flex:0 0 44px;width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:rgba(0,145,255,.13);color:#30b2ff;font-size:27px;font-weight:800}.service-card b{font-size:13px}.service-card p{font-size:11px;color:#9dafc5;line-height:1.5;margin:4px 0 0}.service-card a{display:inline-block;margin-top:8px;color:#32b5ff;font-size:11px;font-weight:800}.order-banner{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:27px 30px;border:1px solid #14518a;border-radius:19px;background:radial-gradient(ellipse at 90% 30%,rgba(0,127,255,.22),transparent 40%),linear-gradient(110deg,#0a1a2c,#071320);margin:0 0 28px}.order-banner .eyebrow{margin-bottom:8px}.order-banner h2{max-width:620px}.order-banner p:not(.eyebrow){font-size:12px;color:#a9bdd3;margin:9px 0 0;max-width:600px}.wa-large{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 18px;border-radius:12px;background:linear-gradient(135deg,#09c96b,#04984e);color:white;font-size:12px;font-weight:800;white-space:nowrap}.wa-large span{font-size:21px}.site-footer{border-top:1px solid #182b40;background:#060c14;padding:24px max(24px,calc((100vw - 1232px)/2)) 18px}.footer-main,.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:18px}.footer-brand .brand-mark{width:44px;height:40px;flex-basis:44px;font-size:23px}.footer-brand .brand-copy strong{font-size:14px}.footer-brand .brand-copy small{font-size:8px}.footer-contact{display:flex;flex-direction:column;align-items:flex-end;gap:3px}.footer-contact span,.footer-bottom small{font-size:10px;color:#8397ad}.footer-contact a{font-size:13px;font-weight:800;color:#d9eaff}.footer-bottom{border-top:1px solid #142337;margin-top:18px;padding-top:13px}.drawer-backdrop{position:fixed;inset:0;z-index:100;background:rgba(0,4,10,.74);backdrop-filter:blur(5px);display:flex;justify-content:flex-end}.drawer-backdrop[hidden]{display:none!important}.cart-drawer{height:100%;width:min(470px,100%);overflow:auto;background:#091421;border-left:1px solid #24405d;padding:22px;box-shadow:-20px 0 60px rgba(0,0,0,.3)}.drawer-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #20344a;padding-bottom:15px}.drawer-head .eyebrow{margin-bottom:3px}.drawer-head h2{font-size:25px;margin:0}.icon-button{width:38px;height:38px;border:1px solid #29425d;border-radius:11px;background:#101e2d;color:#e9f3ff;font-size:26px}.cart-items{padding:10px 0}.cart-row{display:flex;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid #1a2b3e}.cart-row h3{font-size:13px;margin:0 0 4px}.cart-row small{font-size:11px;color:#95abc2}.quantity{display:flex;align-items:center;gap:12px;margin-top:9px}.quantity button{width:28px;height:28px;border:1px solid #294966;border-radius:8px;background:#102338;color:#eaf5ff}.cart-row-price{text-align:right;font-size:12px;font-weight:800;white-space:nowrap}.remove-item{border:0;background:none;color:#ff8e9a;font-size:10px;margin-top:8px}.cart-empty{padding:20px 0;color:#95abc2;font-size:13px}.cart-bottom{border-top:1px solid #20344a;padding-top:16px}.total-line{display:flex;align-items:center;justify-content:space-between;font-size:14px;margin-bottom:15px}.total-line strong{font-size:23px}.customer-field{display:flex;flex-direction:column;gap:7px;margin:13px 0;color:#c3d4e7;font-size:11px;font-weight:700}.customer-field input,.customer-field textarea{width:100%;border:1px solid #2a4058;border-radius:10px;background:#0c1b2b;color:#f4f8ff;padding:11px;resize:vertical}.checkout-button{width:100%;border:0;border-radius:11px;padding:14px;background:linear-gradient(120deg,#08c96b,#009e51);color:white;font-weight:800}.checkout-button:disabled{cursor:not-allowed}.privacy-note{display:block;margin-top:10px;color:#758ba3;font-size:10px;line-height:1.5}.toast{position:fixed;z-index:150;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:12px 18px;border:1px solid #2c5278;border-radius:12px;background:#10243a;color:#f5faff;font-size:12px;box-shadow:var(--shadow);transition:opacity .2s,transform .2s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1400px){.hero{min-height:390px}.hero-art{min-height:390px}.product-visual{height:210px}}
+@media(max-width:1000px){.header-inner{padding:12px 18px;gap:14px}.header-actions{gap:12px}.favorites-link{display:none}.page-shell{padding:18px}.hero{grid-template-columns:1fr .8fr;min-height:340px}.hero-copy{padding-left:27px}.hero h1{font-size:clamp(32px,5vw,46px)}.hero-art{min-height:320px}.laptop{width:205px;right:2%;top:72px}.laptop-screen{height:145px}.laptop-base{width:230px}.phone{left:14%;top:91px;width:90px;height:175px}.buds{left:2%;bottom:40px;transform:scale(.85)}.category-shortcuts{gap:8px}.shortcut{min-height:110px}.benefit{padding:4px 10px;gap:9px}.benefit-icon{width:33px;height:33px;flex-basis:33px}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-visual{height:175px}}
+@media(max-width:700px){html{scroll-padding-top:82px}.site-header{position:relative}.header-inner{min-height:72px;padding:10px 14px;align-items:center;gap:10px}.brand{gap:9px;flex:1}.brand-mark{width:42px;height:40px;flex-basis:42px;border-radius:10px;font-size:23px}.brand-copy strong{font-size:13px;letter-spacing:0}.brand-copy small{font-size:7px;letter-spacing:.02em;margin-top:3px}.header-actions{gap:9px}.header-action{min-width:30px}.header-action .action-icon{font-size:23px}.header-action small{display:none}.cart-top{display:flex}.header-wa{padding:9px 10px;border-radius:10px;gap:0}.header-wa .wa-symbol{display:none}.header-wa strong{font-size:11px}.header-wa small{font-size:8px}.page-shell{padding:13px 13px 30px}.search-row{margin-bottom:13px}.search-box{min-height:49px;padding-left:12px;gap:8px}.search-box input{font-size:12px}.search-submit{padding:10px 13px;font-size:11px}.search-icon{font-size:23px}.hero{display:block;min-height:0;border-radius:17px}.hero-copy{padding:22px 19px 17px}.hero .eyebrow{gap:6px;font-size:9px;margin-bottom:12px}.hero h1{font-size:clamp(30px,8vw,40px);line-height:1.08;max-width:100%}.hero-text{font-size:12px;line-height:1.6;margin:13px 0 16px;max-width:100%}.primary-btn{padding:12px 15px;gap:20px;font-size:12px}.primary-btn b{font-size:19px}.hero-note{font-size:10px;margin-top:14px}.hero-art{min-height:180px;height:180px;margin:0 8px 5px}.orbit-one{width:250px;height:150px;top:12px;left:15%}.orbit-two{width:190px;height:125px;top:27px;left:27%}.laptop{width:160px;right:4%;top:27px}.laptop-screen{height:105px;border-width:5px;border-bottom-width:7px;border-radius:9px}.laptop-base{width:178px;height:7px;margin-left:-9px}.laptop-screen span{font-size:22px}.phone{width:65px;height:132px;left:21%;top:37px;border-width:4px;border-radius:16px}.phone-camera{top:5px;width:18px;height:4px}.phone-mark{font-size:16px}.buds{left:7%;bottom:19px;transform:scale(.62);transform-origin:bottom left}.hero-floating-tag{font-size:7px;padding:6px 8px}.tag-smart{left:7%;top:14px}.tag-tools{right:5%;bottom:16px}.category-shortcuts{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:13px 0}.shortcut{min-height:100px;padding:8px 4px;border-radius:12px;gap:4px}.shortcut-art{height:48px;font-size:30px}.art-phone{font-size:37px}.art-laptop{font-size:39px}.art-home{font-size:35px}.art-cool{font-size:32px}.art-watch,.art-all{font-size:34px}.shortcut b{font-size:9px}.benefit-strip{grid-template-columns:repeat(2,minmax(0,1fr));padding:9px;margin-bottom:30px}.benefit{padding:10px 7px;border-right:0;gap:8px}.benefit:nth-child(odd){border-right:1px solid #1c3045}.benefit:nth-child(-n+2){border-bottom:1px solid #1c3045}.benefit-icon{flex-basis:31px;width:31px;height:31px;font-size:19px;border-radius:9px}.benefit b{font-size:10px}.benefit small{font-size:9px}.section-heading{align-items:center;gap:8px;margin-bottom:13px}.section-heading h2{font-size:23px}.section-heading .eyebrow{font-size:9px}.muted{font-size:11px;line-height:1.45;max-width:280px}.cart-button{padding:8px 9px;font-size:10px}.cart-count-small{min-width:18px;height:18px;margin-left:2px;font-size:10px}.catalog-tools{margin:10px 0;gap:8px}.catalog-tools-label{font-size:10px}.catalog-tools select{padding:8px;font-size:10px;max-width:65%}.category-list{gap:6px;padding-bottom:10px}.category-chip{font-size:10px;padding:8px 11px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.product-card{border-radius:13px}.product-visual{height:145px}.product-visual img{padding:8px}.product-placeholder{font-size:47px}.product-badge{top:7px;left:7px;font-size:8px;padding:4px 6px}.product-info{padding:9px}.product-category{font-size:8px}.product-info h3{font-size:11px;margin:6px 0 4px}.product-desc{font-size:9px;min-height:28px;margin-bottom:9px}.product-price{font-size:15px}.add-button{width:32px;height:32px;flex-basis:32px;border-radius:9px;font-size:23px}.catalog-disclaimer{font-size:10px;line-height:1.5;margin:12px 0 24px}.service-banners{grid-template-columns:1fr;gap:8px;margin-bottom:18px}.service-card{padding:13px;border-radius:13px;gap:12px}.service-symbol{width:38px;height:38px;flex-basis:38px;font-size:23px}.service-card b{font-size:12px}.service-card p{font-size:10px}.order-banner{display:block;padding:20px 17px;border-radius:15px;margin-bottom:20px}.order-banner h2{font-size:23px}.order-banner p:not(.eyebrow){font-size:11px;line-height:1.55}.wa-large{margin-top:16px;width:100%;padding:13px 12px;font-size:11px}.footer-main{align-items:flex-start}.footer-brand .brand-mark{width:37px;height:35px;flex-basis:37px;font-size:20px}.footer-brand .brand-copy strong{font-size:11px}.footer-brand .brand-copy small{font-size:6px;white-space:normal}.footer-contact span{font-size:9px}.footer-contact a{font-size:11px}.site-footer{padding:19px 14px 14px}.footer-bottom{margin-top:14px;padding-top:10px}.footer-bottom small{font-size:9px}.cart-drawer{padding:17px}.toast{width:calc(100% - 30px);text-align:center;bottom:15px}}
+@media(max-width:380px){.brand-copy strong{font-size:11px}.brand-copy small{font-size:6px}.header-actions{gap:6px}.header-wa{padding:8px}.header-wa strong{font-size:10px}.hero-copy{padding-left:15px;padding-right:15px}.hero h1{font-size:29px}.hero .eyebrow{font-size:8px}.product-visual{height:125px}.product-price{font-size:14px}}
 
-"use strict";
+/* ELECTROMARKET — FIX CATALOG CARDS */
+#product-grid,
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 14px;
+}
 
-const WHATSAPP_NUMBER = "79298881157";
-const CART_STORAGE_KEY = "electromarket-cart-v1";
+.product-card {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 18px;
+}
 
-const CATEGORIES = [
-  "Все товары",
-  "Смартфоны и телефоны",
-  "Аксессуары",
-  "Планшеты и компьютеры",
-  "Электроинструменты",
-  "Бытовая техника",
-  "Роутеры и связь",
-  "Кондиционеры и отопление",
-  "Смарт-гаджеты и сеть",
-  "Автотовары и электроника",
-  "Машинки для стрижки",
-  "Прочее"
-];
+.product-visual {
+  height: 180px;
+  flex: 0 0 180px;
+  overflow: hidden;
+}
 
-let activeCategory = "Все товары";
-let searchTerm = "";
-let sortMode = "featured";
-let toastTimer;
+.product-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
 
-let galleryProduct = null;
-let galleryIndex = 0;
-let galleryTouchX = 0;
+.product-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 13px;
+}
 
-const $ = id => document.getElementById(id);
+.product-category {
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
 
-const money = value =>
-  new Intl.NumberFormat("ru-RU", {
-    maximumFractionDigits: 0
-  }).format(Number(value) || 0) + " ₽";
+.product-info h3 {
+  font-size: 15px;
+  line-height: 1.35;
+  margin: 7px 0;
+  overflow-wrap: anywhere;
+}
 
-const safe = value =>
-  String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[char]));
+.product-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  min-height: 0;
+  max-height: 4.5em;
+  margin: 0 0 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
 
-// ---------- СОХРАНЕНИЕ КОРЗИНЫ ----------
+.product-bottom {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+}
 
-function loadCart() {
-  try {
-    const saved = JSON.parse(
-      localStorage.getItem(CART_STORAGE_KEY) || "{}"
-    );
+.product-price {
+  font-size: 19px;
+  font-weight: 800;
+  white-space: nowrap;
+}
 
-    return saved && typeof saved === "object" && !Array.isArray(saved)
-      ? saved
-      : {};
-  } catch (error) {
-    console.error("Ошибка загрузки корзины:", error);
-    return {};
+.add-button {
+  flex-shrink: 0;
+}
+
+/* Телефоны: карточки на всю ширину */
+@media (max-width: 560px) {
+  #product-grid,
+  .product-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .product-card {
+    border-radius: 17px;
+  }
+
+  .product-visual {
+    height: 210px;
+    flex-basis: 210px;
+  }
+
+  .product-info {
+    padding: 14px;
+  }
+
+  .product-info h3 {
+    font-size: 17px;
+  }
+
+  .product-desc {
+    font-size: 13px;
+    line-height: 1.5;
+    -webkit-line-clamp: 3;
+    max-height: 4.5em;
+  }
+
+  .product-price {
+    font-size: 21px;
+  }
+
+  .add-button {
+    width: 48px;
+    height: 48px;
+    flex-basis: 48px;
+    border-radius: 13px;
+  }
+
+  .category-list,
+  #categories {
+    max-width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
   }
 }
 
-let cart = loadCart();
+/* Исправление отображения фотографий товаров */
+.product-visual {
+  height: 190px;
+  min-height: 190px;
+  flex: 0 0 190px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 
-function saveCart() {
-  try {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
-  } catch (error) {
-    console.error("Ошибка сохранения корзины:", error);
-    showToast("Не удалось сохранить корзину браузера");
+.product-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Телефоны */
+@media (max-width: 600px) {
+  .product-visual {
+    height: 170px;
+    min-height: 170px;
+    flex-basis: 170px;
   }
 }
 
-// ---------- ТОВАРЫ ----------
-
-function getProducts() {
-  return Array.isArray(window.PRODUCTS) ? window.PRODUCTS : [];
-}
-
-function productById(id) {
-  return getProducts().find(
-    product => String(product.id) === String(id)
-  );
-}
-
-function getProductImages(product) {
-  if (!product) return [];
-
-  const extra = Array.isArray(product.images)
-    ? product.images
-    : [];
-
-  return [...new Set(
-    [product.image, ...extra].filter(
-      image => typeof image === "string" && image.trim()
-    )
-  )];
-}
-
-// ---------- СТИЛИ КНОПОК И ФОТОГАЛЕРЕИ ----------
-
-function installStoreStyles() {
-  if ($("electromarket-extra-styles")) return;
-
-  const style = document.createElement("style");
-  style.id = "electromarket-extra-styles";
-
-  style.textContent = `
-    .product-actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
-    .product-actions button {
-      width: 100%;
-      min-height: 43px;
-      border: 0;
-      border-radius: 11px;
-      padding: 10px 12px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .product-actions .add-button {
-      background: #20b85a !important;
-      color: #fff !important;
-      border: 1px solid #20b85a !important;
-      opacity: 1 !important;
-    }
-
-    .product-actions .buy-now-button {
-      background: #0879c9;
-      color: #fff;
-    }
-
-    .product-actions button:active {
-      transform: scale(.98);
-    }
-
-    .product-visual img[data-gallery] {
-      cursor: zoom-in;
-    }
-
-    #product-gallery[hidden] {
-      display: none !important;
-    }
-
-    #product-gallery {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px;
-      background: rgba(0,0,0,.96);
-      overscroll-behavior: contain;
-    }
-
-    #gallery-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      min-width: 0;
-      min-height: 0;
-    }
-
-    #gallery-image {
-      display: block;
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-
-    .gallery-control {
-      position: absolute;
-      z-index: 2;
-      display: grid;
-      place-items: center;
-      min-width: 44px;
-      min-height: 44px;
-      padding: 4px 12px;
-      color: #fff;
-      background: rgba(15,27,43,.94);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 12px;
-      font-size: 30px;
-      cursor: pointer;
-    }
-
-    #gallery-close {
-      top: 8px;
-      right: 8px;
-      border-radius: 50%;
-    }
-
-    #gallery-prev {
-      left: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    #gallery-next {
-      right: 4px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    #gallery-count {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 7px 13px;
-      color: white;
-      background: rgba(15,27,43,.94);
-      border-radius: 20px;
-      font-size: 14px;
-      white-space: nowrap;
-    }
-
-    @media(max-width:600px) {
-      .product-actions button {
-        min-height: 46px;
-        font-size: 14px;
-      }
-
-      #product-gallery {
-        padding: 5px;
-      }
-
-      .gallery-control {
-        min-width: 38px;
-        min-height: 44px;
-        padding: 4px 8px;
-      }
-    }
-  `;
-
-  document.head.appendChild(style);
-}
-
-// ---------- КАТЕГОРИИ И ПОИСК ----------
-
-function renderCategories() {
-  const container = $("categories");
-  if (!container) return;
-
-  container.innerHTML = CATEGORIES.map(category => `
-    <button
-      class="category-chip ${category === activeCategory ? "active" : ""}"
-      data-category="${safe(category)}"
-      type="button"
-    >${safe(category)}</button>
-  `).join("");
-}
-
-function filteredProducts() {
-  let products = getProducts().filter(product => {
-    const categoryMatch =
-      activeCategory === "Все товары" ||
-      product.category === activeCategory;
-
-    const haystack = [
-      product.name,
-      product.brand,
-      product.category,
-      product.description
-    ].join(" ").toLocaleLowerCase("ru");
-
-    return categoryMatch &&
-      haystack.includes(searchTerm.toLocaleLowerCase("ru"));
-  });
-
-  if (sortMode === "price-asc") {
-    products.sort((a, b) => Number(a.price) - Number(b.price));
-  }
-
-  if (sortMode === "price-desc") {
-    products.sort((a, b) => Number(b.price) - Number(a.price));
-  }
-
-  if (sortMode === "name") {
-    products.sort((a, b) =>
-      String(a.name || "").localeCompare(
-        String(b.name || ""), "ru"
-      )
-    );
-  }
-
-  return products;
-}
-
-// ---------- КАРТОЧКИ ТОВАРОВ ----------
-
-function renderProducts() {
-  const grid = $("product-grid");
-  if (!grid) return;
-
-  const products = filteredProducts();
-
-  grid.innerHTML = products.map(product => {
-    const images = getProductImages(product);
-
-    const visual = product.image
-      ? `<img
-          src="${safe(product.image)}"
-          alt="${safe(product.name)}"
-          loading="lazy"
-          data-gallery="${safe(product.id)}"
-          onerror="this.style.display='none'"
-        >`
-      : `<span class="product-placeholder">${
-          safe(product.emoji || "📦")
-        }</span>`;
-
-    return `
-      <article class="product-card">
-        <div class="product-visual">
-          ${product.badge
-            ? `<span class="product-badge">${
-                safe(product.badge)
-              }</span>`
-            : ""}
-          ${visual}
-          ${images.length > 1
-            ? `<span class="product-photo-count">${
-                images.length
-              } фото</span>`
-            : ""}
-        </div>
-
-        <div class="product-info">
-          <span class="product-category">
-            ${safe(product.category || "")}
-            ${product.brand ? " · " + safe(product.brand) : ""}
-          </span>
-
-          <h3>${safe(product.name || "Товар")}</h3>
-
-          <p class="product-desc">${
-            safe(product.description || "")
-          }</p>
-
-          <div class="product-bottom">
-            <div>
-              <div class="product-price">
-                ${money(product.price)}
-              </div>
-              ${Number(product.oldPrice) > Number(product.price)
-                ? `<small style="text-decoration:line-through">
-                    ${money(product.oldPrice)}
-                  </small>`
-                : ""}
-            </div>
-          </div>
-
-          <div class="product-actions">
-            <button
-              type="button"
-              class="add-button"
-              data-add="${safe(product.id)}"
-            >＋ В корзину</button>
-
-            <button
-              type="button"
-              class="buy-now-button"
-              data-buy-now="${safe(product.id)}"
-            >Заказать сейчас</button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
-
-  const empty = $("empty-state");
-  if (empty) empty.hidden = products.length > 0;
-}
-
-// ---------- ПОЛНОЭКРАННЫЕ ФОТО ----------
-
-function initGallery() {
-  if ($("product-gallery")) return;
-
-  const modal = document.createElement("div");
-  modal.id = "product-gallery";
-  modal.hidden = true;
-  modal.setAttribute("role", "dialog");
-  modal.setAttribute("aria-modal", "true");
-  modal.setAttribute("aria-label", "Фотографии товара");
-
-  modal.innerHTML = `
-    <div id="gallery-wrap">
-      <button
-        id="gallery-close"
-        class="gallery-control"
-        type="button"
-        aria-label="Закрыть"
-      >×</button>
-
-      <button
-        id="gallery-prev"
-        class="gallery-control"
-        type="button"
-        aria-label="Предыдущее фото"
-      >‹</button>
-
-      <img id="gallery-image" alt="">
-
-      <button
-        id="gallery-next"
-        class="gallery-control"
-        type="button"
-        aria-label="Следующее фото"
-      >›</button>
-
-      <div id="gallery-count"></div>
-    </div>
-  `;
-
-  document.body.appendChild(modal);
-
-  $("gallery-close").addEventListener("click", closeGallery);
-  $("gallery-prev").addEventListener("click", () => changeGallery(-1));
-  $("gallery-next").addEventListener("click", () => changeGallery(1));
-
-  modal.addEventListener("click", event => {
-    if (event.target === modal) closeGallery();
-  });
-
-  const wrap = $("gallery-wrap");
-
-  wrap.addEventListener("touchstart", event => {
-    if (event.changedTouches.length) {
-      galleryTouchX = event.changedTouches[0].clientX;
-    }
-  }, { passive: true });
-
-  wrap.addEventListener("touchend", event => {
-    if (!event.changedTouches.length) return;
-
-    const delta =
-      event.changedTouches[0].clientX - galleryTouchX;
-
-    if (Math.abs(delta) > 45) {
-      changeGallery(delta < 0 ? 1 : -1);
-    }
-  }, { passive: true });
-}
-
-function openGallery(productId) {
-  const product = productById(productId);
-  if (!product) return;
-
-  const images = getProductImages(product);
-  if (!images.length) {
-    showToast("У этого товара нет фотографии");
-    return;
-  }
-
-  initGallery();
-  galleryProduct = product;
-  galleryIndex = 0;
-
-  $("product-gallery").hidden = false;
-  document.body.style.overflow = "hidden";
-
-  showGalleryImage();
-}
-
-function showGalleryImage() {
-  if (!galleryProduct) return;
-
-  const images = getProductImages(galleryProduct);
-  if (!images.length) return;
-
-  galleryIndex =
-    (galleryIndex + images.length) % images.length;
-
-  $("gallery-image").src = images[galleryIndex];
-  $("gallery-image").alt =
-    `${galleryProduct.name || "Товар"} — фото ${galleryIndex + 1}`;
-
-  $("gallery-count").textContent =
-    `${galleryIndex + 1} / ${images.length}`;
-
-  $("gallery-prev").hidden = images.length < 2;
-  $("gallery-next").hidden = images.length < 2;
-  $("gallery-count").hidden = images.length < 2;
-}
-
-function changeGallery(direction) {
-  if (!galleryProduct) return;
-
-  galleryIndex += direction;
-  showGalleryImage();
-}
-
-function closeGallery() {
-  const modal = $("product-gallery");
-  if (modal) modal.hidden = true;
-
-  document.body.style.overflow = "";
-  galleryProduct = null;
-}
-
-// ---------- КОРЗИНА ----------
-
-function cartItems() {
-  return Object.entries(cart)
-    .map(([id, qty]) => ({
-      product: productById(id),
-      qty: Number(qty)
-    }))
-    .filter(item =>
-      item.product &&
-      Number.isFinite(item.qty) &&
-      item.qty > 0
-    );
-}
-
-function renderCart() {
-  const items = cartItems();
-
-  const count = items.reduce(
-    (sum, item) => sum + item.qty, 0
-  );
-
-  const total = items.reduce(
-    (sum, item) =>
-      sum + Number(item.product.price || 0) * item.qty,
-    0
-  );
-
-  if ($("cart-count")) $("cart-count").textContent = count;
-  if ($("cart-count-display")) {
-    $("cart-count-display").textContent = count;
-  }
-  if ($("cart-total")) $("cart-total").textContent = money(total);
-  if ($("cart-empty")) $("cart-empty").hidden = items.length > 0;
-
-  if ($("cart-items")) {
-    $("cart-items").innerHTML = items.map(({ product, qty }) => `
-      <div class="cart-row">
-        <div>
-          <h3>${safe(product.name)}</h3>
-          <small>${money(product.price)} за шт.</small>
-
-          <div class="quantity">
-            <button
-              type="button"
-              data-qty="${safe(product.id)}"
-              data-delta="-1"
-              aria-label="Уменьшить количество"
-            >−</button>
-
-            <span>${qty}</span>
-
-            <button
-              type="button"
-              data-qty="${safe(product.id)}"
-              data-delta="1"
-              aria-label="Увеличить количество"
-            >+</button>
-          </div>
-        </div>
-
-        <div class="cart-row-price">
-          ${money(Number(product.price) * qty)}
-          <br>
-          <button
-            type="button"
-            class="remove-item"
-            data-remove="${safe(product.id)}"
-          >Удалить</button>
-        </div>
-      </div>
-    `).join("");
-  }
-
-  if ($("checkout")) {
-    $("checkout").disabled = items.length === 0;
-    $("checkout").style.opacity =
-      items.length === 0 ? ".5" : "1";
+/* Компьютеры */
+@media (min-width: 601px) {
+  .product-visual {
+    height: 210px;
+    min-height: 210px;
+    flex-basis: 210px;
   }
 }
 
-function addToCart(id) {
-  if (!productById(id)) return;
-
-  cart[id] = (Number(cart[id]) || 0) + 1;
-
-  saveCart();
-  renderCart();
-  showToast("Товар добавлен в корзину");
+/* ELECTROMARKET: карточки в 2 столбца */
+.product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 12px !important;
 }
 
-function openCart() {
-  if (!$("cart-drawer")) return;
-
-  $("cart-drawer").hidden = false;
-  document.body.style.overflow = "hidden";
+/* Кнопки в нижней части карточки */
+.product-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 54px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 14px !important;
 }
 
-function closeCart() {
-  if (!$("cart-drawer")) return;
-
-  $("cart-drawer").hidden = true;
-  document.body.style.overflow = "";
+/* Заказать — большая кнопка */
+.product-actions .buy-now-button {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 52px !important;
+  padding: 8px !important;
+  border: 0 !important;
+  border-radius: 28px !important;
+  background: #0879c9 !important;
+  color: #fff !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
 }
 
-// ---------- ЗАКАЗ В WHATSAPP ----------
+/* Корзина — круглая кнопка справа */
+.product-actions .add-button {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 54px !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  padding: 0 !important;
+  border: 2px solid #28a9f5 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: #28a9f5 !important;
+  font-size: 25px !important;
+  font-weight: 400 !important;
+}
 
-function sendWhatsAppOrder(items, customerName = "", note = "") {
-  if (!items.length) {
-    showToast("Нет товаров для заказа");
-    return;
+/* Убираем лишнее растягивание карточек */
+.product-card {
+  min-width: 0;
+}
+
+/* Телефоны */
+@media (max-width: 380px) {
+  .product-grid {
+    gap: 8px !important;
   }
 
-  const total = items.reduce(
-    (sum, item) =>
-      sum + Number(item.product.price || 0) * item.qty,
-    0
-  );
-
-  const lines = items.map(({ product, qty }, index) =>
-    `${index + 1}. ${product.name} — ${qty} шт. × ${money(product.price)} = ${money(Number(product.price) * qty)}`
-  );
-
-  const message = [
-    "Здравствуйте! Хочу оформить заказ в ЭлектроМаркет.",
-    "",
-    ...lines,
-    "",
-    `Итого: ${money(total)}`,
-    customerName ? `Имя: ${customerName}` : "",
-    note ? `Комментарий: ${note}` : "",
-    "",
-    "Пожалуйста, уточните наличие и условия получения."
-  ].filter(Boolean).join("\n");
-
-  const url =
-    `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-  window.open(url, "_blank");
-}
-
-function buyNow(id) {
-  const product = productById(id);
-  if (!product) return;
-
-  sendWhatsAppOrder([{ product, qty: 1 }]);
-}
-
-function checkout() {
-  const items = cartItems();
-  if (!items.length) {
-    showToast("Сначала добавьте товары в корзину");
-    return;
+  .product-actions {
+    grid-template-columns: minmax(0, 1fr) 46px !important;
+    gap: 6px !important;
   }
 
-  const name = $("customer-name")?.value.trim() || "";
-  const note = $("customer-note")?.value.trim() || "";
+  .product-actions .add-button {
+    width: 46px !important;
+    height: 46px !important;
+    min-height: 46px !important;
+  }
 
-  sendWhatsAppOrder(items, name, note);
-}
-
-// ---------- УВЕДОМЛЕНИЯ ----------
-
-function showToast(message) {
-  const toast = $("toast");
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer = setTimeout(() => {
-    toast.classList.remove("show");
-  }, 2200);
-}
-
-// ---------- ОБРАБОТЧИКИ ----------
-
-function bindEvents() {
-  $("categories")?.addEventListener("click", event => {
-    const button = event.target.closest("[data-category]");
-    if (!button) return;
-
-    activeCategory = button.dataset.category;
-    renderCategories();
-    renderProducts();
-  });
-
-  $("product-grid")?.addEventListener("click", event => {
-    const addButton = event.target.closest("[data-add]");
-    if (addButton) {
-      addToCart(addButton.dataset.add);
-      return;
-    }
-
-    const buyButton = event.target.closest("[data-buy-now]");
-    if (buyButton) {
-      buyNow(buyButton.dataset.buyNow);
-      return;
-    }
-
-    const image = event.target.closest("[data-gallery]");
-    if (image) openGallery(image.dataset.gallery);
-  });
-
-  $("search")?.addEventListener("input", event => {
-    searchTerm = event.target.value.trim();
-    renderProducts();
-  });
-
-  $("sort")?.addEventListener("change", event => {
-    sortMode = event.target.value;
-    renderProducts();
-  });
-
-  $("cart-open")?.addEventListener("click", openCart);
-  $("cart-close")?.addEventListener("click", closeCart);
-
-  $("cart-drawer")?.addEventListener("click", event => {
-    if (event.target === $("cart-drawer")) closeCart();
-  });
-
-  $("cart-items")?.addEventListener("click", event => {
-    const qtyButton = event.target.closest("[data-qty]");
-    const removeButton = event.target.closest("[data-remove]");
-
-    if (qtyButton) {
-      const id = qtyButton.dataset.qty;
-
-      cart[id] =
-        (Number(cart[id]) || 0) + Number(qtyButton.dataset.delta);
-
-      if (cart[id] <= 0) delete cart[id];
-
-      saveCart();
-      renderCart();
-      return;
-    }
-
-    if (removeButton) {
-      delete cart[removeButton.dataset.remove];
-
-      saveCart();
-      renderCart();
-    }
-  });
-
-  $("checkout")?.addEventListener("click", checkout);
-
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") {
-      if ($("product-gallery") && !$("product-gallery").hidden) {
-        closeGallery();
-      } else {
-        closeCart();
-      }
-    }
-
-    if ($("product-gallery") && !$("product-gallery").hidden) {
-      if (event.key === "ArrowLeft") changeGallery(-1);
-      if (event.key === "ArrowRight") changeGallery(1);
-    }
-  });
-
-  if ($("year")) {
-    $("year").textContent = new Date().getFullYear();
+  .product-actions .buy-now-button {
+    min-height: 46px !important;
+    font-size: 13px !important;
   }
 }
 
-// ---------- ЗАПУСК ----------
-
-function initStore() {
-  installStoreStyles();
-  bindEvents();
-  renderCategories();
-  renderProducts();
-  renderCart();
+/* Компактные кнопки в карточках товаров */
+.product-actions {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 48px !important;
+  gap: 10px !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin-top: 18px !important;
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initStore);
-} else {
-  initStore();
+.product-actions .buy-now-button {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  padding: 8px 5px !important;
+  font-size: 14px !important;
+  line-height: 1.25 !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  border-radius: 28px !important;
 }
+
+.product-actions .add-button {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 0 !important;
+  line-height: 1 !important;
+  overflow: hidden !important;
+  background: #16b957 !important;
+  color: transparent !important;
+  position: relative !important;
+}
+
+.product-actions .add-button::after {
+  content: "🛒";
+  font-size: 23px;
+  line-height: 1;
+  color: #fff;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-actions .buy-now-button,
+.product-actions .add-button {
+  box-sizing: border-box !important;
+}
+
+
