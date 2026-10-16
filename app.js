@@ -195,6 +195,29 @@ function installStoreStyles() {
       z-index: 3;
     }
 
+    .product-status-badge {
+      position: absolute;
+      z-index: 4;
+      left: 8px;
+      bottom: 8px;
+      max-width: calc(100% - 16px);
+      padding: 5px 8px;
+      border-radius: 8px;
+      color: #fff;
+      background: #4b5563;
+      font-size: 11px;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+    .status-coming_soon { background: #a16207; }
+    .status-preorder { background: #075985; }
+    .status-out_of_stock { background: #991b1b; }
+    .buy-now-button.is-unavailable,
+    .add-button.is-unavailable {
+      opacity: .55 !important;
+      cursor: not-allowed !important;
+    }
+
     .product-info {
       min-width: 0;
       flex: 1;
@@ -267,7 +290,7 @@ function installStoreStyles() {
       border: 0 !important;
       border-radius: 28px !important;
       background: #078cff !important;
-      color: #ffffff !important;
+      color: #17130b !important;
       font-size: 14px !important;
       font-weight: 800 !important;
       line-height: 1.25;
@@ -637,8 +660,28 @@ function renderCategories() {
   `).join("");
 }
 
+function productStatus(product) {
+  const allowed = ["available", "coming_soon", "preorder", "out_of_stock", "inactive"];
+  return allowed.includes(product?.status) ? product.status : "available";
+}
+
+function productStatusLabel(product) {
+  return ({
+    available: "В наличии",
+    coming_soon: "Скоро ожидается",
+    preorder: "Предзаказ",
+    out_of_stock: "Нет в наличии",
+    inactive: "Неактивный"
+  })[productStatus(product)];
+}
+
+function canOrderProduct(product) {
+  return ["available", "preorder"].includes(productStatus(product));
+}
+
 function filteredProducts() {
   let products = getProducts().filter(product => {
+    if (productStatus(product) === "inactive") return false;
     const categoryMatch =
       activeCategory === "Все товары" ||
       product.category === activeCategory;
@@ -709,6 +752,9 @@ function renderProducts() {
           ${product.badge
             ? `<span class="product-badge">${safe(product.badge)}</span>`
             : ""}
+          ${productStatus(product) !== "available"
+            ? `<span class="product-status-badge status-${safe(productStatus(product))}">${safe(productStatusLabel(product))}</span>`
+            : ""}
           ${visual}
           ${images.length > 1
             ? `<span class="product-photo-count">${images.length} фото</span>`
@@ -740,16 +786,18 @@ function renderProducts() {
           <div class="product-actions">
             <button
               type="button"
-              class="buy-now-button"
+              class="buy-now-button ${canOrderProduct(product) ? "" : "is-unavailable"}"
               data-buy-now="${safe(product.id)}"
-            >Заказать</button>
+              ${canOrderProduct(product) ? "" : "disabled"}
+            >${productStatus(product) === "preorder" ? "Предзаказ" : productStatus(product) === "coming_soon" ? "Скоро" : productStatus(product) === "out_of_stock" ? "Нет в наличии" : "Заказать"}</button>
 
             <button
               type="button"
-              class="add-button"
+              class="add-button ${canOrderProduct(product) ? "" : "is-unavailable"}"
               data-add="${safe(product.id)}"
               aria-label="Добавить в корзину"
               title="Добавить в корзину"
+              ${canOrderProduct(product) ? "" : "disabled"}
             >🛒</button>
           </div>
         </div>
@@ -876,6 +924,24 @@ function openProductDetails(id) {
 
   modal.querySelector(".details-price").textContent =
     money(product.price);
+
+  let statusLine = modal.querySelector(".details-status");
+  if (!statusLine) {
+    statusLine = document.createElement("div");
+    statusLine.className = "details-status";
+    modal.querySelector(".details-price").after(statusLine);
+  }
+  const currentStatus = productStatus(product);
+  statusLine.textContent = currentStatus === "available" ? "В наличии" : productStatusLabel(product);
+  statusLine.hidden = currentStatus === "available";
+  statusLine.style.cssText = "margin:-8px 0 16px;color:#8ecbff;font-weight:700";
+  const orderButton = modal.querySelector(".details-order");
+  const cartButton = modal.querySelector(".details-cart");
+  orderButton.textContent = currentStatus === "preorder" ? "Оформить предзаказ" : "Заказать";
+  orderButton.disabled = !canOrderProduct(product);
+  cartButton.disabled = !canOrderProduct(product);
+  orderButton.style.opacity = cartButton.style.opacity = canOrderProduct(product) ? "1" : ".45";
+  orderButton.title = cartButton.title = canOrderProduct(product) ? "" : "Товар временно недоступен для заказа";
 
   const oldPrice = modal.querySelector(".details-old-price");
   if (Number(product.oldPrice) > Number(product.price)) {
@@ -1076,6 +1142,7 @@ function cartItems() {
     }))
     .filter(item =>
       item.product &&
+      canOrderProduct(item.product) &&
       Number.isFinite(item.qty) &&
       item.qty > 0
     );
@@ -1157,7 +1224,12 @@ function renderCart() {
 }
 
 function addToCart(id) {
-  if (!productById(id)) return;
+  const product = productById(id);
+  if (!product) return;
+  if (!canOrderProduct(product)) {
+    showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
+    return;
+  }
 
   cart[id] = (Number(cart[id]) || 0) + 1;
 
@@ -1207,7 +1279,9 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
   );
 
   const message = [
-    "Здравствуйте! Хочу оформить заказ в ЭлектроМаркет.",
+    items.some(item => productStatus(item.product) === "preorder")
+      ? "Здравствуйте! Хочу оформить предзаказ в ЭлектроМаркет."
+      : "Здравствуйте! Хочу оформить заказ в ЭлектроМаркет.",
     "",
     ...lines,
     "",
@@ -1227,6 +1301,10 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
 function buyNow(id) {
   const product = productById(id);
   if (!product) return;
+  if (!canOrderProduct(product)) {
+    showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
+    return;
+  }
 
   sendWhatsAppOrder([{ product, qty: 1 }]);
 }
