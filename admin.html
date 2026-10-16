@@ -86,6 +86,17 @@ placeholder="Вставьте токен GitHub">
 <label for="badge">Метка</label>
 <input id="badge" placeholder="АКЦИЯ">
 </div>
+<div class="full">
+<label for="productStatus">Статус товара</label>
+<select id="productStatus">
+<option value="available">В наличии</option>
+<option value="coming_soon">Скоро ожидается</option>
+<option value="preorder">Предзаказ</option>
+<option value="out_of_stock">Нет в наличии</option>
+<option value="inactive">Неактивный — скрыть с сайта</option>
+</select>
+<p class="help">Статус сохраняется вместе с товаром. Неактивные товары остаются в админке, но скрываются из каталога.</p>
+</div>
 <div>
 <label for="emoji">Значок</label>
 <input id="emoji" placeholder="📦">
@@ -225,7 +236,14 @@ function render() {
     const name = document.createElement("strong");
     name.textContent = p.name || "Без названия";
     const detail = document.createElement("small");
-    detail.textContent = `${p.category || "Без категории"} · ${p.price ?? "—"} ₽`;
+    const statusLabels = {
+      available: "В наличии",
+      coming_soon: "Скоро ожидается",
+      preorder: "Предзаказ",
+      out_of_stock: "Нет в наличии",
+      inactive: "Неактивный"
+    };
+    detail.textContent = `${p.category || "Без категории"} · ${p.price ?? "—"} ₽ · ${statusLabels[p.status || "available"] || "В наличии"}`;
     info.append(name, detail);
 
     const edit = document.createElement("button");
@@ -367,6 +385,7 @@ function editProduct(i) {
   $("oldPrice").value = p.oldPrice ?? "";
   $("badge").value = p.badge || "";
   $("emoji").value = p.emoji || "";
+  $("productStatus").value = p.status || "available";
   $("image").value = p.image || "";
   $("description").value = p.description || "";
   fillCategories(p.category || "");
@@ -437,6 +456,7 @@ $("form").addEventListener("submit", async e => {
     oldPrice: $("oldPrice").value ? Number($("oldPrice").value) : 0,
     badge: $("badge").value.trim(),
     emoji: $("emoji").value.trim(),
+    status: $("productStatus").value || "available",
     image: $("image").value.trim() || previous.image || "",
     description: $("description").value.trim()
   };
