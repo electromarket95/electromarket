@@ -103,7 +103,13 @@ placeholder="Вставьте токен GitHub">
 </div>
 <div class="full">
 <label for="photoFile">Фотография товара</label>
-<input id="photoFile" type="file" accept="image/*">
+<input
+  id="photoFile"
+  type="file"
+  accept="image/*"
+  multiple
+>
+<p class="help">Можно выбрать несколько фотографий сразу.</p>
 <img id="photoPreview" alt="Предпросмотр">
 <label for="image">Имя файла или URL фото</label>
 <input id="image" placeholder="images/photo.jpg">
