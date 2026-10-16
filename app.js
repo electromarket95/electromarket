@@ -267,7 +267,7 @@ function installStoreStyles() {
       border: 0 !important;
       border-radius: 28px !important;
       background: #078cff !important;
-      color: #17130b !important;
+      color: #ffffff !important;
       font-size: 14px !important;
       font-weight: 800 !important;
       line-height: 1.25;
