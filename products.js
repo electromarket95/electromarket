@@ -3,7 +3,7 @@ window.PRODUCTS = [
     "id": "item-1792219004147",
     "name": "ТВ БОКС (приставка)",
     "brand": "Xiaomi",
-    "category": "Смартфоны и телефоны",
+    "category": "Медиаплееры",
     "price": 7900,
     "oldPrice": 0,
     "badge": "",
