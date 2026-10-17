@@ -16,7 +16,7 @@ window.PRODUCTS = [
     "id": "item-1792218837998",
     "name": "ТВ ПРИСТАВКА",
     "brand": "Xiaomi",
-    "category": "Прочее",
+    "category": "Медиаплееры",
     "price": 5500,
     "oldPrice": 0,
     "badge": "",
