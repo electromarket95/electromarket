@@ -1,5 +1,18 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792221877354",
+    "name": "Усилитель сигнала wifi",
+    "brand": "Xiaomi",
+    "category": "Роутеры и связь",
+    "price": 1400,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "status": "available",
+    "image": "images/item-1792221877354-1792221877354-1.jpg",
+    "description": "Усилитель WiFi Xiaomi Amplifier Pro \n\n\nXiaomi Mi WiFi Router Amplifer (PRO) – маленький и незаметный ретранслятор сигнала Wi-Fi для больших домов и квартир.Он работает только на частоте 2,4 ГГц. Скорость передачи данных доходит до 300 Мбит/с. Настройка проводится через мобильное приложение. По времени занимает 2-3 минуты."
+  },
+  {
     "id": "item-1792219004147",
     "name": "ТВ БОКС (приставка)",
     "brand": "Xiaomi",
