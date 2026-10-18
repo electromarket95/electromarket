@@ -100,8 +100,8 @@ function productById(id) {
 function productVariantOptions(product) {
   const variants = product && product.variants && typeof product.variants === "object" ? product.variants : {};
   const rows = Array.isArray(variants.items) ? variants.items : [];
-  const colors = Array.isArray(variants.colors) ? [...variants.colors] : [];
-  const memories = Array.isArray(variants.memories) ? [...variants.memories] : [];
+  const colors = Array.isArray(variants.colors) ? variants.colors : [];
+  const memories = Array.isArray(variants.memories) ? variants.memories : [];
   rows.forEach(v => { if (v && v.color) colors.push(v.color); if (v && v.memory) memories.push(v.memory); });
   return {
     colors: [...new Set(colors.filter(v => typeof v === "string" && v.trim()))],
@@ -1479,11 +1479,6 @@ function renderCart() {
 function addToCart(id, options = null) {
   const product = productById(id);
   if (!product) return;
-  if (!options && product.variants && Array.isArray(product.variants.items) && product.variants.items.length) {
-    openProductDetails(id);
-    showToast("Выбери цвет и память");
-    return;
-  }
   if (!canOrderProduct(product)) {
     showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
     return;
@@ -1563,11 +1558,6 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
 function buyNow(id, options = null) {
   const product = productById(id);
   if (!product) return;
-  if (!options && product.variants && Array.isArray(product.variants.items) && product.variants.items.length) {
-    openProductDetails(id);
-    showToast("Выбери цвет и память");
-    return;
-  }
   if (!canOrderProduct(product)) {
     showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
     return;

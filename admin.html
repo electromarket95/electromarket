@@ -25,6 +25,14 @@ textarea{min-height:80px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .full{grid-column:1/-1}
 #photoPreview{display:none;max-width:180px;max-height:180px;object-fit:contain}
+.variant-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.choices{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.choice{display:flex;align-items:center;gap:6px;background:#eef3f9;border:1px solid #d5dfeb;border-radius:8px;padding:8px;font-size:13px}
+.choice input{width:auto;margin:0}
+.variant-price-table{margin-top:12px;display:grid;gap:8px}
+.variant-price-row{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center;background:#f8fafc;padding:8px;border-radius:8px}
+.variant-price-row input{min-width:0}
+@media(max-width:500px){.variant-pick-grid{grid-template-columns:1fr}.variant-price-row{grid-template-columns:1fr 110px}}
 @media(max-width:500px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -101,10 +109,14 @@ placeholder="Вставьте токен GitHub">
 <label for="description">Описание</label>
 <textarea id="description"></textarea>
 </div>
-<div class="full">
-<label for="variantsText">Варианты товара и цены</label>
-<textarea id="variantsText" placeholder="Чёрный | 128 ГБ | 22990&#10;Чёрный | 256 ГБ | 26990&#10;Синий | 128 ГБ | 23990"></textarea>
-<div class="help">Одна строка на каждую комбинацию: Цвет | Память | Цена. Если товар не имеет вариантов, оставь поле пустым. Для удаления ранее заданных вариантов отметь галочку ниже.</div>
+<div class="full" id="variantsEditor">
+<label>Варианты товара (необязательно)</label>
+<div class="help">Отметь нужные цвета и объёмы памяти. Таблица комбинаций появится автоматически — вручную вводить нужно только цены.</div>
+<div class="variant-pick-grid">
+  <div><strong>Цвета</strong><div id="colorChoices" class="choices"></div></div>
+  <div><strong>Память</strong><div id="memoryChoices" class="choices"></div></div>
+</div>
+<div id="variantPriceTable" class="variant-price-table"></div>
 <label style="display:flex;gap:8px;align-items:center;font-weight:normal"><input id="clearVariants" type="checkbox" style="width:auto"> Удалить варианты у этого товара</label>
 </div>
 </div>
@@ -355,12 +367,74 @@ async function saveProducts() {
   }
 }
 
+const VARIANT_COLORS = ["Чёрный", "Белый", "Синий", "Зелёный", "Серый", "Серебристый", "Золотой", "Фиолетовый", "Розовый", "Красный", "Жёлтый", "Оранжевый", "Голубой", "Бежевый", "Коричневый", "Графитовый", "Титановый", "Прозрачный"];
+const VARIANT_MEMORIES = ["16 ГБ", "32 ГБ", "64 ГБ", "128 ГБ", "256 ГБ", "512 ГБ", "1 ТБ", "2 ТБ"];
+let editingVariantRows = [];
+
+function renderChoiceList(containerId, type, options, selectedValues = []) {
+  const container = $(containerId);
+  container.innerHTML = options.map(value => `<label class="choice"><input type="checkbox" data-variant-choice="${type}" value="${safeAttr(value)}" ${selectedValues.includes(value) ? "checked" : ""}>${safeHtml(value)}</label>`).join("");
+}
+function safeHtml(value) {
+  return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+}
+function safeAttr(value) { return safeHtml(value); }
+function selectedVariantValues(type) {
+  return [...document.querySelectorAll(`[data-variant-choice="${type}"]:checked`)].map(input => input.value);
+}
+function renderVariantPriceTable() {
+  const colors = selectedVariantValues("color");
+  const memories = selectedVariantValues("memory");
+  const container = $("variantPriceTable");
+  if (!colors.length && !memories.length) { container.innerHTML = '<div class="help">Варианты не выбраны. Товар будет продаваться по основной цене.</div>'; return; }
+  if (!colors.length || !memories.length) { container.innerHTML = '<div class="help">Для таблицы цен выбери хотя бы один цвет и один объём памяти.</div>'; return; }
+  const rows = [];
+  colors.forEach(color => memories.forEach(memory => rows.push({color, memory})));
+  container.innerHTML = '<strong>Цены комбинаций</strong>' + rows.map(row => {
+    const old = editingVariantRows.find(v => v.color === row.color && v.memory === row.memory);
+    const key = `${row.color}|||${row.memory}`;
+    const price = old && old.price != null ? old.price : "";
+    return `<div class="variant-price-row"><div><strong>${safeHtml(row.color)}</strong><div class="help">${safeHtml(row.memory)}</div></div><input type="number" min="0" step="1" placeholder="Цена, ₽" data-variant-price="${safeAttr(key)}" value="${price}"></div>`;
+  }).join("");
+}
+function setupVariantEditor(product = null) {
+  const rows = Array.isArray(product?.variants?.items) ? product.variants.items : [];
+  editingVariantRows = rows.map(v => ({color:String(v.color || ""), memory:String(v.memory || ""), price:v.price}));
+  const existingColors = [...new Set(rows.map(v => v.color).filter(Boolean))];
+  const existingMemories = [...new Set(rows.map(v => v.memory).filter(Boolean))];
+  const colors = [...new Set([...VARIANT_COLORS, ...existingColors])];
+  const memories = [...new Set([...VARIANT_MEMORIES, ...existingMemories])];
+  renderChoiceList("colorChoices", "color", colors, existingColors);
+  renderChoiceList("memoryChoices", "memory", memories, existingMemories);
+  renderVariantPriceTable();
+}
+function readVariantRows() {
+  const colors = selectedVariantValues("color");
+  const memories = selectedVariantValues("memory");
+  if (!colors.length && !memories.length) return [];
+  if (!colors.length || !memories.length) throw new Error("Выбери и цвет, и память либо сними все отметки.");
+  const rows = [];
+  for (const color of colors) for (const memory of memories) {
+    const key = `${color}|||${memory}`;
+    const input = document.querySelector(`[data-variant-price="${CSS.escape(key)}"]`);
+    if (!input || input.value.trim() === "" || !Number.isFinite(Number(input.value)) || Number(input.value) < 0) {
+      throw new Error(`Укажи цену для комбинации «${color}, ${memory}».`);
+    }
+    rows.push({color, memory, price:Number(input.value)});
+  }
+  return rows;
+}
+
+document.addEventListener("change", event => {
+  if (event.target.matches("[data-variant-choice]")) renderVariantPriceTable();
+});
+
 function clearForm() {
   $("form").reset();
   editIndex = -1;
   photoData = "";
-  $("variantsText").value = "";
   $("clearVariants").checked = false;
+  setupVariantEditor(null);
   $("photoPreview").style.display = "none";
   $("formTitle").textContent = "Новый товар";
   $("save").textContent = "Сохранить товар";
@@ -379,8 +453,7 @@ function editProduct(i) {
   $("emoji").value = p.emoji || "";
   $("image").value = p.image || "";
   $("description").value = p.description || "";
-  const variantRows = Array.isArray(p.variants?.items) ? p.variants.items : [];
-  $("variantsText").value = variantRows.map(v => [v.color || "", v.memory || "", v.price ?? ""].join(" | ")).join("\n");
+  setupVariantEditor(p);
   $("clearVariants").checked = false;
   fillCategories(p.category || "");
   $("formTitle").textContent = "Редактирование товара";
@@ -441,23 +514,11 @@ $("form").addEventListener("submit", async e => {
 
   const previous = editIndex >= 0 ? products[editIndex] : {};
   let parsedVariants = null;
-  const variantsRaw = $("variantsText").value.trim();
-  if (variantsRaw) {
-    parsedVariants = [];
-    const rows = variantsRaw.split(/\r?\n/).map(line => line.trim()).filter(Boolean);
-    for (let i = 0; i < rows.length; i++) {
-      const parts = rows[i].split("|").map(part => part.trim());
-      if (parts.length !== 3 || !parts[0] || !parts[1] || parts[2] === "" || !Number.isFinite(Number(parts[2])) || Number(parts[2]) < 0) {
-        status(`Строка вариантов ${i + 1} заполнена неверно. Формат: Цвет | Память | Цена`);
-        return;
-      }
-      parsedVariants.push({ color: parts[0], memory: parts[1], price: Number(parts[2]) });
-    }
-    const keys = parsedVariants.map(v => `${v.color}\u0000${v.memory}`);
-    if (new Set(keys).size !== keys.length) {
-      status("Есть повторяющиеся комбинации цвета и памяти. Исправь список вариантов.");
-      return;
-    }
+  try {
+    parsedVariants = readVariantRows();
+  } catch (error) {
+    status(error.message);
+    return;
   }
   const product = {
     ...previous,
@@ -472,7 +533,7 @@ $("form").addEventListener("submit", async e => {
     image: $("image").value.trim() || previous.image || "",
     description: $("description").value.trim()
   };
-  if (parsedVariants) {
+  if (parsedVariants.length) {
     product.variants = {
       colors: [...new Set(parsedVariants.map(v => v.color))],
       memories: [...new Set(parsedVariants.map(v => v.memory))],
