@@ -470,9 +470,13 @@ window.PRODUCTS = [
     "oldPrice": 0,
     "badge": "АКЦИЯ",
     "emoji": "🔧",
-    "image": "шуруповерт макита.png",
+    "image": "images/makita-001-1.png",
     "description": "Металлический патрон 13 мм, 3 режима работы, 2 аккумулятора по 5 А·ч, зарядное устройство и кейс.",
-    "status": "available"
+    "status": "available",
+    "images": [
+      "images/makita-001-1.png",
+      "шуруповерт макита.png"
+    ]
   },
   {
     "id": "item-роутер-olax-cpe-ax9-pro-4g-lte",
