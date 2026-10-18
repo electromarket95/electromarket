@@ -17,12 +17,6 @@ const CATEGORIES = [
   "Смарт-гаджеты и сеть",
   "Автотовары и электроника",
   "Машинки для стрижки",
-  "Медиаплееры",
-  "Проекторы",
-  "Наушники",
-  "Колонки", 
-  "Гигиеническая косметика",
-  "Парфюмерия",
   "Прочее"
 ];
 
@@ -37,6 +31,7 @@ let galleryTouchX = 0;
 let detailProductId = null;
 let detailImageIndex = 0;
 let detailTouchX = 0;
+let selectedProductOptions = { color: "", memory: "" };
 
 const $ = id => document.getElementById(id);
 
@@ -101,6 +96,59 @@ function productById(id) {
     product => String(product.id) === String(id)
   );
 }
+
+function productVariantOptions(product) {
+  const variants = product && product.variants && typeof product.variants === "object" ? product.variants : {};
+  const rows = Array.isArray(variants.items) ? variants.items : [];
+  const colors = Array.isArray(variants.colors) ? [...variants.colors] : [];
+  const memories = Array.isArray(variants.memories) ? [...variants.memories] : [];
+  rows.forEach(v => { if (v && v.color) colors.push(v.color); if (v && v.memory) memories.push(v.memory); });
+  return {
+    colors: [...new Set(colors.filter(v => typeof v === "string" && v.trim()))],
+    memories: [...new Set(memories.filter(v => typeof v === "string" && v.trim()))]
+  };
+}
+
+function productVariantPrice(product, options = {}) {
+  const rows = product && product.variants && Array.isArray(product.variants.items) ? product.variants.items : [];
+  const found = rows.find(v => v && String(v.color || "") === String(options.color || "") && String(v.memory || "") === String(options.memory || "") && Number.isFinite(Number(v.price)) && Number(v.price) >= 0);
+  return found ? Number(found.price) : Number(product && product.price || 0);
+}
+
+function productWithOptions(product, options) {
+  return { ...product, price: productVariantPrice(product, options) };
+}
+
+function defaultProductOptions(product) {
+  const available = productVariantOptions(product);
+  return {
+    color: available.colors.includes("Чёрный") ? "Чёрный" : (available.colors[0] || ""),
+    memory: available.memories.includes("256 ГБ") ? "256 ГБ" : (available.memories[0] || "")
+  };
+}
+
+function cartKey(product, options = {}) {
+  if (!product) return "";
+  const hasVariants = !!(options.color || options.memory);
+  return hasVariants
+    ? String(product.id) + "|v|" + encodeURIComponent(options.color || "") + "|" + encodeURIComponent(options.memory || "")
+    : String(product.id);
+}
+
+function parseCartKey(key) {
+  const parts = String(key).split("|v|");
+  if (parts.length < 2) return { id: String(key), options: { color: "", memory: "" } };
+  const values = parts.slice(1).join("|v|").split("|");
+  let color = "", memory = "";
+  try { color = decodeURIComponent(values[0] || ""); memory = decodeURIComponent(values[1] || ""); } catch (e) {}
+  return { id: parts[0], options: { color, memory } };
+}
+
+function selectedOptionsLabel(options) {
+  return [options && options.color, options && options.memory].filter(Boolean).join(" · ");
+}
+
+// Ссылка на конкретный товар для WhatsApp и прямого открытия на сайте.
 function getProductShareUrl(product) {
   const baseUrl = "https://electromarket95.github.io/electromarket/";
   return baseUrl + "#product=" + encodeURIComponent(String(product.id));
@@ -111,7 +159,6 @@ function openProductFromHash() {
   if (!match) return;
 
   let id;
-
   try {
     id = decodeURIComponent(match[1]);
   } catch (error) {
@@ -120,6 +167,12 @@ function openProductFromHash() {
 
   const product = productById(id);
   if (!product) return;
+
+  const modal = $("product-details");
+  if (
+    String(detailProductId) === String(product.id) &&
+    modal && !modal.hidden
+  ) return;
 
   openProductDetails(product.id);
 }
@@ -178,6 +231,11 @@ function installStoreStyles() {
   style.id = "electromarket-extra-styles";
 
   style.textContent = `
+    .details-variants { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:12px 0 18px; }
+    .details-variants:empty { display:none; }
+    .variant-field { display:block; min-width:0; color:inherit; font-size:13px; font-weight:700; }
+    .variant-field span { display:block; margin-bottom:6px; }
+    .variant-field select { width:100%; min-width:0; padding:10px; border:1px solid #526174; border-radius:9px; background:#172235; color:inherit; font:inherit; }
     /* Карточки товаров */
     #product-grid.product-grid {
       display: grid !important;
@@ -965,6 +1023,7 @@ function initProductDetails() {
         <h2 class="details-title"></h2>
         <div class="details-price"></div>
         <div class="details-old-price" hidden></div>
+        <div class="details-variants"></div>
         <div class="details-description"></div>
 
         <h3 class="details-specs-heading">Характеристики</h3>
@@ -996,7 +1055,7 @@ function initProductDetails() {
   modal.querySelector(".details-order").addEventListener(
     "click", () => {
       if (detailProductId !== null) {
-        buyNow(detailProductId);
+        buyNow(detailProductId, selectedProductOptions);
       }
     }
   );
@@ -1005,7 +1064,7 @@ function initProductDetails() {
     "click", () => {
       if (detailProductId === null) return;
 
-      addToCart(detailProductId);
+      addToCart(detailProductId, selectedProductOptions);
       closeProductDetails();
     }
   );
@@ -1030,6 +1089,21 @@ function initProductDetails() {
     if (!dot) return;
     detailImageIndex = Number(dot.dataset.detailImageIndex) || 0;
     renderDetailImage();
+  });
+
+  modal.querySelector(".details-variants").addEventListener("change", event => {
+    if (event.target.matches("[data-variant-color]")) selectedProductOptions.color = event.target.value;
+    if (event.target.matches("[data-variant-memory]")) selectedProductOptions.memory = event.target.value;
+    if (detailProductId !== null) {
+      const current = productById(detailProductId);
+      if (current) {
+        modal.querySelector(".details-price").textContent = money(productVariantPrice(current, selectedProductOptions));
+        const oldPrice = modal.querySelector(".details-old-price");
+        const price = productVariantPrice(current, selectedProductOptions);
+        if (Number(current.oldPrice) > price) { oldPrice.textContent = money(current.oldPrice); oldPrice.hidden = false; }
+        else { oldPrice.textContent = ""; oldPrice.hidden = true; }
+      }
+    }
   });
 }
 
@@ -1096,8 +1170,22 @@ function openProductDetails(id) {
   modal.querySelector(".details-title").textContent =
     product.name || "Товар";
 
-  modal.querySelector(".details-price").textContent =
-    money(product.price);
+  const variantOptions = productVariantOptions(product);
+  selectedProductOptions = defaultProductOptions(product);
+  const variantsContainer = modal.querySelector(".details-variants");
+  variantsContainer.innerHTML = [
+    variantOptions.colors.length ? `<label class="variant-field"><span>Цвет</span><select data-variant-color aria-label="Выберите цвет">${variantOptions.colors.map(value => `<option value="${safe(value)}" ${value === selectedProductOptions.color ? "selected" : ""}>${safe(value)}</option>`).join("")}</select></label>` : "",
+    variantOptions.memories.length ? `<label class="variant-field"><span>Память</span><select data-variant-memory aria-label="Выберите память">${variantOptions.memories.map(value => `<option value="${safe(value)}" ${value === selectedProductOptions.memory ? "selected" : ""}>${safe(value)}</option>`).join("")}</select></label>` : ""
+  ].join("");
+
+  const updateVariantPrice = () => {
+    const price = productVariantPrice(product, selectedProductOptions);
+    modal.querySelector(".details-price").textContent = money(price);
+    const oldPrice = modal.querySelector(".details-old-price");
+    if (Number(product.oldPrice) > price) { oldPrice.textContent = money(product.oldPrice); oldPrice.hidden = false; }
+    else { oldPrice.textContent = ""; oldPrice.hidden = true; }
+  };
+  updateVariantPrice();
 
   let statusLine = modal.querySelector(".details-status");
   if (!statusLine) {
@@ -1118,7 +1206,8 @@ function openProductDetails(id) {
   orderButton.title = cartButton.title = canOrderProduct(product) ? "" : "Товар временно недоступен для заказа";
 
   const oldPrice = modal.querySelector(".details-old-price");
-  if (Number(product.oldPrice) > Number(product.price)) {
+  const selectedPrice = productVariantPrice(product, selectedProductOptions);
+  if (Number(product.oldPrice) > selectedPrice) {
     oldPrice.textContent = money(product.oldPrice);
     oldPrice.hidden = false;
   } else {
@@ -1303,16 +1392,12 @@ function closeGallery() {
 
 function cartItems() {
   return Object.entries(cart)
-    .map(([id, qty]) => ({
-      product: productById(id),
-      qty: Number(qty)
-    }))
-    .filter(item =>
-      item.product &&
-      canOrderProduct(item.product) &&
-      Number.isFinite(item.qty) &&
-      item.qty > 0
-    );
+    .map(([key, qty]) => {
+      const parsed = parseCartKey(key);
+      const baseProduct = productById(parsed.id);
+      return { key, product: baseProduct ? productWithOptions(baseProduct, parsed.options) : null, options: parsed.options, qty: Number(qty) };
+    })
+    .filter(item => item.product && canOrderProduct(item.product) && Number.isFinite(item.qty) && item.qty > 0);
 }
 
 function renderCart() {
@@ -1345,16 +1430,17 @@ function renderCart() {
   }
 
   if ($("cart-items")) {
-    $("cart-items").innerHTML = items.map(({ product, qty }) => `
+    $("cart-items").innerHTML = items.map(({ key, product, options, qty }) => `
       <div class="cart-row">
         <div>
           <h3>${safe(product.name)}</h3>
+          ${selectedOptionsLabel(options) ? `<small>${safe(selectedOptionsLabel(options))}</small>` : ""}
           <small>${money(product.price)} за шт.</small>
 
           <div class="quantity">
             <button
               type="button"
-              data-qty="${safe(product.id)}"
+              data-qty="${safe(key)}"
               data-delta="-1"
               aria-label="Уменьшить количество"
             >−</button>
@@ -1363,7 +1449,7 @@ function renderCart() {
 
             <button
               type="button"
-              data-qty="${safe(product.id)}"
+              data-qty="${safe(key)}"
               data-delta="1"
               aria-label="Увеличить количество"
             >+</button>
@@ -1376,7 +1462,7 @@ function renderCart() {
           <button
             type="button"
             class="remove-item"
-            data-remove="${safe(product.id)}"
+            data-remove="${safe(key)}"
           >Удалить</button>
         </div>
       </div>
@@ -1390,16 +1476,21 @@ function renderCart() {
   }
 }
 
-function addToCart(id) {
+function addToCart(id, options = null) {
   const product = productById(id);
   if (!product) return;
+  if (!options && product.variants && Array.isArray(product.variants.items) && product.variants.items.length) {
+    openProductDetails(id);
+    showToast("Выбери цвет и память");
+    return;
+  }
   if (!canOrderProduct(product)) {
     showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
     return;
   }
-
-  cart[id] = (Number(cart[id]) || 0) + 1;
-
+  const chosen = options || defaultProductOptions(product);
+  const key = cartKey(product, chosen);
+  cart[key] = (Number(cart[key]) || 0) + 1;
   saveCart();
   renderCart();
   showToast("Товар добавлен в корзину");
@@ -1436,14 +1527,18 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
   }
 
   const total = items.reduce(
-    (sum, item) =>
-      sum + Number(item.product.price || 0) * item.qty,
+    (sum, item) => sum + productVariantPrice(item.product, item.options) * item.qty,
     0
   );
 
-    const lines = items.map(({ product, qty }, index) =>
-    `${index + 1}. ${product.name} — ${qty} шт. × ${money(product.price)} = ${money(Number(product.price) * qty)}\nСсылка на товар: ${getProductShareUrl(product)}`
-  );
+  // Для каждого товара добавляем отдельную ссылку на его карточку.
+  const lines = items.flatMap(({ product, qty, options }, index) => {
+    const unitPrice = productVariantPrice(product, options);
+    return [
+      `${index + 1}. ${product.name}${selectedOptionsLabel(options) ? " — " + selectedOptionsLabel(options) : ""} — ${qty} шт. × ${money(unitPrice)} = ${money(unitPrice * qty)}`,
+      getProductShareUrl(product)
+    ];
+  });
 
   const message = [
     items.some(item => productStatus(item.product) === "preorder")
@@ -1465,15 +1560,21 @@ function sendWhatsAppOrder(items, customerName = "", note = "") {
   window.open(url, "_blank");
 }
 
-function buyNow(id) {
+function buyNow(id, options = null) {
   const product = productById(id);
   if (!product) return;
+  if (!options && product.variants && Array.isArray(product.variants.items) && product.variants.items.length) {
+    openProductDetails(id);
+    showToast("Выбери цвет и память");
+    return;
+  }
   if (!canOrderProduct(product)) {
     showToast(productStatus(product) === "coming_soon" ? "Товар скоро появится" : "Товар сейчас недоступен");
     return;
   }
 
-  sendWhatsAppOrder([{ product, qty: 1 }]);
+  const chosen = options || defaultProductOptions(product);
+  sendWhatsAppOrder([{ product: productWithOptions(product, chosen), qty: 1, options: chosen }]);
 }
 
 function checkout() {
@@ -1625,13 +1726,15 @@ function bindEvents() {
 // ==================================================
 
 function initStore() {
-openProductFromHash();
-window.addEventListener("hashchange", openProductFromHash);
   installStoreStyles();
   bindEvents();
   renderCategories();
   renderProducts();
   renderCart();
+
+  // Если сайт открыт по ссылке #product=..., сразу показываем нужный товар.
+  openProductFromHash();
+  window.addEventListener("hashchange", openProductFromHash);
 }
 
 if (document.readyState === "loading") {
