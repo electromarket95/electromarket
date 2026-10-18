@@ -1,5 +1,20 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792341423043",
+    "name": "Электрический обогреватель",
+    "brand": "",
+    "category": "Кондиционеры и отопление",
+    "price": 2500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792341423043-1.jpg",
+    "description": "",
+    "images": [
+      "images/item-1792341423043-1.jpg"
+    ]
+  },
+  {
     "id": "item-1792326150711",
     "name": "Смарт телевизор 43",
     "brand": "Whale",
