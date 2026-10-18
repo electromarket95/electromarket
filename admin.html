@@ -25,6 +25,7 @@ textarea{min-height:80px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .full{grid-column:1/-1}
 #photoPreview{display:none;max-width:180px;max-height:180px;object-fit:contain}
+#listWrap[hidden]{display:none}
 .variant-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .choices{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
 .choice{display:flex;align-items:center;gap:6px;background:#eef3f9;border:1px solid #d5dfeb;border-radius:8px;padding:8px;font-size:13px}
@@ -60,11 +61,6 @@ placeholder="Вставьте токен GitHub">
 <label for="search">Поиск товара</label>
 <input id="search" placeholder="Название, бренд или категория">
 <div id="status" class="status">Загрузка каталога…</div>
-
-<section class="panel">
-<h3>Товары (<span id="count">0</span>)</h3>
-<div id="list"></div>
-</section>
 
 <section class="panel">
 <h3 id="formTitle">Новый товар</h3>
@@ -123,6 +119,14 @@ placeholder="Вставьте токен GitHub">
 <button id="save" type="submit">Сохранить товар</button>
 <button id="clear" class="gray" type="button">Очистить форму</button>
 </form>
+</section>
+
+<section class="panel" id="listPanel">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  <h3 style="margin:8px 0">Товары (<span id="count">0</span>)</h3>
+  <button id="toggleList" class="gray" type="button" aria-expanded="false">Показать список</button>
+</div>
+<div id="listWrap" hidden><div id="list"></div></div>
 </section>
 </main>
 
@@ -479,6 +483,13 @@ $("disconnect").addEventListener("click", () => {
 });
 
 $("search").addEventListener("input", render);
+$("toggleList").addEventListener("click", () => {
+  const wrap = $("listWrap");
+  const opening = wrap.hidden;
+  wrap.hidden = !opening;
+  $("toggleList").textContent = opening ? "Скрыть список" : "Показать список";
+  $("toggleList").setAttribute("aria-expanded", String(opening));
+});
 $("new").addEventListener("click", () => {
   clearForm();
   $("formTitle").scrollIntoView({ behavior: "smooth" });
@@ -567,6 +578,7 @@ $("form").addEventListener("submit", async e => {
 });
 
 fillCategories();
+setupVariantEditor(null); // Инициализируем цвета и память при первом открытии страницы.
 render();
 
 if (token) {
