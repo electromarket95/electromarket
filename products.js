@@ -1,39 +1,5 @@
 window.PRODUCTS = [
   {
-    "id": "item-1792305597697",
-    "name": "Galaxy A9",
-    "brand": "Samsung",
-    "category": "Смартфоны и телефоны",
-    "price": 15000,
-    "oldPrice": 0,
-    "badge": "",
-    "emoji": "",
-    "image": "images/item-1792305597697.jpg",
-    "description": "",
-    "variants": {
-      "colors": [
-        "Черный",
-        "Белый"
-      ],
-      "memories": [
-        "128",
-        "256"
-      ],
-      "items": [
-        {
-          "color": "Черный",
-          "memory": "128",
-          "price": 15000
-        },
-        {
-          "color": "Белый",
-          "memory": "256",
-          "price": 23000
-        }
-      ]
-    }
-  },
-  {
     "id": "item-1792268669110",
     "name": "Машинка для стрижки",
     "brand": "King",
