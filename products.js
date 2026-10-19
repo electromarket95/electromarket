@@ -1,5 +1,20 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792400733355",
+    "name": "Tactix 8",
+    "brand": "Копия",
+    "category": "Смарт-гаджеты и сеть",
+    "price": 3500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792400733355-1.jpg",
+    "description": "Taktix 8 51mm Black\n\n✅ Яpкий АMОLЕD-дисплей\n✅ Мoниторинг пульca и aктивнocти\n✅ Увeдомления о звoнкax и coобщeниях\n✅ Спортивные peжимы\n✅ Кoнтpoль cнa и шaгомер\n✅ Длитeльная автонoмнaя pабота\n✅ Coвместимость с Android и iРhone",
+    "images": [
+      "images/item-1792400733355-1.jpg"
+    ]
+  },
+  {
     "id": "item-1792400669430",
     "name": "Смарт часы",
     "brand": "HK",
