@@ -1,5 +1,20 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792400669430",
+    "name": "Смарт часы",
+    "brand": "HK",
+    "category": "Смарт-гаджеты и сеть",
+    "price": 2500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792400669430-1.jpg",
+    "description": "Apple Watch HK11 Pro Max",
+    "images": [
+      "images/item-1792400669430-1.jpg"
+    ]
+  },
+  {
     "id": "item-1792400598730",
     "name": "Смарт часы",
     "brand": "HK",
