@@ -1,7 +1,7 @@
 window.PRODUCTS = [
   {
     "id": "item-1792406773427",
-    "name": "AirPods",
+    "name": "AirPods 4 (без ANC)",
     "brand": "Apple",
     "category": "Наушники",
     "price": 11000,
