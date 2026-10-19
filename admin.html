@@ -27,9 +27,16 @@ textarea{min-height:80px}
 #photoPreview{display:none;max-width:180px;max-height:180px;object-fit:contain}
 #listWrap[hidden]{display:none}
 .variant-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
-.choices{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+.choices{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 2px}
 .choice{display:flex;align-items:center;gap:6px;background:#eef3f9;border:1px solid #d5dfeb;border-radius:8px;padding:8px;font-size:13px}
 .choice input{width:auto;margin:0}
+.variant-dropdown{border:1px solid #d5dfeb;border-radius:10px;background:#fff;margin-top:8px;overflow:hidden}
+.variant-dropdown summary{cursor:pointer;list-style:none;padding:12px;background:#eef3f9;font-weight:bold;border-radius:9px;user-select:none}
+.variant-dropdown summary::-webkit-details-marker{display:none}
+.variant-dropdown summary:after{content:"▾";float:right;color:#52647a}
+.variant-dropdown[open] summary:after{content:"▴"}
+.variant-dropdown .choices{padding:0 10px 10px}
+.variant-dropdown .choice{font-size:14px;padding:9px 10px}
 .variant-price-table{margin-top:12px;display:grid;gap:8px}
 .variant-price-row{display:grid;grid-template-columns:1fr 120px;gap:8px;align-items:center;background:#f8fafc;padding:8px;border-radius:8px}
 .variant-price-row input{min-width:0}
@@ -371,13 +378,15 @@ async function saveProducts() {
   }
 }
 
-const VARIANT_COLORS = ["Чёрный", "Белый", "Синий", "Зелёный", "Серый", "Серебристый", "Золотой", "Фиолетовый", "Розовый", "Красный", "Жёлтый", "Оранжевый", "Голубой", "Бежевый", "Коричневый", "Графитовый", "Титановый", "Прозрачный"];
+const VARIANT_COLORS = ["Чёрный", "Белый", "Синий", "Бургундий", "Зелёный", "Серый", "Серебристый", "Золотой", "Фиолетовый", "Розовый", "Красный", "Жёлтый", "Оранжевый", "Голубой", "Бежевый", "Коричневый", "Графитовый", "Титановый", "Прозрачный"];
 const VARIANT_MEMORIES = ["16 ГБ", "32 ГБ", "64 ГБ", "128 ГБ", "256 ГБ", "512 ГБ", "1 ТБ", "2 ТБ"];
 let editingVariantRows = [];
 
 function renderChoiceList(containerId, type, options, selectedValues = []) {
   const container = $(containerId);
-  container.innerHTML = options.map(value => `<label class="choice"><input type="checkbox" data-variant-choice="${type}" value="${safeAttr(value)}" ${selectedValues.includes(value) ? "checked" : ""}>${safeHtml(value)}</label>`).join("");
+  const title = type === "color" ? "Выбрать цвета" : "Выбрать память";
+  const choices = options.map(value => `<label class="choice"><input type="checkbox" data-variant-choice="${type}" value="${safeAttr(value)}" ${selectedValues.includes(value) ? "checked" : ""}>${safeHtml(value)}</label>`).join("");
+  container.innerHTML = `<details class="variant-dropdown"><summary data-variant-summary="${type}">${title} (${selectedValues.length})</summary><div class="choices">${choices}</div></details>`;
 }
 function safeHtml(value) {
   return String(value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
@@ -430,7 +439,13 @@ function readVariantRows() {
 }
 
 document.addEventListener("change", event => {
-  if (event.target.matches("[data-variant-choice]")) renderVariantPriceTable();
+  if (event.target.matches("[data-variant-choice]")) {
+    const type = event.target.dataset.variantChoice;
+    const count = selectedVariantValues(type).length;
+    const summary = document.querySelector(`[data-variant-summary="${type}"]`);
+    if (summary) summary.textContent = `${type === "color" ? "Выбрать цвета" : "Выбрать память"} (${count})`;
+    renderVariantPriceTable();
+  }
 });
 
 function clearForm() {
