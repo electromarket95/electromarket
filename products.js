@@ -1,5 +1,20 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792400912038",
+    "name": "Умные часы",
+    "brand": "FaizFull",
+    "category": "Смарт-гаджеты и сеть",
+    "price": 4800,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792400912038-1.jpg",
+    "description": "⌚ FAIZFULL FitCore 9S — умные часы для активной жизни!\n\nAMOLED-дисплей 1,43″, GPS, более 100 спортивных режимов, мониторинг пульса, сна и активности, анализ уровня кислорода в крови, Bluetooth-звонки, защита 5 ATM и аккумулятор 500 мА·ч.",
+    "images": [
+      "images/item-1792400912038-1.jpg"
+    ]
+  },
+  {
     "id": "item-1792400733355",
     "name": "Tactix 8",
     "brand": "Копия",
