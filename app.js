@@ -100,8 +100,8 @@ function productById(id) {
 function productVariantOptions(product) {
   const variants = product && product.variants && typeof product.variants === "object" ? product.variants : {};
   const rows = Array.isArray(variants.items) ? variants.items : [];
-  const colors = Array.isArray(variants.colors) ? variants.colors : [];
-  const memories = Array.isArray(variants.memories) ? variants.memories : [];
+  const colors = Array.isArray(variants.colors) ? [...variants.colors] : [];
+  const memories = Array.isArray(variants.memories) ? [...variants.memories] : [];
   rows.forEach(v => { if (v && v.color) colors.push(v.color); if (v && v.memory) memories.push(v.memory); });
   return {
     colors: [...new Set(colors.filter(v => typeof v === "string" && v.trim()))],
