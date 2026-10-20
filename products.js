@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501816904",
+    "name": "Пульт дистанционного управления",
+    "brand": "Xiaomi",
+    "category": "Прочее",
+    "price": 1000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501816904-1792501816905-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501767254",
     "name": "Универсальный пульт",
     "brand": "Samsung",
