@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501443522",
+    "name": "Беспроводные наушники",
+    "brand": "Hoco",
+    "category": "Наушники",
+    "price": 2000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501443522-1792501443526-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501408312",
     "name": "Беспроводные наушники",
     "brand": "Hoco",
