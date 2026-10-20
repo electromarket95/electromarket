@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501077482",
+    "name": "Беспроводные наушники",
+    "brand": "FaizFull",
+    "category": "Наушники",
+    "price": 1000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501077482-1792501077483-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501033433",
     "name": "Беспроводные наушники",
     "brand": "FaizFull",
