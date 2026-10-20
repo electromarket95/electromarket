@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501604028",
+    "name": "Пульт для устройства",
+    "brand": "Xiaomi",
+    "category": "Прочее",
+    "price": 1000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501604028-1792501604028-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501547169",
     "name": "Беспроводные наушники",
     "brand": "Hoco",
