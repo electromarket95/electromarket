@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501221451",
+    "name": "Беспроводные наушники",
+    "brand": "FaizFull",
+    "category": "Наушники",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501221451-1792501221451-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501177769",
     "name": "Беспроводные наушники",
     "brand": "Wiwu",
