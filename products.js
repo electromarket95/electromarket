@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501678614",
+    "name": "Универсальный пульт",
+    "brand": "Samsung",
+    "category": "Прочее",
+    "price": 500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501678614-1792501678614-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501642573",
     "name": "Пульт универсальный",
     "brand": "LG",
