@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501275533",
+    "name": "Беспроводные наушники",
+    "brand": "Defender",
+    "category": "Наушники",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501275533-1792501275535-1.jpg",
+    "description": "Defender Twins 975"
+  },
+  {
     "id": "item-1792501221451",
     "name": "Беспроводные наушники",
     "brand": "FaizFull",
