@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501725177",
+    "name": "Универсальный пульт для телевизора",
+    "brand": "Samsung",
+    "category": "Прочее",
+    "price": 700,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501725177-1792501725178-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501678614",
     "name": "Универсальный пульт",
     "brand": "Samsung",
