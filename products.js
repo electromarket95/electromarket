@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792507635980",
+    "name": "СЗУ для ноутбука",
+    "brand": "",
+    "category": "Прочее",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792507635980-1792507635980-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792507482272",
     "name": "Сетевое зарядное устройство",
     "brand": "",
