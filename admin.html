@@ -24,7 +24,10 @@ textarea{min-height:80px}
 .info small{display:block;color:#64748b;margin-top:5px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .full{grid-column:1/-1}
-#photoPreview{display:none;max-width:180px;max-height:180px;object-fit:contain}
+.photo-previews{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.photo-preview-item{width:100px;border:1px solid #dbe3ed;border-radius:8px;padding:6px;background:#f8fafc;font-size:11px;color:#64748b;overflow-wrap:anywhere}
+.photo-preview-item img{width:100%;height:90px;object-fit:contain;display:block}
+.photo-preview-item .photo-main{font-weight:bold;color:#1769d2}
 #listWrap[hidden]{display:none}
 .variant-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .choices{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 2px}
@@ -103,8 +106,9 @@ placeholder="Вставьте токен GitHub">
 </div>
 <div class="full">
 <label for="photoFile">Фотография товара</label>
-<input id="photoFile" type="file" accept="image/*">
-<img id="photoPreview" alt="Предпросмотр">
+<input id="photoFile" type="file" accept="image/*" multiple>
+<p class="help">Можно выбрать несколько фотографий. Новые фото добавятся к сохранённым.</p>
+<div id="photoPreviews" class="photo-previews" aria-live="polite"></div>
 <label for="image">Имя файла или URL фото</label>
 <input id="image" placeholder="images/photo.jpg">
 </div>
@@ -157,7 +161,7 @@ let token = localStorage.getItem("em_admin_token") || "";
 let products = [];
 let fileSha = "";
 let editIndex = -1;
-let photoData = "";
+let photoDataList = [];
 
 const $ = id => document.getElementById(id);
 const status = msg => $("status").textContent = msg;
@@ -448,13 +452,39 @@ document.addEventListener("change", event => {
   }
 });
 
+function getProductImageList(product) {
+  if (!product) return [];
+  return [...new Set([product.image, ...(Array.isArray(product.images) ? product.images : [])]
+    .filter(value => typeof value === "string" && value.trim()))];
+}
+
+function renderPhotoPreviews(existing = [], selected = photoDataList) {
+  const container = $("photoPreviews");
+  container.replaceChildren();
+  const addPreview = (src, label, isMain = false) => {
+    const card = document.createElement("div");
+    card.className = "photo-preview-item";
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = label;
+    const caption = document.createElement("div");
+    caption.textContent = label;
+    if (isMain) caption.className = "photo-main";
+    card.append(img, caption);
+    container.appendChild(card);
+  };
+  existing.forEach((path, index) => addPreview(imageUrl(path), `Сохранённое фото ${index + 1}`, index === 0));
+  selected.forEach((item, index) => addPreview(item.data, `Новое фото ${index + 1}`, existing.length === 0 && index === 0));
+}
+
 function clearForm() {
   $("form").reset();
   editIndex = -1;
-  photoData = "";
+  photoDataList = [];
+  $("photoFile").value = "";
+  renderPhotoPreviews();
   $("clearVariants").checked = false;
   setupVariantEditor(null);
-  $("photoPreview").style.display = "none";
   $("formTitle").textContent = "Новый товар";
   $("save").textContent = "Сохранить товар";
   fillCategories();
@@ -463,7 +493,8 @@ function clearForm() {
 function editProduct(i) {
   const p = products[i];
   editIndex = i;
-  photoData = "";
+  photoDataList = [];
+  $("photoFile").value = "";
   $("name").value = p.name || "";
   $("brand").value = p.brand || "";
   $("price").value = p.price ?? "";
@@ -478,12 +509,7 @@ function editProduct(i) {
   $("formTitle").textContent = "Редактирование товара";
   $("save").textContent = "Сохранить изменения";
 
-  if (p.image) {
-    $("photoPreview").src = imageUrl(p.image);
-    $("photoPreview").style.display = "block";
-  } else {
-    $("photoPreview").style.display = "none";
-  }
+  renderPhotoPreviews(getProductImageList(p));
   $("formTitle").scrollIntoView({ behavior: "smooth" });
 }
 
@@ -511,22 +537,29 @@ $("new").addEventListener("click", () => {
 });
 $("clear").addEventListener("click", clearForm);
 
-$("photoFile").addEventListener("change", () => {
-  const file = $("photoFile").files[0];
-  if (!file) return;
-  if (!file.type.startsWith("image/")) {
-    status("Выбери изображение.");
+$("photoFile").addEventListener("change", async () => {
+  const files = Array.from($("photoFile").files || []);
+  if (!files.length) return;
+  const invalid = files.find(file => !file.type.startsWith("image/"));
+  if (invalid) {
+    status(`Файл «${invalid.name}» не является изображением.`);
+    $("photoFile").value = "";
     return;
   }
-
-  const reader = new FileReader();
-  reader.onload = () => {
-    photoData = reader.result;
-    $("photoPreview").src = photoData;
-    $("photoPreview").style.display = "block";
-  };
-  reader.onerror = () => status("Не удалось прочитать фото.");
-  reader.readAsDataURL(file);
+  try {
+    const readFile = file => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve({ file, data: reader.result });
+      reader.onerror = () => reject(new Error(`Не удалось прочитать фото «${file.name}».`));
+      reader.readAsDataURL(file);
+    });
+    photoDataList = await Promise.all(files.map(readFile));
+    const existing = editIndex >= 0 ? getProductImageList(products[editIndex]) : [];
+    renderPhotoPreviews(existing);
+    status(`Выбрано фотографий: ${photoDataList.length}. Нажми «Сохранить товар».`);
+  } catch (error) {
+    status(error.message);
+  }
 });
 
 $("form").addEventListener("submit", async e => {
@@ -573,13 +606,22 @@ $("form").addEventListener("submit", async e => {
   }
 
   try {
-    if (photoData) {
-      const file = $("photoFile").files[0];
-      const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
-      const safeExt = ["jpg", "jpeg", "png", "webp"].includes(ext) ? ext : "jpg";
-      const path = "images/" + product.id + "." + safeExt;
-      status("Загружаю фотографию…");
-      product.image = await uploadPhoto(path, photoData);
+    const allImages = editIndex >= 0 ? getProductImageList(previous) : [];
+    if (photoDataList.length) {
+      for (let index = 0; index < photoDataList.length; index++) {
+        const entry = photoDataList[index];
+        const ext = (entry.file.name.split(".").pop() || "jpg").toLowerCase();
+        const safeExt = ["jpg", "jpeg", "png", "webp"].includes(ext) ? ext : "jpg";
+        const path = `images/${product.id}-${Date.now()}-${index + 1}.${safeExt}`;
+        status(`Загружаю фото ${index + 1} из ${photoDataList.length}…`);
+        allImages.push(await uploadPhoto(path, entry.data));
+      }
+    }
+    const uniqueImages = [...new Set(allImages)];
+    if (uniqueImages.length) {
+      product.image = uniqueImages[0];
+      if (uniqueImages.length > 1) product.images = uniqueImages.slice(1);
+      else delete product.images;
     }
 
     if (editIndex >= 0) products[editIndex] = product;
