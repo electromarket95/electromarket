@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792505560966",
+    "name": "Перфоратор электрический",
+    "brand": "Oasis",
+    "category": "Электроинструменты",
+    "price": 4000,
+    "oldPrice": 0,
+    "badge": "Акция",
+    "emoji": "",
+    "image": "images/item-1792505560966-1792505560966-1.webp",
+    "description": "Перфоратор сетевой Oasis PR-100 PRO, 1000Вт, 3,3Дж, горизонтальный"
+  },
+  {
     "id": "item-1792504947855",
     "name": "Garmin Tactix 8 (1в1 с оригиналом)",
     "brand": "",
