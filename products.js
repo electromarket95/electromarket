@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792503657806",
+    "name": "Лобзик электрический",
+    "brand": "Oasis",
+    "category": "Электроинструменты",
+    "price": 1700,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792503657806-1792503657807-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792501816904",
     "name": "Пульт дистанционного управления",
     "brand": "Xiaomi",
