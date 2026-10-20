@@ -1,5 +1,21 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792504947855",
+    "name": "Garmin Tactix 8 (1в1 с оригиналом)",
+    "brand": "",
+    "category": "Смарт-гаджеты и сеть",
+    "price": 9900,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792504947855-1792504947855-1.jpg",
+    "description": "",
+    "images": [
+      "images/item-1792504947855-1792504954164-2.jpg",
+      "images/item-1792504947855-1792504959558-3.jpg"
+    ]
+  },
+  {
     "id": "item-1792503657806",
     "name": "Лобзик электрический",
     "brand": "Oasis",
