@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792507482272",
+    "name": "Сетевое зарядное устройство",
+    "brand": "",
+    "category": "Прочее",
+    "price": 350,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792507482272-1792507482273-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792505560966",
     "name": "Перфоратор электрический",
     "brand": "Oasis",
