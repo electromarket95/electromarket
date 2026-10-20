@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792501177769",
+    "name": "Беспроводные наушники",
+    "brand": "Wiwu",
+    "category": "Смартфоны и телефоны",
+    "price": 1800,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792501177769-1792501177773-1.jpg",
+    "description": "Wiwu AirBuds 4 ANC"
+  },
+  {
     "id": "item-1792501077482",
     "name": "Беспроводные наушники",
     "brand": "FaizFull",
