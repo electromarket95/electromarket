@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792500911589",
+    "name": "Беспроводные наушники",
+    "brand": "FaizFull",
+    "category": "Наушники",
+    "price": 1300,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792500911589-1792500911590-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792496188733",
     "name": "Мини цепная пила",
     "brand": "",
