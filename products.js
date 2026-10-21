@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792574842411",
+    "name": "Камера видеонаблюдения",
+    "brand": "FaizFull",
+    "category": "Камеры видеонаблюдения",
+    "price": 3500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792574842411-1792574842411-1.jpg",
+    "description": "Камера WiFi FaizFull  FT170 \n\n🔵Wi-Fi камера \n🔴С 2-мя объективами \n🔵Качество сьемки 6mp\n🔴Приложение O-KAM PRO \n🔵Датчик движения \n🔴Длина кабеля 3 - метра \n🔵Поддержка карты памяти до 256Gb"
+  },
+  {
     "id": "item-1792574772098",
     "name": "Камера видеонаблюдения",
     "brand": "FaizFull",
