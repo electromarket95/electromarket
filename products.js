@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792571537495",
+    "name": "Автомобильный сабвуфер",
+    "brand": "Pioneer",
+    "category": "Автотовары и электроника",
+    "price": 4300,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792571537495-1792571537495-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792571317986",
     "name": "Умная колонка с Алисой",
     "brand": "Яндекс",
