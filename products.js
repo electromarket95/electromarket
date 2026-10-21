@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792571028710",
+    "name": "Акустическая система",
+    "brand": "CARLIVE",
+    "category": "Автотовары и электроника",
+    "price": 3200,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792571028710-1792571028711-1.jpg",
+    "description": "Автомобильные динамики"
+  },
+  {
     "id": "item-1792507635980",
     "name": "СЗУ для ноутбука",
     "brand": "",
