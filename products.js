@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792742407396",
+    "name": "Проектор",
+    "brand": "Lukyroad",
+    "category": "Проекторы",
+    "price": 4900,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792742407396-1792742407396-1.jpg",
+    "description": "Проектор Lukyroad v15 🔥"
+  },
+  {
     "id": "item-1792742107015",
     "name": "Беспроводные наушники",
     "brand": "Hoco",
