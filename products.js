@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792742107015",
+    "name": "Беспроводные наушники",
+    "brand": "Hoco",
+    "category": "Наушники",
+    "price": 2000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792742107015-1792742107017-1.jpg",
+    "description": "Беспроводные наушники Hoco W65 Plus"
+  },
+  {
     "id": "item-1792739851725",
     "name": "Беспроводные наушники",
     "brand": "Hoco",
