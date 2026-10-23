@@ -13,8 +13,8 @@ window.PRODUCTS = [
     "variants": {
       "colors": [
         "Чёрный",
-        "Серый",
-        "Фиолетовый"
+        "Бургундий",
+        "Серый"
       ],
       "memories": [
         "1 ТБ"
@@ -26,12 +26,12 @@ window.PRODUCTS = [
           "price": 8500
         },
         {
-          "color": "Серый",
+          "color": "Бургундий",
           "memory": "1 ТБ",
           "price": 8500
         },
         {
-          "color": "Фиолетовый",
+          "color": "Серый",
           "memory": "1 ТБ",
           "price": 8500
         }
