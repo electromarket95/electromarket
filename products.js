@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792762483645",
+    "name": "Аэрогриль",
+    "brand": "Slivers Criest",
+    "category": "Бытовая техника",
+    "price": 6500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792762483645-1792762483645-1.jpg",
+    "description": "🔥Аэрогриль SLIVERS CRIEST 12л"
+  },
+  {
     "id": "item-1792742407396",
     "name": "Проектор",
     "brand": "Lukyroad",
