@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792739713400",
+    "name": "Беспроводные наушники",
+    "brand": "Hoco",
+    "category": "Наушники",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792739713400-1792739713401-1.jpg",
+    "description": "Беспроводные наушники Hoco W35 Air"
+  },
+  {
     "id": "item-1792738289813",
     "name": "SmartX 13 Ultra",
     "brand": "SmartX",
