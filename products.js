@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792739802151",
+    "name": "Беспроводные наушники",
+    "brand": "Hoco",
+    "category": "Наушники",
+    "price": 1500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792739802151-1792739802152-1.jpg",
+    "description": "Беспроводные наушники Hoco W35  Max"
+  },
+  {
     "id": "item-1792739713400",
     "name": "Беспроводные наушники",
     "brand": "Hoco",
