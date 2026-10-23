@@ -28,6 +28,9 @@ textarea{min-height:80px}
 .photo-preview-item{width:100px;border:1px solid #dbe3ed;border-radius:8px;padding:6px;background:#f8fafc;font-size:11px;color:#64748b;overflow-wrap:anywhere}
 .photo-preview-item img{width:100%;height:90px;object-fit:contain;display:block}
 .photo-preview-item .photo-main{font-weight:bold;color:#1769d2}
+.photo-preview-item .photo-delete{width:100%;margin:6px 0 0;padding:7px 4px;background:#b42318;color:#fff;font-size:11px}
+.photo-preview-item.is-removed{opacity:.45;border:1px dashed #b42318}
+.photo-preview-item.is-removed img{filter:grayscale(1)}
 #listWrap[hidden]{display:none}
 .variant-pick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
 .choices{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0 2px}
@@ -154,8 +157,7 @@ const CATS = [
   "Смарт-гаджеты и сеть",
 "Автотовары и электроника", 
   "Машинки для стрижки",
-"Камеры видеонаблюдения",
-  "Прочее"
+"Прочее"
 ];
 
 let token = localStorage.getItem("em_admin_token") || "";
@@ -163,6 +165,7 @@ let products = [];
 let fileSha = "";
 let editIndex = -1;
 let photoDataList = [];
+let removedPhotoPaths = [];
 
 const $ = id => document.getElementById(id);
 const status = msg => $("status").textContent = msg;
@@ -462,26 +465,52 @@ function getProductImageList(product) {
 function renderPhotoPreviews(existing = [], selected = photoDataList) {
   const container = $("photoPreviews");
   container.replaceChildren();
-  const addPreview = (src, label, isMain = false) => {
+  const addPreview = (src, label, options = {}) => {
+    const { path = "", isMain = false, isNew = false, index = -1 } = options;
     const card = document.createElement("div");
     card.className = "photo-preview-item";
+    if (path && removedPhotoPaths.includes(path)) card.classList.add("is-removed");
     const img = document.createElement("img");
     img.src = src;
     img.alt = label;
     const caption = document.createElement("div");
-    caption.textContent = label;
-    if (isMain) caption.className = "photo-main";
+    caption.textContent = path && removedPhotoPaths.includes(path) ? `${label} — будет удалено` : label;
+    if (isMain && !(path && removedPhotoPaths.includes(path))) caption.className = "photo-main";
     card.append(img, caption);
+    if (path) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "photo-delete";
+      btn.textContent = removedPhotoPaths.includes(path) ? "Вернуть фото" : "Удалить фото";
+      btn.addEventListener("click", () => {
+        if (removedPhotoPaths.includes(path)) removedPhotoPaths = removedPhotoPaths.filter(item => item !== path);
+        else removedPhotoPaths.push(path);
+        const currentProduct = editIndex >= 0 ? products[editIndex] : null;
+        renderPhotoPreviews(currentProduct ? getProductImageList(currentProduct) : [], photoDataList);
+      });
+      card.appendChild(btn);
+    } else if (isNew) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "photo-delete";
+      btn.textContent = "Убрать фото";
+      btn.addEventListener("click", () => {
+        photoDataList.splice(index, 1);
+        renderPhotoPreviews(editIndex >= 0 ? getProductImageList(products[editIndex]) : [], photoDataList);
+      });
+      card.appendChild(btn);
+    }
     container.appendChild(card);
   };
-  existing.forEach((path, index) => addPreview(imageUrl(path), `Сохранённое фото ${index + 1}`, index === 0));
-  selected.forEach((item, index) => addPreview(item.data, `Новое фото ${index + 1}`, existing.length === 0 && index === 0));
+  existing.forEach((path, index) => addPreview(imageUrl(path), `Сохранённое фото ${index + 1}`, { path, isMain: index === 0 }));
+  selected.forEach((item, index) => addPreview(item.data, `Новое фото ${index + 1}`, { isNew: true, index, isMain: existing.length === 0 && index === 0 }));
 }
 
 function clearForm() {
   $("form").reset();
   editIndex = -1;
   photoDataList = [];
+  removedPhotoPaths = [];
   $("photoFile").value = "";
   renderPhotoPreviews();
   $("clearVariants").checked = false;
@@ -495,6 +524,7 @@ function editProduct(i) {
   const p = products[i];
   editIndex = i;
   photoDataList = [];
+  removedPhotoPaths = [];
   $("photoFile").value = "";
   $("name").value = p.name || "";
   $("brand").value = p.brand || "";
@@ -607,7 +637,7 @@ $("form").addEventListener("submit", async e => {
   }
 
   try {
-    const allImages = editIndex >= 0 ? getProductImageList(previous) : [];
+    const allImages = (editIndex >= 0 ? getProductImageList(previous) : []).filter(path => !removedPhotoPaths.includes(path));
     if (photoDataList.length) {
       for (let index = 0; index < photoDataList.length; index++) {
         const entry = photoDataList[index];
@@ -620,9 +650,19 @@ $("form").addEventListener("submit", async e => {
     }
     const uniqueImages = [...new Set(allImages)];
     if (uniqueImages.length) {
+      // Первая оставшаяся фотография становится основной.
       product.image = uniqueImages[0];
       if (uniqueImages.length > 1) product.images = uniqueImages.slice(1);
       else delete product.images;
+    } else if (editIndex >= 0 && removedPhotoPaths.length) {
+      // Если удалили все сохранённые фото, не возвращаем старый путь из поля image.
+      delete product.image;
+      delete product.images;
+      $("image").value = "";
+    } else {
+      // Для нового товара разрешаем указать фото путём/URL без загрузки файла.
+      const manualImage = $("image").value.trim();
+      if (manualImage) product.image = manualImage;
     }
 
     if (editIndex >= 0) products[editIndex] = product;
@@ -646,4 +686,6 @@ if (token) {
 }
 </script>    
 </body>
-</html>
+</html>ngth) {
+      // Если удалили все сохранённые фото, не возвращаем старый путь из поля image.
+      delete pro
