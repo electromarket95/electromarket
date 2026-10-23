@@ -1,5 +1,52 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792737769259",
+    "name": "UMiiO I18 Pro Max",
+    "brand": "Umiio",
+    "category": "Планшеты и компьютеры",
+    "price": 8500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792737769259-1792737769259-1.jpg",
+    "description": "Планшет UMIO I18 Pro Max✅\n\n📱 Экран 10,1”\n💾 До 16 ГБ ОЗУ + 1 ТБ памяти\n🔋 Большая батарея\n⌨️ Клавиатура + мышь\n✍️ Стилус\n📶 Есть версии с поддержкой 5G\n\nПодойдёт для учёбы, работы, фильмов, YouTube, Telegram и повседневных задач.",
+    "variants": {
+      "colors": [
+        "Чёрный",
+        "Серый",
+        "Фиолетовый"
+      ],
+      "memories": [
+        "1 ТБ"
+      ],
+      "items": [
+        {
+          "color": "Чёрный",
+          "memory": "1 ТБ",
+          "price": 8500
+        },
+        {
+          "color": "Серый",
+          "memory": "1 ТБ",
+          "price": 8500
+        },
+        {
+          "color": "Фиолетовый",
+          "memory": "1 ТБ",
+          "price": 8500
+        }
+      ]
+    },
+    "images": [
+      "images/item-1792737769259-1792737771949-2.webp",
+      "images/item-1792737769259-1792737774213-3.webp",
+      "images/item-1792737769259-1792737776884-4.webp",
+      "images/item-1792737769259-1792737779229-5.webp",
+      "images/item-1792737769259-1792737781592-6.webp",
+      "images/item-1792737769259-1792737784134-7.webp"
+    ]
+  },
+  {
     "id": "item-1792614680496",
     "name": "Планшет TG-30",
     "brand": "Timergereev",
