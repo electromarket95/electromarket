@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792778746046",
+    "name": "Соковыжималка",
+    "brand": "UAKEEN",
+    "category": "Бытовая техника",
+    "price": 4500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792778746046-1792778746047-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792778370186",
     "name": "Колонка с кораном",
     "brand": "",
