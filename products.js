@@ -1,5 +1,35 @@
 window.PRODUCTS = [
   {
+    "id": "item-1792834711615",
+    "name": "Poco F9 Ultra",
+    "brand": "Xiaomi",
+    "category": "Смартфоны и телефоны",
+    "price": 65500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1792834711615-1792834711616-1.jpg",
+    "description": "",
+    "variants": {
+      "colors": [
+        "Чёрный"
+      ],
+      "memories": [
+        "256 ГБ"
+      ],
+      "items": [
+        {
+          "color": "Чёрный",
+          "memory": "256 ГБ",
+          "price": 65500
+        }
+      ]
+    },
+    "images": [
+      "images/item-1792834711615-1792834714727-2.png"
+    ]
+  },
+  {
     "id": "item-1792778746046",
     "name": "Соковыжималка",
     "brand": "UAKEEN",
