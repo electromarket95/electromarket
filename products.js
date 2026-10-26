@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793039496204",
+    "name": "Портативный аккумулятор",
+    "brand": "FaizFull",
+    "category": "Прочее",
+    "price": 3900,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793039496204-1793039496204-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1793039443040",
     "name": "Портативный аккумулятор",
     "brand": "Hoco",
