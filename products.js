@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793039763828",
+    "name": "Внешний жесткий диск",
+    "brand": "Toshiba",
+    "category": "Прочее",
+    "price": 10800,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793039763828-1793039763828-1.jpg",
+    "description": "Портативный внешний жёсткий диск Toshiba 1TB"
+  },
+  {
     "id": "item-1793039686007",
     "name": "Портативный аккумулятор",
     "brand": "FaizFull",
