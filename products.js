@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793038956476",
+    "name": "Портативный аккамулятор",
+    "brand": "Hoco",
+    "category": "Прочее",
+    "price": 4500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793038956476-1793038956477-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1792835042383",
     "name": "Mi Pad 8 Pro",
     "brand": "Xiaomi",
