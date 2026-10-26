@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793039130227",
+    "name": "Портативный аккумулятор",
+    "brand": "Hoco",
+    "category": "Прочее",
+    "price": 3600,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793039130227-1793039130231-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1793038956476",
     "name": "Портативный аккамулятор",
     "brand": "Hoco",
