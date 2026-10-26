@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793039824984",
+    "name": "Внешний жесткий диск",
+    "brand": "Netac",
+    "category": "Прочее",
+    "price": 9500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793039824984-1793039824984-1.jpg",
+    "description": "Портативный внешний жёсткий диск Netac 1TB"
+  },
+  {
     "id": "item-1793039763828",
     "name": "Внешний жесткий диск",
     "brand": "Toshiba",
