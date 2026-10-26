@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793039404434",
+    "name": "Портативный аккумулятор (мини)",
+    "brand": "Hoco",
+    "category": "Смартфоны и телефоны",
+    "price": 1700,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793039404434-1793039404437-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1793039346804",
     "name": "Портативный аккумулятор",
     "brand": "Hoco",
