@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793111453967",
+    "name": "Стационарный роутер",
+    "brand": "FaizFull",
+    "category": "Роутеры и связь",
+    "price": 2800,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793111453967-1793111453968-1.jpg",
+    "description": "4G Роутер FaizFull FW18"
+  },
+  {
     "id": "item-1793110596027",
     "name": "Карманный роутер",
     "brand": "FaizFull",
