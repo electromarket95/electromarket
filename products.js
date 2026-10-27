@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793110530865",
+    "name": "Карманный роутер",
+    "brand": "Olax",
+    "category": "Роутеры и связь",
+    "price": 3100,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793110530865-1793110530865-1.jpg",
+    "description": "Olax M100"
+  },
+  {
     "id": "item-1793110449271",
     "name": "Карманный роутер",
     "brand": "Olax",
