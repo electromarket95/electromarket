@@ -9,7 +9,7 @@ window.PRODUCTS = [
     "badge": "",
     "emoji": "",
     "image": "images/item-1793110449271-1793110449272-1.jpg",
-    "description": ""
+    "description": "OLAX MT10"
   },
   {
     "id": "item-1793039824984",
