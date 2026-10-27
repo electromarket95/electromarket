@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793111501509",
+    "name": "Стационарный роутер",
+    "brand": "",
+    "category": "Роутеры и связь",
+    "price": 3000,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793111501509-1793111501509-1.jpg",
+    "description": "4G Роутер 4BAND F30"
+  },
+  {
     "id": "item-1793111453967",
     "name": "Стационарный роутер",
     "brand": "FaizFull",
