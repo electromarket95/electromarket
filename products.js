@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793110564855",
+    "name": "Карманный роутер",
+    "brand": "FaizFull",
+    "category": "Роутеры и связь",
+    "price": 2500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793110564855-1793110564855-1.jpg",
+    "description": ""
+  },
+  {
     "id": "item-1793110530865",
     "name": "Карманный роутер",
     "brand": "Olax",
