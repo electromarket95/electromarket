@@ -1,5 +1,17 @@
 window.PRODUCTS = [
   {
+    "id": "item-1793111590203",
+    "name": "Стационарный роутер",
+    "brand": "Olax",
+    "category": "Роутеры и связь",
+    "price": 4500,
+    "oldPrice": 0,
+    "badge": "",
+    "emoji": "",
+    "image": "images/item-1793111590203-1793111590203-1.jpg",
+    "description": "4G Роутер Olax AX9 Pro"
+  },
+  {
     "id": "item-1793111547346",
     "name": "Стационарный роутер",
     "brand": "Olax",
