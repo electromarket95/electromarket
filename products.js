@@ -16,9 +16,9 @@ window.PRODUCTS = [
     "name": "Стационарный роутер",
     "brand": "Olax",
     "category": "Роутеры и связь",
-    "price": 3500,
+    "price": 3300,
     "oldPrice": 0,
-    "badge": "",
+    "badge": "Акция",
     "emoji": "",
     "image": "images/item-1793111547346-1793111547346-1.jpg",
     "description": "4G Роутер Olax MC50 Pro"
